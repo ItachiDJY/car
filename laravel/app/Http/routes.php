@@ -11,30 +11,19 @@
 |
 */
 
-//Route::get('/admin/index','IndexController@index');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+//Route::get('/','AdminController@index');
 
-Route::group(['namespace' => 'admin'],function(){
-	Route::controller('/admin/index','IndexController');
-});
-
-/*
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('test/{info}',function($info = null){
-	echo $info;
-});
-
-Route::get('demo',function(){
-	return view('demo');
-});
-
-Route::get('home',function(){
-	return view('home');
-});
-//Route::get('home', 'HomeController@index');
-//Route::auth();
-
-Route::get('/home', 'HomeController@index');
-*/
+Route::get('/','Home\IndexController@index');
+Route::get('/register','Home\RegisterController@index');
+Route::get('/login','Home\LoginController@index');
+Route::get('/door','Home\DoorController@index');
+Route::get('/shop','Home\ShopController@index');
+Route::get('/long','Home\LongRentController@index');
+Route::get('/company','Home\CompanyController@index');
+Route::get('/free','Home\FreeController@index');
+Route::get('/store','Home\StoreController@index');
+Route::get('/activity','Home\ActivityController@index');
+Route::get('/country','Home\CountryController@index');
