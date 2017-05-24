@@ -1,0 +1,2 @@
+/*! Copyright©2008-2017 zuche.com All Rights Reserved.2017-05-23 */
+function CNNIC_change(eleId){var str=document.getElementById(eleId).href,str1=str.substring(0,str.length-6);str1+=CNNIC_RndNum(6),document.getElementById(eleId).href=str1}function CNNIC_RndNum(k){for(var rnd="",i=0;k>i;i++)rnd+=Math.floor(10*Math.random());return rnd}
