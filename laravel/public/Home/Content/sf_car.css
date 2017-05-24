@@ -1,0 +1,118 @@
+﻿/* CSS Document */
+/* 顺风车 首页*/
+.w1190{ width:1190px; margin:0 auto; overflow:hidden; zoom:1;}
+.sf_w980{ width:980px; margin:0 auto;}
+.orderBoxBlue{ border:solid 1px #dbe4eb; border-bottom-width:2px; background:#fff;}/* 蓝色边框 底边 2px */
+.sf_banner{ height:300px; background:url(../Images/sf_banner.jpg) no-repeat center top; min-width:1190px; width:100%;}
+.sf_selectCar{ width:515px; height:185px;border:solid 1px #dcdcdc; background:#fff; position:absolute; margin-top:44px;}
+.sf_selectCar h3{ height:50px; line-height:50px; color:#1a2a38; font-size:20px; padding-left:50px;font-family: "微软雅黑", arial, Simsun, sans-serif;}
+.sf_selectCarCont{ padding-left:50px; position:relative;}
+.sf_selectCarCont .inder_cd{ position:absolute; top:20px; right:50px;}
+.sfLeft{ width:818px; float:left; background:#F6FAFB;}
+.sfRight{ width:348px; float:right;background:#F6FAFB;}
+.sfRule{ line-height:22px;}
+.sfRule h3{ line-height:50px;}
+.sfCityBox{ border:solid 1px #dbe4eb; border-top:0;background:#fff;}
+.sfCity{ background:#eaf6fd; line-height:40px;}
+.sfCity span{ display:inline-block; height:40px; line-height:40px; padding:0 18px; float:left; border-right:solid 1px #dbe4eb; font-size:14px; cursor:pointer;}
+.sfCity span.curr,.sfCity span:hover{ border-top:solid 1px #61a1df; color:#61a1df;}
+.sfSearch{ height:36px; line-height:36px;width:816px;}
+.sfSearch span{display:inline-block; border-right:solid 1px #dbe4eb; float:left; text-align:center; cursor:pointer;}
+.w229{ width:229px;}
+.w179{ width:179px;}
+.w117{ width:117px;}
+.sz_arrowGray{ width:9px; height:5px; display:inline-block; background:url(../Images/order.png) no-repeat -59px -26px; margin:3px 0 0 6px;}
+.sfCarList{}
+.sfCarList ul li{ height:155px; border-bottom:dashed 1px #dbe4eb; color:#3b3b3b; line-height:22px;}
+.sfCarList ul li:last-child{ border:0;}
+.sfCarList ul li>div{ float:left;}
+.sfCarName{ width:229px; overflow:hidden;}
+.sfCarDate{ width:148px;padding:50px 0 0 33px;}
+.sfCarAddress{ width:136px; padding:70px 0 0 44px;}
+.sfCarPrice{ width:92px; padding:65px 0 0 26px;}
+.sfCarBtn{ padding:65px 0 0 18px;}
+.pages{ border-top:solid 1px #dbe4eb;border-left:solid 1px #dbe4eb; overflow:hidden; zoom:1;background:#fff;}
+.pages span,.pages a{ display:block; float:left; line-height:30px;border-bottom:solid 1px #dbe4eb;border-right:solid 1px #dbe4eb; cursor:pointer; padding:0 10px;}
+.pages a{ font-family:Arial, Helvetica, sans-serif; color:#848484;}
+.pages a.curr,.pages a:hover{border-bottom:solid 2px #61a1df; color:#61a1df; text-decoration:none;}
+.searchCityItems{border-top: solid 1px #dbe4eb;}
+/* 内容页 */
+.sfConLeft{ width:732px;}
+.sfConRight{ width:223px;}
+.confirmRoute h3{ line-height:50px; font-size:20px; color:#1a2a38; font-family:"微软雅黑";}
+.confirmRoute .borderBlueBda{ padding:40px 0 40px 30px; overflow:hidden;zoom:1;}
+.confirmRoute .borderBlueBda span{ display:inline-block; line-height:20px;}
+.confirmRoute .borderBlueBda span.bluetitle{ display:inline-block;background:#5899dd; color:#fff; line-height:14px;}
+.confirmRoute .borderBlueBda .fl{ width:345px;}
+.modeList{height:250px;max-height:250px; overflow:scroll; overflow-x:hidden;background-color: #fff;}
+*+html .modeList li{margin-left: -10px;}
+/* 页面底部说明明细 */
+.index_explain{ background:#none;}
+.index_explain ul li { float: left; width: 20%; border-left: 1px solid #dbe4eb; height:123px; }
+.index_explain ul li.w19 { width: 19%; }
+.index_explain dl { width: 160px; margin: 0 auto; }
+.index_explain dl dt { width: 160px; text-align: center; font-size: 14px; color: #3b3b3b; font-family: "微软雅黑", arial, Simsun, sans-serif; font-weight: bold; line-height: 40px; padding-top: 10px; }
+.index_explain dl dd { float: left; width: 79px; font-size: 12px; color: #848484; line-height: 25px; }
+.index_explain dl dd a{ color: #848484;}
+/*遮罩层*/
+#fullbg {  
+    background-color:#000;  
+    left:0px;  
+    opacity:0.5;  
+    position:absolute;  
+    top:0px;  
+    z-index:999;  
+    filter:alpha(opacity=50); /* IE6 */  
+    -moz-opacity:0.5; /* Mozilla */  
+    -khtml-opacity:0.5; /* Safari */  
+}  
+#dialog {  
+    background-color:#FFF;  
+    display:none;
+	width:560px;  
+    height:344px;
+	border:solid 6px #1a2a39;
+	top:50%; 
+    left:50%;  
+    margin:-172px 0 0 -280px; 
+    position:fixed !important; /* 浮动对话框 */  
+    position:absolute;             
+    z-index:99999;  
+}
+.pl85{ padding:0 85px;}
+.feeMsg h3{position:relative; height:51px; line-height:51px; background:#fff; text-align: center;color:#ff7c00;border-bottom:1px solid #dbe4eb;}
+.feeMsg label{ display:inline-block; line-height:30px; float:left;}
+.feeMsg .sz_item{ overflow:hidden;zoom:1;}
+.btnSubmit{ width:330px; padding-left:5px;}
+.btnSubmit a{ width:330px; height:29px; line-height:29px; display:inline-block; text-decoration:none;}
+.btnSubmit a:hover{text-decoration:none;}
+.feeMsg h3 .close{ width:25px; height:25px; display:block; position:absolute; right:10px; top:10px; background:url(../Images/close03.png) no-repeat center; text-indent:-9999px;} 
+
+/* 门店下拉 */
+.sf_storeSelect{ width:168px;background:#fff; border:1px solid #61a1df; padding:1px; position:absolute; z-index:99999; left:122px; top:0;border-radius:3px;-moz-border-radius:3px; -webkit-border-radius:3px;-moz-box-shadow: 0px 0px 8px #d4d4d4;-webkit-box-shadow: 0px 0px 8px #d4d4d4;box-shadow: 0px 0px 8px #d4d4d4;}
+.sf_storeSelect ul li,.sf_storeSelect ul p{ height:22px; line-height:22px; padding-left:13px; border-bottom:dashed 1px #f3f3f3; color:#848484;cursor:pointer;}
+.sf_storeSelect ul li.curr{ height:28px; line-height:28px; color:#61a1df; border-bottom:dashed 1px #dbe4eb; color:#61a1df; }
+.sf_storeSelect ul li.curr span{ float:right; display:inline-block; width:18px; height:5px;background:url(../Images/input_select.png) no-repeat center right; text-indent:-9999px; margin-top:10px;}
+
+/* 车型选择 */
+.sf_carSelect{ width:223px;background:#fff; border:2px solid #61a1df; padding:1px; padding-bottom:10px; position:absolute; z-index:99999; left:0; top:0;-moz-box-shadow: 0px 0px 8px #d4d4d4;-webkit-box-shadow: 0px 0px 8px #d4d4d4;box-shadow: 0px 0px 8px #d4d4d4;}
+.sf_carSelect ul li{ height:22px; line-height:22px; padding-left:13px; border-bottom:dashed 1px #f3f3f3; color:#848484;cursor:pointer;}
+.sf_carSelect ul li.curr{ height:28px; line-height:28px; color:#61a1df; border-bottom:dashed 1px #dbe4eb; color:#61a1df; }
+.sf_carSelect ul li.curr span{ float:right; display:inline-block; width:18px; height:5px;background:url(../Images/input_select.png) no-repeat center right; text-indent:-9999px; margin-top:10px;}
+.arrowBlueUp{ width:17px; height:10px; display:inline-block; background:url(../Images/arrowblueup.png) no-repeat center top; position:absolute; top:-10px; left:50%; margin-left:-9px;}
+
+/*登录样式*/
+.login_info{width:291px; height:250px; padding:17px 25px; background:#f5f5f4;}
+.login_info h2{font-size:18px;font-family: "微软雅黑", arial, Simsun, sans-serif; font-weight:normal; position:relative;}
+.login_info a.reg{font-size:12px; color:#61a1df;}
+.login_info ul{margin-top:5px;}
+.login_info li{ height:31px; line-height:31px; padding-top:15px;}
+.login_info label{ padding-left:5px;}
+.w220{ width:220px; color:#b9b9b9;}
+.loginbut{ padding-left:40px; padding-top:5px;}
+.loginbut input{ vertical-align:middle;}
+.loginbut a{color:#333; text-decoration:none;}
+input.loginipt{height:37px; width:225px; color:#fff; font-size:16px; font-weight:bold;}
+.closeLogin{ position:absolute; top:-10px; right:-20px;}
+
+.htjcs{border:6px solid #dbe4eb;}
