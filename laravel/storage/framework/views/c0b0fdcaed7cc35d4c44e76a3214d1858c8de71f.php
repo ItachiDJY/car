@@ -5,8 +5,8 @@
 		<title>后台管理</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{ URL::asset('Admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/font-awesome.min.css') }}" />
+		<link href="<?php echo e(URL::asset('Admin/assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('Admin/assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -17,9 +17,9 @@
 		<!-- fonts -->
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/ace.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/ace-rtl.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/ace-skins.min.css') }}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('Admin/assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('Admin/assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('Admin/assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -29,7 +29,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{ URL::asset('Admin/assets/js/ace-extra.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -61,7 +61,7 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{ URL::asset('Admin/assets/avatars/user.jpg') }}" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="<?php echo e(URL::asset('Admin/assets/avatars/user.jpg')); ?>" alt="Jason's Photo" />
 								<span class="user-info">
 									<small>欢迎光临,</small>
 									ADMIN
@@ -366,7 +366,7 @@
 						</ul><!-- .breadcrumb -->
 					</div>
 
-					 @yield('content')					
+					 <?php echo $__env->yieldContent('content'); ?>					
 
 					<!-- /.page-content -->
 				</div><!-- /.main-content -->
@@ -429,7 +429,7 @@
 
 		<!--[if !IE]> -->
 
-		<script src="{{ URL::asset('Admin/assets/js/jquery-2.0.3.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/jquery-2.0.3.min.js')); ?>"></script>
 
 		<!-- <![endif]-->
 
@@ -454,8 +454,8 @@
 		<script type="text/javascript">
 			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
 		</script>
-		<script src="{{ URL::asset('Admin/assets/js/bootstrap.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/typeahead-bs2.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -463,19 +463,19 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{ URL::asset('Admin/assets/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.ui.touch-punch.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.slimscroll.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.easy-pie-chart.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.sparkline.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/flot/jquery.flot.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/flot/jquery.flot.pie.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/flot/jquery.flot.resize.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/jquery.slimscroll.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/jquery.easy-pie-chart.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/jquery.sparkline.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/flot/jquery.flot.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/flot/jquery.flot.pie.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/flot/jquery.flot.resize.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{ URL::asset('Admin/assets/js/ace-elements.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/ace.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('Admin/assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 
