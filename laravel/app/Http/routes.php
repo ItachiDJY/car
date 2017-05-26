@@ -11,26 +11,43 @@
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-//Route::get('/','AdminController@index');
+/*Route::get('/', function () {
+    return view('welcome');
+});*/
 
-Route::group(['namespace' => 'Home'],function(){
-	Route::get('/','IndexController@index');
-	Route::get('/register','RegisterController@index');
-	Route::get('/login','LoginController@index');
-	Route::get('/door','DoorController@index');
-	Route::get('/shop','ShopController@index');
-	Route::get('/long','LongRentController@index');
-	Route::get('/company','CompanyController@index');
-	Route::get('/free','FreeController@index');
-	Route::get('/store','StoreController@index');
-	Route::get('/activity','ActivityController@index');
-	Route::get('/country','CountryController@index');
+/*
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+
+Route::controllers([
+	'auth' => 'Auth\AuthController',
+	'password' => 'Auth\PasswordController',
+]);
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+{
+  Route::get('/', 'AdminHomeController@index');
+  Route::resource('pages', 'PagesController');
+});
+*/
+/*Route::get('/welcome', 'WelcomeController@index');
+Route::get('/welcome_show', 'WelcomeController@show');*/
+
+Route::group(['middleware' => ['web']], function()
+{
+
 });
 
+//首页
+Route::get('/index', 'Admin\IndexController@index');
+//车辆管理
+Route::get('/car', 'Admin\CarController@index');
+Route::get('/car_add', 'Admin\CarController@add');
+Route::post('/car_add_do', 'Admin\CarController@add_do');
+Route::get('/deploy', 'Admin\CarController@deployList');
+Route::get('/deploy_add', 'Admin\CarController@deploy_add');
+Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
+Route::get('/brand', 'Admin\CarController@car_brand');
+Route::get('/brand_add', 'Admin\CarController@car_brand_add');
+Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
 
-Route::group(['namespace' => 'Admin'],function(){
-	Route::controller('/admin','IndexController');
-});
