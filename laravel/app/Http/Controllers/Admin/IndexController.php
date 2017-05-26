@@ -1,20 +1,17 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests;
 use Illuminate\Http\Request;
+
+use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use DB;
 
 class IndexController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getIndex()
-    {
-        return view('Admin/index');
-    }
-
+   //展示车辆信息及使用情况
+   public function index() {
+   		return view('admin.index') ;
+   }
 }
