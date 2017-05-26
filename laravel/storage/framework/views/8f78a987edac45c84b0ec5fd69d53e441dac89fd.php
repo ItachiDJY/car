@@ -1,12 +1,13 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<title>后台管理</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{ URL::asset('Admin/assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/font-awesome.min.css') }}" />
+		
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -17,9 +18,9 @@
 		<!-- fonts -->
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/ace.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/ace-rtl.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('Admin/assets/css/ace-skins.min.css') }}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -29,7 +30,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{ URL::asset('Admin/assets/js/ace-extra.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -40,65 +41,7 @@
 	</head>
 
 	<body>
-		<div class="navbar navbar-default" id="navbar">
-			<script type="text/javascript">
-				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
-			</script>
-
-			<div class="navbar-container" id="navbar-container">
-				<div class="navbar-header pull-left">
-					<a href="#" class="navbar-brand">
-						<small>
-							<i class="icon-leaf"></i>
-							后台管理
-						</small>
-					</a><!-- /.brand -->
-				</div><!-- /.navbar-header -->
-
-				<div class="navbar-header pull-right" role="navigation">
-					<ul class="nav ace-nav">
-	
-
-						<li class="light-blue">
-							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{ URL::asset('Admin/assets/avatars/user.jpg') }}" alt="Jason's Photo" />
-								<span class="user-info">
-									<small>欢迎光临,</small>
-									ADMIN
-								</span>
-
-								<i class="icon-caret-down"></i>
-							</a>
-
-							<ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
-								<li>
-									<a href="#">
-										<i class="icon-cog"></i>
-										设置
-									</a>
-								</li>
-
-								<li>
-									<a href="#">
-										<i class="icon-user"></i>
-										个人资料
-									</a>
-								</li>
-
-								<li class="divider"></li>
-
-								<li>
-									<a href="#">
-										<i class="icon-off"></i>
-										退出
-									</a>
-								</li>
-							</ul>
-						</li>
-					</ul><!-- /.ace-nav -->
-				</div><!-- /.navbar-header -->
-			</div><!-- /.container -->
-		</div>
+		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -127,219 +70,8 @@
 							<span class="btn btn-danger"></span>
 						</div>
 					</div><!-- #sidebar-shortcuts -->
-				
-				<!-- 左侧导航 -->
-					
-<ul class="nav nav-list">
-						<li class="active">
-							<a href="index">
-								<i class="icon-dashboard"></i>
-								<span class="menu-text"> 后台控制台 </span>
-							</a>
-						</li>
 
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-desktop"></i>
-								<span class="menu-text"> 员工管理 </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="/admin/addadmin">
-										<i class="icon-double-angle-right"></i>
-										添加员工
-									</a>
-								</li>
-
-								<li>
-									<a href="record.html">
-										<i class="icon-double-angle-right"></i>
-										员工列表
-									</a>
-								</li>
-
-								<li>
-									<a href="javascript:void(0)" class="dropdown-toggle">
-										<i class="icon-double-angle-right"></i>
-											司机管理
-										
-										<b class="arrow icon-angle-down"></b>
-									</a>
-
-									<ul class="submenu">
-										<li>
-											<a href="account.html">
-												<i class="icon-leaf"></i>
-												   司机列表
-											</a>
-										</li>
-
-										
-
-									</ul>
-								</li>
-							</ul>
-						</li>
-
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-list"></i>
-								<span class="menu-text"> 车辆管理 </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="car_add">
-										<i class="icon-double-angle-right"></i>
-										添加车辆信息
-									</a>
-								</li>
-
-								<li>
-									<a href="car">
-										<i class="icon-double-angle-right"></i>
-										车辆信息展示
-									</a>
-								</li>
-								<li>
-									<a href="car">
-										<i class="icon-double-angle-right"></i>
-										添加配置
-									</a>
-								</li>
-								<li>
-									<a href="car">
-										<i class="icon-double-angle-right"></i>
-										车辆配置展示
-									</a>
-								</li>
-                                
-                                
-							</ul>
-						</li>
-
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text"> 会员管理 </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="form-elements.html">
-										<i class="icon-double-angle-right"></i>
-										添加会员
-									</a>
-								</li>
-
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										删除会员
-									</a>
-								</li>
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										会员列表
-									</a>
-								</li>
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										会员级别列表
-									</a>
-								</li>
-
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text"> 订单管理 </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="form-elements.html">
-										<i class="icon-double-angle-right"></i>
-										订单列表
-									</a>
-								</li>
-
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										回收站
-									</a>
-								</li>
-								
-
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text"> 支付管理 </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="form-elements.html">
-										<i class="icon-double-angle-right"></i>
-										支付宝支付
-									</a>
-								</li>
-
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										微信支付
-									</a>
-								</li>
-								
-
-							</ul>
-						</li>
-						<li>
-							<a href="#" class="dropdown-toggle">
-								<i class="icon-edit"></i>
-								<span class="menu-text"> 门店管理 </span>
-
-								<b class="arrow icon-angle-down"></b>
-							</a>
-
-							<ul class="submenu">
-								<li>
-									<a href="form-elements.html">
-										<i class="icon-double-angle-right"></i>
-										门店列表
-									</a>
-								</li>
-
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										添加新门店
-									</a>
-								</li>
-								
-
-							</ul>
-						</li>
-
-					</ul>
+					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 					<!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
@@ -351,14 +83,49 @@
 					</script>
 				</div>
 
-				
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
 
-					 @yield('content')					
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="#">首页</a>
+							</li>
+							<li class="active">后台管理控制台</li>
+						</ul><!-- .breadcrumb -->
+					</div>
 
-					<!-- /.page-content -->
-				<!-- /.main-content -->
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								控制台
+								<small>
+									<i class="icon-double-angle-right"></i>
+									 查看
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
 
-				<div class="ace-settings-container" id="ace-settings-container">
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								
+
+
+
+
+
+								<!-- PAGE CONTENT ENDS -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+
+				<!-- <div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
 					</div>
@@ -404,7 +171,8 @@
 							</label>
 						</div>
 					</div>
-				</div><!-- /#ace-settings-container -->
+				</div> -->
+				<!-- /#ace-settings-container -->
 			</div><!-- /.main-container-inner -->
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -416,7 +184,7 @@
 
 		<!--[if !IE]> -->
 
-		<script src="{{ URL::asset('Admin/assets/js/jquery-2.0.3.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 
 		<!-- <![endif]-->
 
@@ -427,7 +195,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"script>");
+			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -439,10 +207,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 		</script>
-		<script src="{{ URL::asset('Admin/assets/js/bootstrap.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/typeahead-bs2.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -450,19 +218,19 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{ URL::asset('Admin/assets/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.ui.touch-punch.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.slimscroll.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.easy-pie-chart.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/jquery.sparkline.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/flot/jquery.flot.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/flot/jquery.flot.pie.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/flot/jquery.flot.resize.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.slimscroll.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.easy-pie-chart.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.sparkline.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/flot/jquery.flot.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/flot/jquery.flot.pie.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/flot/jquery.flot.resize.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{ URL::asset('Admin/assets/js/ace-elements.min.js') }}"></script>
-		<script src="{{ URL::asset('Admin/assets/js/ace.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 

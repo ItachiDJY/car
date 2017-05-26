@@ -11,35 +11,22 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
 
-/*
-Route::auth();
+Route::get('/','Home\IndexController@index');
+Route::get('/register','Home\RegisterController@index');
+Route::get('/login','Home\LoginController@index');
+Route::get('/door','Home\DoorController@index');
+Route::get('/shop','Home\ShopController@index');
+Route::get('/long','Home\LongRentController@index');
+Route::get('/company','Home\CompanyController@index');
+Route::get('/free','Home\FreeController@index');
+Route::get('/store','Home\StoreController@index');
+Route::get('/activity','Home\ActivityController@index');
+Route::get('/country','Home\CountryController@index');
 
-Route::get('/home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
-Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
-{
-  Route::get('/', 'AdminHomeController@index');
-  Route::resource('pages', 'PagesController');
-});
-*/
-/*Route::get('/welcome', 'WelcomeController@index');
-Route::get('/welcome_show', 'WelcomeController@show');*/
-
-Route::group(['middleware' => ['web']], function()
-{
-
-});
 
 //首页
-Route::get('/index', 'Admin\IndexController@index');
+Route::get('/admin', 'Admin\IndexController@index');
 //车辆管理
 Route::get('/car', 'Admin\CarController@index');
 Route::get('/car_add', 'Admin\CarController@add');
@@ -50,4 +37,6 @@ Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
 Route::get('/brand', 'Admin\CarController@car_brand');
 Route::get('/brand_add', 'Admin\CarController@car_brand_add');
 Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
+
+
 
