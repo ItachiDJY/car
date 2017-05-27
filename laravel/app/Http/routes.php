@@ -10,9 +10,10 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::group(['middleware'=>'web'], function (){
 
 
-Route::get('/','Home\IndexController@index');
+Route::any('/','Home\IndexController@index');
 Route::get('/register','Home\RegisterController@index');
 Route::get('/login','Home\LoginController@index');
 Route::get('/door','Home\DoorController@index');
@@ -49,3 +50,11 @@ Route::get('/dele_order','Admin\OrderController@dele_order');
 Route::get('/search_order','Admin\OrderController@search_order');
 
 
+//前台注册
+Route::post('/register/register','Home\RegisterController@register');
+Route::get('/register/check_code','Home\RegisterController@check_code');
+Route::get('/register/check_phone','Home\RegisterController@check_phone');
+
+//前台登录
+    Route::post('/login/login','Home\LoginController@login');
+});
