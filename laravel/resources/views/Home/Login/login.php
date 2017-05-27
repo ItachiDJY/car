@@ -20,7 +20,7 @@
 	<!--head start -->
 <div class="zc_head_bd">
     <div class="zc_main">
-        <a href="https://www.zuche.com" class="zc_logo" alt="神州租车"></a>
+        <a href="/" class="zc_logo" alt="神州租车"></a>
         <div class="zc_phone_bd">
 			<div class="p-re zc_p_h">
 				<span class="zc-tel"></span>
@@ -33,21 +33,23 @@
 	<div class="zc_login_bd">
 	    <div class="zc_main">
 	        <div class="zc_login_box">
-	            <ul class="tabs">
-	                <li id="normallogin" class="cur">登录</li>
-	                <li id="mobilelogin">手机动态码登录</li>
+	            <ul class="tabs" style="align-content: center">
+
+	                <li id="normallogin" class="cur" style="align-content: center">登录</li>
+<!--	                <li id="mobilelogin">手机动态码登录</li>-->
 	                <input type="hidden" id="logintype" value="normal">
 	            </ul>
 	            <div class="boxremove" style="width:730px;position:relative;">
 		            <div class="tabcontents cur" style="float:left;">
 		            	<div class="zc_l_error" id="error_tips"></div>
+                        <form action="/login/login" method="post">
 		                <ul>
 		                    <li><label class="icon_wz"><span class="zc-iuser "></span></label>
-		                        <input type="text" class="wipt t_val" id="normal_id" value="请输入手机号/证件号" maxlength="18">
-		                        <input type="text" class="wipt t_val" id="phone_id" value="请输入注册手机号" maxlength="18" style="display:none">
+		                        <input type="text" class="wipt t_val" id="normal_id"maxlength="18" name="username" placeholder="请输入手机号或者真实姓名" >
+		                        <input type="text" class="wipt t_val" id="phone_id" placeholder="请输入注册手机号" maxlength="18" style="display:none">
 		                    </li>
 		                    <li class="pass_switchover"><label class="icon_wz"><span class="zc-ipsw "></span></label>
-		                        <input type="text" class="wipt"  value="请输入密码" id="xpasstext" >
+		                        <input type="text" class="wipt"  placeholder="请输入密码" id="xpasstext" name="pwd">
 		                        <input type="password" class="wipt"  value="" id="xpassword" >
 		                    </li>
 		                    <li class="clearfix" id="imageYzmLi" style="display:none">
@@ -64,15 +66,17 @@
 		                    </li>
 		                    <li class="zc_list_che">
 		                        <label class="fl"><span class="zc-blyes"></span><span class="zc_blyes_kong"></span>
-		                        <input id="autoLogin" type="checkbox" checked class="login_checkbox">30天内自动登录</label>
+		                        <input id="autoLogin" type="checkbox" checked class="login_checkbox" name="free" value="1">30天内自动登录</label>
 		                        <a href="https://passport.zuche.com/member/loginandregist/getpassword.do" class="fr" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','忘记密码')">忘记密码？</a>
 		                        <div class="clear"></div>
 		                    </li>
 		                </ul>
 		                <ul class="login_sub" id="login_sub">
+                            <input type="hidden" name="_token" value="<?php echo csrf_token();?>">
 		                	<li><input type="submit" class="zc-btn btn-login" value="登录" id="loginBt" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','账户密码登录')"></li>
 		                	<li><div class="zc_login_rbox">还不是会员？<a href="/register" rel="nofollow" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','立即注册')">立即注册</a> </div></li>
 		            	</ul>
+                        </form>
 		                <input type="hidden" id="autoLogin" name="autoLogin"></input>
 		            </div>	
 		            <div class="tabcontents cur" id="imgYzmDiv" style="float:left">
@@ -199,26 +203,26 @@
 	<!--foot end -->
 
 <script type="text/javascript">
-	var carwrmjsURL = 'https://js.zuchecdn.com';
-	var carwrmimageURL = 'https://image.zuchecdn.com';
-	var carwrmcssURL = 'https://css.zuchecdn.com';
-	var carwlomURL = "https://changzu.zuche.com";
-	var carwcmsURL='https://huodong.zuche.com';
-	var carwdmURL = "https://service.zuche.com";
-	var carwepmURL='https://carbusiness.zuche.com';
-	var carwlmURL='https://passport.zuche.com';
-	var carwmmURL = "https://mycar.zuche.com";
-	var carwsomURL='https://www.zuche.com';
-	var enURL='https://en.zuche.com';
-	var orderURL='https://order.zuche.com';
-	var leasingURL='https://leasing.zuche.com';
-	var easyrideURL='https://easyride.zuche.com';
-	var serviceURL='https://service.zuche.com';
-	var carbusinessURL='';
-	var jiamengURL='https://jiameng.zuche.com';
-	var irURL='https://ir.zuche.com';
-	var carwnewsURL='https://news.zuche.com';
-	var shoujiURL='https://shouji.zuche.com';
+//	var carwrmjsURL = 'https://js.zuchecdn.com';
+//	var carwrmimageURL = 'https://image.zuchecdn.com';
+//	var carwrmcssURL = 'https://css.zuchecdn.com';
+//	var carwlomURL = "https://changzu.zuche.com";
+//	var carwcmsURL='https://huodong.zuche.com';
+//	var carwdmURL = "https://service.zuche.com";
+//	var carwepmURL='https://carbusiness.zuche.com';
+//	var carwlmURL='https://passport.zuche.com';
+//	var carwmmURL = "https://mycar.zuche.com";
+//	var carwsomURL='https://www.zuche.com';
+//	var enURL='https://en.zuche.com';
+//	var orderURL='https://order.zuche.com';
+//	var leasingURL='https://leasing.zuche.com';
+//	var easyrideURL='https://easyride.zuche.com';
+//	var serviceURL='https://service.zuche.com';
+//	var carbusinessURL='';
+//	var jiamengURL='https://jiameng.zuche.com';
+//	var irURL='https://ir.zuche.com';
+//	var carwnewsURL='https://news.zuche.com';
+//	var shoujiURL='https://shouji.zuche.com';
 </script>
 <script type="text/javascript" src="Scripts/sea@89b3a8eaa1.js"></script>
 <script type="text/javascript" src="Scripts/seajs-preload@11b2cc155e.js"></script>

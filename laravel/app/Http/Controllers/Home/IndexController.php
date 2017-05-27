@@ -12,6 +12,12 @@ class IndexController extends Controller
     //首页方法
     public function index()
     {
-        return view('Home/Index/index');
+        if(isset($_COOKIE['user_name'])) {
+            $username = $_COOKIE['user_name'];
+            return view('Home/Index/index',['username'=>$username]);
+         } else {
+            return view('Home/Index/index');
+        }
+
     }
 }

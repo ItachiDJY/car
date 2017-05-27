@@ -27,7 +27,7 @@ class Admin extends Model
     /**
      * 查询某个字段的值
      * 返回值
-     * 介绍：如果你不需要完整的一行，可以使用value方法从结果中获取单个值，该方法会直接返回指定列的值：
+     * 介绍：如果你不需要完整的一行，可$info以使用value方法从结果中获取单个值，该方法会直接返回指定列的值：
      * $email = DB::table('users')->where('name', 'John')->value('email');
      */
 
