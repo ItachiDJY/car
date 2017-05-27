@@ -37,16 +37,13 @@ Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
 Route::get('/brand', 'Admin\CarController@car_brand');
 Route::get('/brand_add', 'Admin\CarController@car_brand_add');
 Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
+//员工管理
+Route::get('/staff','Admin\StaffController@index');
+Route::get('/staff_add','Admin\StaffController@add');
+Route::post('/staff_add_do','Admin\StaffController@add_do');
 //订单管理
 Route::get('/order_index','Admin\OrderController@order_index');
 Route::get('/recycle','Admin\OrderController@recycle');
 Route::get('/add_order','Admin\OrderController@add_order');
 Route::get('/dele_order','Admin\OrderController@dele_order');
 Route::get('/search_order','Admin\OrderController@search_order');
-//员工管理
-Route::get('/staff','Admin\StaffController@index');
-Route::get('/staff_add','Admin\StaffController@add');
-Route::post('/staff_add_do','Admin\StaffController@add_do');
-
-
-
