@@ -95,7 +95,7 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -106,25 +106,69 @@
 
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" method="post" action="staff_add_do" enctype="multipart/form-data">
+									<form class="form-horizontal" role="form" method="post" action="driver_add_do" enctype="multipart/form-data">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 姓名 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 司机姓名 </label>
 										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 										<div class="col-sm-9">
-											<input type="text" name="admin_name" id="form-field-1" placeholder="姓名" class="col-xs-10 col-sm-5" />
+											<input type="text" name="driver_name" id="form-field-1" placeholder="司机姓名" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 密码 </label>
-				
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 所属地区</label>
+														
+														<div class="col-sm-9">
+														行政区
+															<select name="reg_one" id="reg_one">
+																<option value="">..请选择</option>
+																<?php foreach($info as $k =>$v): ?>
+																<option value="<?= $v['region_id']?>"><?= $v['region_name']?></option>
+																<?php endforeach; ?>
+															</select>&nbsp;&nbsp;
+															市、区
+															<select name="reg_two" id="reg_two">
+																<option value="">..请选择</option>
+															
+															</select>&nbsp;&nbsp;
+															县、区
+															<select name="region_id" id="reg_three">
+																<option value="">..请选择</option>
+																
+															</select>
+													    </div>
+
+
+
+									</div>
+										
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 司机电话 </label>
+										
 										<div class="col-sm-9">
-											<input type="password" name="admin_pwd" id="form-field-1" placeholder="密码" class="col-xs-10 col-sm-5" />
+											<input type="text" name="driver_phone" id="form-field-1" placeholder="司机电话" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 司机性别 </label>
+										
+										<div class="col-sm-9">
+											&nbsp;&nbsp;&nbsp;&nbsp;男<input type="radio" name="driver_sex" value="0" checked="checked"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;女<input type="radio" name="driver_sex" value="1" />
+										</div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 身份证 </label>
+										
+										<div class="col-sm-9">
+											<input type="text" name="idcard" id="form-field-1" placeholder="身份证" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图片 </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 驾驶证照片 </label>
 
 										<div class="col-sm-9">
 											<input type="file" name="img[]" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
@@ -132,6 +176,8 @@
 									</div>
 
 									<div class="space-4"></div>
+
+								
 									
 									<div class="form-group">
 										<div class="col-md-offset-3 col-md-9">
@@ -224,6 +270,47 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		$(document).on('change','#reg_one',function(){
+			var id = $(this).val();
+			var reg = $('#reg_two');
+			if(id == '') {
+				return false;
+			}
+			$.ajax({
+				type:'get',
+				url:'reg_select',
+				data:{parent_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = '<option value="">..请选择</option>';
+					$.each(msg,function(k,v){
+						str += '<option value='+v.region_id+'>'+v.region_name+'</option>';
+					});
+					reg.html(str);
+				}
+			});
+		});
+
+		$(document).on('change','#reg_two',function(){
+			var id = $(this).val();
+			var reg = $('#reg_three');
+			if(id == '') {
+				return false;
+			}
+			$.ajax({
+				type:'get',
+				url:'reg_select',
+				data:{parent_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = '<option value="">..请选择</option>';
+					$.each(msg,function(k,v){
+						str += '<option value='+v.region_id+'>'+v.region_name+'</option>';
+					});
+					reg.html(str);
+				}
+			});
+		});
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
