@@ -148,7 +148,7 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="release.html">
+									<a href="/admin/addadmin">
 										<i class="icon-double-angle-right"></i>
 										添加员工
 									</a>
@@ -157,12 +157,12 @@
 								<li>
 									<a href="record.html">
 										<i class="icon-double-angle-right"></i>
-										员工离职
+										员工列表
 									</a>
 								</li>
 
 								<li>
-									<a href="#" class="dropdown-toggle">
+									<a href="javascript:void(0)" class="dropdown-toggle">
 										<i class="icon-double-angle-right"></i>
 											司机管理
 										
@@ -351,25 +351,12 @@
 					</script>
 				</div>
 
-				<div class="main-content">
-					<div class="breadcrumbs" id="breadcrumbs">
-						<script type="text/javascript">
-							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
-						</script>
-
-						<ul class="breadcrumb">
-							<li>
-								<i class="icon-home home-icon"></i>
-								<a href="/admin/index">首页</a>
-							</li>
-							<li class="active">后台管理控制台</li>
-						</ul><!-- .breadcrumb -->
-					</div>
+				
 
 					 @yield('content')					
 
 					<!-- /.page-content -->
-				</div><!-- /.main-content -->
+				<!-- /.main-content -->
 
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">

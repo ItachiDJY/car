@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>安居客</title>
+		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
 		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -299,8 +299,12 @@
 									<div class="col-sm-9">
 										<select name="brand_id">
 											<option value="">..请选择品牌</option>
-											
-											<option value=""></option>
+											<?php foreach($brand_list as $key=>$v) : ?>
+											<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
+											<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
+											<?=$v->brand_name?>
+											</option>
+											<?php  endforeach; ?>
 											
 										</select>
 										

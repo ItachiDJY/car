@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>安居客</title>
+		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
 		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
@@ -95,7 +95,8 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">车辆管理</li>
+							<li class="active">添加车辆信息</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>

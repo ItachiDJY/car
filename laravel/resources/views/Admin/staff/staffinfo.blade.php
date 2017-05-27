@@ -93,10 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">车辆管理</li>
-							<li class="active">车辆品牌展示</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -115,42 +114,39 @@
 													<tr>
 														<th class="center">
 															<label>
-																<input type="checkbox" class="ace" id="check" />
+																<input type="checkbox" class="ace" />
 																<span class="lbl"></span>
 															</label>
 														</th>
-														                                                    
-														<th>品牌名称</th>
-														<th>品牌logo</th>
-														<th>父级ID</th>
+														<th>人员编号</th>
+														<th>姓名</th>
+														<th>头像</th>
+														
+														<!-- <th>图片</th> -->
+														
 														<th>操作</th>
 													</tr>
 												</thead>
 
 												<tbody>
-												@foreach ($data as $v)
+												@foreach ($arr as $v)
 
-													<tr ids="<?=$v->brand_id?>">
+													<tr>
 														<td class="center">
 															<label>
-																<input type="checkbox" class="ace" name="box" />
+																<input type="checkbox" class="ace" />
 																<span class="lbl"></span>
 															</label>
 														</td>
+
+														<td><?= $v['admin_id']?></td>
+														<td><?= $v['admin_name']?></td>
 														<td>
-														<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-														<?= $v->brand_name?>
+															<img src="<?= $v['admin_img']?>" alt="">							
 														</td>
 														<td>
-														<?php if (isset($v->brand_logo)) {  ?>
-															<img src="<?=$v->brand_logo?>" alt=""> 
-														<?php	} ?>
-													     </td>
-														<td><?= $v->parent_id?></td>
-														
-														<td>
-														<button class="up btn">编辑</button>
-														<button class="del btn btn-danger">删除</button>
+														<button class="btn">编辑</button>
+														<button class="btn btn-danger">删除</button>
 														</td>
 
 													</tr>
@@ -178,39 +174,7 @@
 
 			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
 		<!-- <![endif]-->
-		<script>
-		    //编辑
-			$('.up').on('click' ,function(){
-		    	var id = $(this).parents('tr').attr('ids');
-		    	location.href ='brand_update?id='+id;
-		    })
-			//全选/全不选
-			$('#check').on('click' , function(){
-				if (this.checked == true) {
-					$('[name=box]:checkbox').prop('checked',true); 
-				} else {
-					$('[name=box]:checkbox').prop('checked',false); 
 
-				}
-			})
-			//单删
-			$(document).on('click' ,'.del' ,function(){
-				 var _this = $(this);
-				 var ids = _this.parents('tr').attr('ids') ;
-				 $.ajax({
-				 	 url:'brand_del',
-				 	 type:'GET',
-				 	 data:{id:ids},
-				 	 success:function(msg){
-				 	 	 if (msg) {
-				 	 	 	  _this.parents('tr').remove();
-				 	 	 } else {
-				 	 	 	  alert('删除失败');
-				 	 	 }
-				 	 }
-				 })
-			})
-		</script>
 		<!--[if IE]>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->

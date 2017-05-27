@@ -21,7 +21,7 @@ class Brand extends Model
 	}
 	//查询单条
 	public function select($id){
-        return $this->where('brand_id',$id)->get()->toArray();
+        return $this->where('brand_id',$id)->first()->toArray();
     }
     //添加操作   返回id值
     public function insert($data)
@@ -42,6 +42,11 @@ class Brand extends Model
     public function del($id){
         $data=$this->find($id);
        return $data->delete();
+    }
+    //批量删除
+    public function pdel($ids){
+       // $data=$this->get();
+        return $this->whereIn('brand_id',$ids)->delete();
     }
     //修改操作
     public function updates($data,$id){

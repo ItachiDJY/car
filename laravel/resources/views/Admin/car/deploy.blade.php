@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>安居客</title>
+		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
 		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -95,7 +95,8 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">车辆管理</li>
+							<li class="active">车辆配置信息展示</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -114,7 +115,7 @@
 													<tr>
 														<th class="center">
 															<label>
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" id="check" />
 																<span class="lbl"></span>
 															</label>
 														</th>
@@ -144,10 +145,10 @@
 												<tbody>
 												@foreach ($data as $v)
 
-													<tr>
+													<tr ids="<?= $v['deploy_id']?>">
 														<td class="center">
 															<label>
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" name="box" />
 																<span class="lbl"></span>
 															</label>
 														</td>
@@ -173,8 +174,8 @@
 														<td><?= $v['foregift']?></td>
 														
 														<td>
-														<button class="btn">编辑</button>
-														<button class="btn btn-danger">删除</button>
+														
+														<button class="del btn btn-danger">删除</button>
 														</td>
 
 													</tr>
@@ -197,11 +198,39 @@
 		</div><!-- /.main-container -->
 
 		<!-- basic scripts -->
-
 		<!--[if !IE]> -->
 
 			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
 		<!-- <![endif]-->
+		<script>
+
+			//全选/全不选
+			$('#check').on('click' , function(){
+				if (this.checked == true) {
+					$('[name=box]:checkbox').prop('checked',true); 
+				} else {
+					$('[name=box]:checkbox').prop('checked',false); 
+
+				}
+			})
+             //单删
+			$(document).on('click' ,'.del' ,function(){
+				 var _this = $(this);
+				 var ids = _this.parents('tr').attr('ids') ;
+				 $.ajax({
+				 	 url:'deploy_del',
+				 	 type:'GET',
+				 	 data:{id:ids},
+				 	 success:function(msg){
+				 	 	 if (msg) {
+				 	 	 	  _this.parents('tr').remove();
+				 	 	 } else {
+				 	 	 	  alert('删除失败');
+				 	 	 }
+				 	 }
+				 })
+			})
+		</script>
 
 		<!--[if IE]>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
