@@ -27,7 +27,7 @@ Route::get('/country','Home\CountryController@index');
 
 
 //首页
-Route::get('/index', 'Admin\IndexController@index');
+Route::get('/admin', 'Admin\IndexController@index');
 //车辆管理
 Route::get('/car', 'Admin\CarController@index');
 Route::get('/car_add', 'Admin\CarController@add');
@@ -43,6 +43,14 @@ Route::get('/deploy_add', 'Admin\CarController@deploy_add');
 Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
 //配置删除
 Route::get('/deploy_del', 'Admin\CarController@deploy_del');
+
+//车辆品牌
+Route::get('/brand', 'Admin\CarController@car_brand');
+Route::get('/brand_add', 'Admin\CarController@car_brand_add');
+Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
+Route::get('/brand_del', 'Admin\CarController@car_brand_del');
+Route::get('/brand_update', 'Admin\CarController@car_brand_update');
+Route::post('/brand_update_do', 'Admin\CarController@car_brand_update_do');;
 //员工管理
 Route::get('/staff','Admin\StaffController@index');
 Route::get('/staff_add','Admin\StaffController@add');
