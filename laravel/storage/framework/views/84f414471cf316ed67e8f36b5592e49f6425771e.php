@@ -5,8 +5,8 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 	</head>
 
 	<body>
-		@include('admin.layouts.header')
+		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')<!-- /.nav-list -->
+					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -93,9 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -118,19 +118,18 @@
 																<span class="lbl"></span>
 															</label>
 														</th>
-														<th>车辆编号</th>
-														<th>车牌号</th>
-														<th>是否出车</th>
-														<th>图片</th>
-														<th>车辆配置</th>
-														<th>出租次数</th>
+														<th>人员编号</th>
+														<th>姓名</th>
+														<th>头像</th>
+														
+														<!-- <th>图片</th> -->
 														
 														<th>操作</th>
 													</tr>
 												</thead>
 
 												<tbody>
-												@foreach ($arr as $v)
+												<?php foreach($arr as $v): ?>
 
 													<tr>
 														<td class="center">
@@ -140,24 +139,18 @@
 															</label>
 														</td>
 
-														<td><?= $v['car_id']?></td>
-														<td><?= $v['plate_number']?></td>
-														<td><?= $v['car_status']?></td>
+														<td><?= $v['admin_id']?></td>
+														<td><?= $v['admin_name']?></td>
 														<td>
-														<?php foreach($v['car_img'] as $val ):?>
-														<img src="<?= $val?>" alt="">
-														<?php endforeach;?>
+															<img src="www.zbcar.com/<?= $v['admin_img']?>" alt="">							
 														</td>
-														<td><?= $v['deploy_id']?></td>
-														<td><?= $v['renta_num']?></td>
-														
 														<td>
 														<button class="btn">编辑</button>
 														<button class="btn btn-danger">删除</button>
 														</td>
 
 													</tr>
-												@endforeach
+												<?php endforeach; ?>
 												</tbody>
 											</table>
 										</div><!-- /.table-responsive -->
@@ -179,7 +172,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -189,7 +182,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -201,10 +194,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 		</script>
-		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -212,25 +205,25 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 
