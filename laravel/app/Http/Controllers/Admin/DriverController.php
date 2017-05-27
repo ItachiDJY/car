@@ -7,39 +7,66 @@ use Illuminate\Http\Request;
 //use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use DB;
-use App\Models\Admin;
+use App\Models\Driver;
+use App\Models\Region;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-class StaffController extends Controller
+class DriverController extends Controller
 {
-   //展示后台管理员信息
+   //展示司机信息
    public function index()
    {
-		$staffObj = new Admin ;
-		$data = $staffObj ->selectAll() ;
-		return view('admin.staff.staffinfo', ['arr' =>$data]) ;
+    $driverObj = new Driver;
+		$regObj = new Region;
+    $data = $driverObj ->selectAll();
+		$reg_data = $regObj ->selectAll();
+    for ($i=0;$i<count($data);$i++) {
+      foreach ($reg_data as $key => $val) {
+        if ($data[$i]['region_id'] == $val['region_id']) {
+            $data[$i]['region_id'] = $val['region_name'];
+        }
+      }
+    }
+    //var_dump($data);die;
+		return view('admin.driver.driverinfo', ['arr' =>$data]) ;
    }
 
-   //员工添加列表
+   //司机添加列表
    public function add()
    {
-      return view('admin.staff.staffadd') ;
+      $regObj = new Region;
+      $data = $regObj ->select(1);
+      //$data = $this->cate_tree($data);
+      //print_r($data);die;
+      return view('admin.driver.driveradd',['info' => $data]);
    }
    //执行添加的方法
    public function add_do(Request $request)
    {
 	   $path = $this ->upload($request);
-      $post = Input::get();
+     $post = Input::get();
       //var_dump($path);die;
       $token = $post ['_token'];
       unset($post['_token']);
-      $post['admin_img'] = implode(',', $path['img']);
-      $post['admin_pwd'] = md5($post['admin_pwd']);
-      var_dump($post);die;
-      $staffObj = new Admin ;
-      $bool = $staffObj ->adds($post);
-      return redirect('/staff');
+      unset($post['reg_two']);
+      unset($post['reg_one']);
+      $post['license_img'] = implode(',', $path['img']);
+      $post['status'] = 0;
+      //var_dump($post);die;
+      $driverObj = new Driver;
+      $driverObj->adds($post);
+
+      return redirect('/driver');
+   }
+   //地区查询三级联动
+   public function reg_select()
+   {
+      $post = Input::get();
+      $regObj = new Region;
+      $data = $regObj ->select($post['parent_id']);
+
+      return json_encode($data);
    }
    
    // //显示配置的方法
@@ -106,14 +133,14 @@ class StaffController extends Controller
     
    // }
 
-   // //无限级分类
+   //无限级分类
    // public function cate_tree($arr ,$parent_id = 0) 
    // {
    //    $result = [];
    //    if ($arr) {
    //        foreach ($arr as $key => $value) {
    //           $result[$key] = $value;
-   //           $result[$key]['son'] = $this ->cate_tree($arr ,$value['brand_id']);
+   //           $result[$key]['son'] = $this ->cate_tree($arr ,$value['parent_id']);
    //        }
    //    }
 
