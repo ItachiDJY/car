@@ -56,5 +56,8 @@ Route::get('/register/check_code','Home\RegisterController@check_code');
 Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
 //前台登录
-    Route::post('/login/login','Home\LoginController@login');
+Route::post('/login/login','Home\LoginController@login');
+Route::get('/login/check_username','Home\LoginController@check_username');
+Route::get('/login/check_pwd','Home\LoginController@check_pwd');
+
 });
