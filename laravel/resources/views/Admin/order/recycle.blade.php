@@ -5,8 +5,8 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+		<link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css') }}" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace.min.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-rtl.min.css') }}" />
+		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-skins.min.css') }}" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+		<script src="{{ URL::asset('assets/js/ace-extra.min.js') }}"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')<!-- /.nav-list -->
+					@include('admin.layouts.main')
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -96,7 +96,9 @@
 								<a href="#">首页</a>
 							</li>
 							<li class="active">安居客控制台</li>
-							
+							<li class="active">房源管理</li>
+							<li class="active">账号设置</li>
+							<li class="active">账号记录</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -118,20 +120,17 @@
 																<span class="lbl"></span>
 															</label>
 														</th>
-														<th>车辆编号</th>
-														<th>车牌号</th>
-														<th>是否出车</th>
-														<th>图片</th>
-														<th>车辆配置</th>
-														<th>出租次数</th>
-														
+														<th>编号</th>
+														<th>网站</th>
+														<th>姓名</th>
+														<th>用户名</th>
+														<th>类型</th>
+														<th>到期时间</th>
 														<th>操作</th>
 													</tr>
 												</thead>
 
 												<tbody>
-												@foreach ($arr as $v)
-
 													<tr>
 														<td class="center">
 															<label>
@@ -140,24 +139,40 @@
 															</label>
 														</td>
 
-														<td><?= $v['car_id']?></td>
-														<td><?= $v['plate_number']?></td>
-														<td><?= $v['car_status']?></td>
-														<td>
-														<?php foreach($v['car_img'] as $val ):?>
-														<img src="<?= $val?>" alt="">
-														<?php endforeach;?>
-														</td>
-														<td><?= $v['deploy_id']?></td>
-														<td><?= $v['renta_num']?></td>
-														
+														<td>A001</td>
+														<td>58同城</td>
+														<td>张三</td>
+														<td>zhangsan</td>
+														<td>非包月</td>
+														<td>20/06/2010</td>
 														<td>
 														<button class="btn">编辑</button>
 														<button class="btn btn-danger">删除</button>
 														</td>
 
 													</tr>
-												@endforeach
+													<tr>
+														<td class="center">
+															<label>
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</td>
+
+														<td>A002</td>
+														<td>58同城</td>
+														<td>张三</td>
+														<td>zhangsan</td>
+														<td>非包月</td>
+														<td>20/06/2010</td>
+														<td>
+														<button class="btn">编辑</button>
+														<button class="btn btn-danger">删除</button>
+														</td>
+
+													</tr>										
+
+													
 												</tbody>
 											</table>
 										</div><!-- /.table-responsive -->
@@ -167,7 +182,53 @@
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
 
-				<!-- /#ace-settings-container -->
+				<div class="ace-settings-container" id="ace-settings-container">
+					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+						<i class="icon-cog bigger-150"></i>
+					</div>
+
+					<div class="ace-settings-box" id="ace-settings-box">
+						<div>
+							<div class="pull-left">
+								<select id="skin-colorpicker" class="hide">
+									<option data-skin="default" value="#438EB9">#438EB9</option>
+									<option data-skin="skin-1" value="#222A2D">#222A2D</option>
+									<option data-skin="skin-2" value="#C6487E">#C6487E</option>
+									<option data-skin="skin-3" value="#D0D0D0">#D0D0D0</option>
+								</select>
+							</div>
+							<span>&nbsp; 选择皮肤</span>
+						</div>
+
+						<div>
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+							<label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
+						</div>
+
+						<div>
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+							<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
+						</div>
+
+						<div>
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+							<label class="lbl" for="ace-settings-breadcrumbs">固定面包屑</label>
+						</div>
+
+						<div>
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+							<label class="lbl" for="ace-settings-rtl">切换到左边</label>
+						</div>
+
+						<div>
+							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+							<label class="lbl" for="ace-settings-add-container">
+								切换窄屏
+								<b></b>
+							</label>
+						</div>
+					</div>
+				</div><!-- /#ace-settings-container -->
 			</div><!-- /.main-container-inner -->
 
 			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
@@ -179,7 +240,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+			<script src="{{ URL::asset('assets/js/jquery-2.0.3.min.js') }}"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -189,7 +250,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+			window.jQuery || document.write("<script src='{{ URL::asset('assets/js/jquery-2.0.3.min.js') }}'>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -201,10 +262,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='{{ URL::asset('assets/js/jquery.mobile.custom.min.js') }}'>"+"<"+"script>");
 		</script>
-		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+		<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/typeahead-bs2.min.js') }}"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -212,25 +273,25 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+		<script src="{{ URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/jquery.ui.touch-punch.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/chosen.jquery.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/fuelux/fuelux.spinner.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/date-time/bootstrap-datepicker.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/date-time/bootstrap-timepicker.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/date-time/moment.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/date-time/daterangepicker.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/bootstrap-colorpicker.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/jquery.knob.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/jquery.autosize.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/jquery.maskedinput.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/bootstrap-tag.min.js') }}"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+		<script src="{{ URL::asset('assets/js/ace-elements.min.js') }}"></script>
+		<script src="{{ URL::asset('assets/js/ace.min.js') }}"></script>
 
 		<!-- inline scripts related to this page -->
 
