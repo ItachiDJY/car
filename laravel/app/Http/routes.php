@@ -43,6 +43,10 @@ Route::get('/recycle','Admin\OrderController@recycle');
 Route::get('/add_order','Admin\OrderController@add_order');
 Route::get('/dele_order','Admin\OrderController@dele_order');
 Route::get('/search_order','Admin\OrderController@search_order');
+//员工管理
+Route::get('/staff','Admin\StaffController@index');
+Route::get('/staff_add','Admin\StaffController@add');
+Route::post('/staff_add_do','Admin\StaffController@add_do');
 
 
 
