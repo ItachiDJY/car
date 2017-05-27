@@ -120,6 +120,7 @@
 														</th>
 														<th>人员编号</th>
 														<th>姓名</th>
+														<th>头像</th>
 														
 														<!-- <th>图片</th> -->
 														
@@ -140,9 +141,9 @@
 
 														<td><?= $v['admin_id']?></td>
 														<td><?= $v['admin_name']?></td>
-														
-														
-														
+														<td>
+															<img src="<?= $v['admin_img']?>" alt="">							
+														</td>
 														<td>
 														<button class="btn">编辑</button>
 														<button class="btn btn-danger">删除</button>

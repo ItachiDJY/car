@@ -31,10 +31,12 @@ class StaffController extends Controller
    {
 	   $path = $this ->upload($request);
       $post = Input::get();
-      //var_dump($post);die;
+      //var_dump($path);die;
       $token = $post ['_token'];
       unset($post['_token']);
       $post['admin_img'] = implode(',', $path['img']);
+      $post['admin_pwd'] = md5($post['admin_pwd']);
+      //var_dump($post);die;
       $staffObj = new Admin ;
       $bool = $staffObj ->adds($post);
       return redirect('/staff');
@@ -119,78 +121,78 @@ class StaffController extends Controller
    // }
 
 
-   // /**
-   // * @brief 文件上传，单文件多文件都可以
-   // * @param Request $request
-   // * @return array
-   // */
-   // public function upload($request)
-   // {
-   //   $path = [];
-   //   $file = $request->file();
-   //   //return $file;
-   //   //多个input标签
-   //   foreach ($file as $key => $val)
-   //   {
-   //       //input标签是数组情况
-   //       if (is_array($val))
-   //       {
-   //           $keyPath = [];
-   //           foreach ($val as $v)
-   //           {
-   //               $singlePath = $this->uploadSingle($v);
-   //               $keyPath[] = $singlePath;
-   //           }
-   //           $path[$key] = $keyPath;
-   //       }
-   //       else
-   //       //input标签单个情况
-   //       {
-   //           $singlePath = $this->uploadSingle($val);
-   //           $path[$key] = $singlePath;
-   //       }
-   //   }
+   /**
+   * @brief 文件上传，单文件多文件都可以
+   * @param Request $request
+   * @return array
+   */
+   public function upload($request)
+   {
+     $path = [];
+     $file = $request->file();
+     //return $file;
+     //多个input标签
+     foreach ($file as $key => $val)
+     {
+         //input标签是数组情况
+         if (is_array($val))
+         {
+             $keyPath = [];
+             foreach ($val as $v)
+             {
+                 $singlePath = $this->uploadSingle($v);
+                 $keyPath[] = $singlePath;
+             }
+             $path[$key] = $keyPath;
+         }
+         else
+         //input标签单个情况
+         {
+             $singlePath = $this->uploadSingle($val);
+             $path[$key] = $singlePath;
+         }
+     }
 
-   //   return $path;
-   // }
+     return $path;
+   }
 
-   //  /**
-   //   * @brief 文件上传辅助,也可用于单文件上传(参数为$request->file())
-   //   * @param Request $file
-   //   * @return array|bool
-   //   */
-   //  public function uploadSingle($file)
-   //  {
+    /**
+     * @brief 文件上传辅助,也可用于单文件上传(参数为$request->file())
+     * @param Request $file
+     * @return array|bool
+     */
+    public function uploadSingle($file)
+    {
         
-   //      //检测文件是否可用
-   //      if ($file->isValid())
-   //      {
-   //          // 获取文件相关信息
-   //          $ext = $file->getClientOriginalExtension();      // 扩展名
-   //          $tempPath = $file->getRealPath();                //临时文件的绝对路径
+        //检测文件是否可用
+        if ($file->isValid())
+        {
+            // 获取文件相关信息
+            $ext = $file->getClientOriginalExtension();      // 扩展名
+            $tempPath = $file->getRealPath();                //临时文件的绝对路径
 
-   //          //检测文件格式
-   //          $allowed_extensions = ["png", "jpg", "gif"];
-   //          if (!in_array($ext, $allowed_extensions))
-   //          {
-   //              return false;
-   //          }
+            //检测文件格式
+            $allowed_extensions = ["png", "jpg", "gif",'JPG','PNG','GIF','jpeg','JPEG'];
+            if (!in_array($ext, $allowed_extensions))
+            {
+                return false;
+            }
 
-   //          //使用uploads本地存储空间（目录）
-   //          $filename = uniqid() . '.' . $ext;
+            //使用uploads本地存储空间（目录）
+            $filename = uniqid() . '.' . $ext;
 
-   //          $datePath = date('Y-m-d');                                     // 上传文件111
-   //          $file->move('uploads/'.$datePath.'/', $filename); // 上传文件111
-   //          $singlePath = 'uploads/'.$datePath.'/'.$filename; 
-   //          //$singlePath = $file->storeAs($datePath, $filename, 'uploads'); // 上传文件111
+            $datePath = date('Y-m-d');                                     // 上传文件111
+            $file->move('uploads/'.$datePath.'/', $filename); // 上传文件111
+            $singlePath = 'uploads/'.$datePath.'/'.$filename; 
+            //$singlePath = $file->storeAs($datePath, $filename, 'uploads'); // 上传文件111
 
-   //          //$bool = Storage::disk('uploads')->put($filename, file_get_contents($tempPath));   // 上传文件222
+            //$bool = Storage::disk('uploads')->put($filename, file_get_contents($tempPath));   // 上传文件222
 
-   //          return $singlePath;
-   //      }
+            return $singlePath;
+        }
 
-   //      return false;
-   //  }
+        return false;
+    }
 
    
    
