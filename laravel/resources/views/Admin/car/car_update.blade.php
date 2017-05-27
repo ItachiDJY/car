@@ -5,7 +5,7 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
 		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
 
 		<!--[if IE 7]>
@@ -96,7 +96,7 @@
 								<a href="#">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
-							<li class="active">车辆品牌展示</li>
+							<li class="active">修改车辆信息</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -106,58 +106,85 @@
 							
 
 									<div class="col-xs-12">
-
 									
+									<form class="form-horizontal" role="form" method="post" action="car_update_do" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 车牌号 </label>
+										<input type="hidden" name="_token" value="<?=csrf_token(); ?>">
+										<input type="hidden" name="car_id" value="<?=$car_info['car_id']  ?>">
+										<div class="col-sm-9">
+											<input type="text" name="plate_number" id="form-field-1" value="<?=$car_info['plate_number']?>" placeholder="车牌号" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图片 </label>
+
+										<div class="col-sm-9">
+											<input type="file" name="img[]" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 出租次数 </label>
+
+										<div class="col-sm-9">
+											<input type="text" name="renta_num" value="<?=$car_info['renta_num']?>" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 出行状态 </label>
+
+										<div class="col-sm-9">
+										    <select name="car_status" id="">
+										    	<option value="0" <?php if ($car_info['car_status'] == 0) {echo 'selected' ;}?>>未出行</option>
+										    	<option value="1" <?php if ($car_info['car_status'] == 1) {echo 'selected' ;}?>>已出行</option>
+										    </select>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 车辆配置</label>
+
+														<div class="col-sm-9">
+															<select name="deploy_id">
+																<option value="">..请选择配置</option>
+																@foreach ($deploy_data as $k =>$v)
+																<option value="<?= $k?>" <?php if ($car_info['deploy_id'] == $k) {echo 'selected' ;}?>><?= $v?></option>
+																@endforeach
+															</select>
+															
+													    </div>
+
+
+									</div>
 									
-										<div class="table-responsive">
-											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th class="center">
-															<label>
-																<input type="checkbox" class="ace" id="check" />
-																<span class="lbl"></span>
-															</label>
-														</th>
-														                                                    
-														<th>品牌名称</th>
-														<th>品牌logo</th>
-														<th>父级ID</th>
-														<th>操作</th>
-													</tr>
-												</thead>
+									<div class="form-group">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit" id="car_add">
+												<i class="icon-ok bigger-110"></i>
+												增加
+											</button>
 
-												<tbody>
-												@foreach ($data as $v)
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+									<div class="hr hr-24"></div>
 
-													<tr ids="<?=$v->brand_id?>">
-														<td class="center">
-															<label>
-																<input type="checkbox" class="ace" name="box" />
-																<span class="lbl"></span>
-															</label>
-														</td>
-														<td>
-														<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-														<?= $v->brand_name?>
-														</td>
-														<td>
-														<?php if (isset($v->brand_logo)) {  ?>
-															<img src="<?=$v->brand_logo?>" alt=""> 
-														<?php	} ?>
-													     </td>
-														<td><?= $v->parent_id?></td>
-														
-														<td>
-														<button class="up btn">编辑</button>
-														<button class="del btn btn-danger">删除</button>
-														</td>
-
-													</tr>
-												@endforeach
-												</tbody>
-											</table>
-										</div><!-- /.table-responsive -->
+									</form>
 									</div><!-- /span -->
 								</div><!-- /row -->
 
@@ -178,39 +205,7 @@
 
 			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
 		<!-- <![endif]-->
-		<script>
-		    //编辑
-			$('.up').on('click' ,function(){
-		    	var id = $(this).parents('tr').attr('ids');
-		    	location.href ='brand_update?id='+id;
-		    })
-			//全选/全不选
-			$('#check').on('click' , function(){
-				if (this.checked == true) {
-					$('[name=box]:checkbox').prop('checked',true); 
-				} else {
-					$('[name=box]:checkbox').prop('checked',false); 
 
-				}
-			})
-			//单删
-			$(document).on('click' ,'.del' ,function(){
-				 var _this = $(this);
-				 var ids = _this.parents('tr').attr('ids') ;
-				 $.ajax({
-				 	 url:'brand_del',
-				 	 type:'GET',
-				 	 data:{id:ids},
-				 	 success:function(msg){
-				 	 	 if (msg) {
-				 	 	 	  _this.parents('tr').remove();
-				 	 	 } else {
-				 	 	 	  alert('删除失败');
-				 	 	 }
-				 	 }
-				 })
-			})
-		</script>
 		<!--[if IE]>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->
@@ -238,7 +233,7 @@
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="assets/js/excanvas.min.js"></script>
+		  <script src="{{URL::asset('assets/js/excanvas.min.js')}}"></script>
 		<![endif]-->
 
 		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>

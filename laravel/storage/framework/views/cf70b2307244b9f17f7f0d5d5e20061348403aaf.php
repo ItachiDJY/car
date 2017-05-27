@@ -2,11 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>租呗</title>
+		<title>安居客</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 	</head>
 
 	<body>
-		@include('admin.layouts.header')
+		<?php echo $__env->make('layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')<!-- /.nav-list -->
+					<?php echo $__env->make('layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -95,9 +95,10 @@
 								<i class="icon-home home-icon"></i>
 								<a href="#">首页</a>
 							</li>
-							<li class="active">车辆管理</li>
-							<li class="active">车辆品牌展示</li>
-							
+							<li class="active">安居客控制台</li>
+							<li class="active">房源管理</li>
+							<li class="active">账号设置</li>
+							<li class="active">账号记录</li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -115,46 +116,46 @@
 													<tr>
 														<th class="center">
 															<label>
-																<input type="checkbox" class="ace" id="check" />
+																<input type="checkbox" class="ace" />
 																<span class="lbl"></span>
 															</label>
 														</th>
-														                                                    
-														<th>品牌名称</th>
-														<th>品牌logo</th>
-														<th>父级ID</th>
+														<th>车辆编号</th>
+														<th>车牌号</th>
+														<th>是否出车</th>
+														<th>图片</th>
+														<th>车辆配置</th>
+														<th>出租次数</th>
+														
 														<th>操作</th>
 													</tr>
 												</thead>
 
 												<tbody>
-												@foreach ($data as $v)
+												<?php foreach($arr as $v): ?>
 
-													<tr ids="<?=$v->brand_id?>">
+													<tr>
 														<td class="center">
 															<label>
-																<input type="checkbox" class="ace" name="box" />
+																<input type="checkbox" class="ace" />
 																<span class="lbl"></span>
 															</label>
 														</td>
-														<td>
-														<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-														<?= $v->brand_name?>
-														</td>
-														<td>
-														<?php if (isset($v->brand_logo)) {  ?>
-															<img src="<?=$v->brand_logo?>" alt=""> 
-														<?php	} ?>
-													     </td>
-														<td><?= $v->parent_id?></td>
+
+														<td><?= $v['car_id']?></td>
+														<td><?= $v['plate_number']?></td>
+														<td><?= $v['car_status']?></td>
+														<td><?= $v['car_img']?></td>
+														<td><?= $v['deploy_id']?></td>
+														<td><?= $v['renta_num']?></td>
 														
 														<td>
-														<button class="up btn">编辑</button>
-														<button class="del btn btn-danger">删除</button>
+														<button class="btn">编辑</button>
+														<button class="btn btn-danger">删除</button>
 														</td>
 
 													</tr>
-												@endforeach
+												<?php endforeach; ?>
 												</tbody>
 											</table>
 										</div><!-- /.table-responsive -->
@@ -176,41 +177,9 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 		<!-- <![endif]-->
-		<script>
-		    //编辑
-			$('.up').on('click' ,function(){
-		    	var id = $(this).parents('tr').attr('ids');
-		    	location.href ='brand_update?id='+id;
-		    })
-			//全选/全不选
-			$('#check').on('click' , function(){
-				if (this.checked == true) {
-					$('[name=box]:checkbox').prop('checked',true); 
-				} else {
-					$('[name=box]:checkbox').prop('checked',false); 
 
-				}
-			})
-			//单删
-			$(document).on('click' ,'.del' ,function(){
-				 var _this = $(this);
-				 var ids = _this.parents('tr').attr('ids') ;
-				 $.ajax({
-				 	 url:'brand_del',
-				 	 type:'GET',
-				 	 data:{id:ids},
-				 	 success:function(msg){
-				 	 	 if (msg) {
-				 	 	 	  _this.parents('tr').remove();
-				 	 	 } else {
-				 	 	 	  alert('删除失败');
-				 	 	 }
-				 	 }
-				 })
-			})
-		</script>
 		<!--[if IE]>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->
@@ -218,7 +187,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -230,10 +199,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 		</script>
-		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -241,25 +210,25 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 

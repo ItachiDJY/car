@@ -299,8 +299,12 @@
 									<div class="col-sm-9">
 										<select name="brand_id">
 											<option value="">..请选择品牌</option>
-											
-											<option value=""></option>
+											<?php foreach($brand_list as $key=>$v) : ?>
+											<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
+											<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
+											<?=$v->brand_name?>
+											</option>
+											<?php  endforeach; ?>
 											
 										</select>
 										
