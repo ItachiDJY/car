@@ -16,19 +16,19 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="release.html">
+									<a href="staff_add">
 										<i class="icon-double-angle-right"></i>
 										添加员工
 									</a>
 								</li>
 
 								<li>
-									<a href="record.html">
+									<a href="staff">
 										<i class="icon-double-angle-right"></i>
-										员工离职
+										员工列表
 									</a>
 								</li>
-
+							
 								<li>
 									<a href="#" class="dropdown-toggle">
 										<i class="icon-double-angle-right"></i>
@@ -36,8 +36,14 @@
 										
 										<b class="arrow icon-angle-down"></b>
 									</a>
-
+										
 									<ul class="submenu">
+										<li>
+											<a href="account.html">
+												<i class="icon-leaf"></i>
+												   添加司机
+											</a>
+										</li>
 										<li>
 											<a href="account.html">
 												<i class="icon-leaf"></i>
