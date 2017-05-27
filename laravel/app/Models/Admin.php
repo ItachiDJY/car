@@ -14,7 +14,7 @@ class Admin extends Model
     protected  $guarded=['*'];
     //默认添加开始时间和结束时间，默认开启ture
     public $timestamps=false;
-    protected $fillable = ['admin_id','admin_name','admin_pwd'];
+    protected $fillable = ['admin_id','admin_name','admin_pwd','admin_img'];
 	//查看所有的方法
 	public function selectAll(){
 		return $this->get()->toArray();
