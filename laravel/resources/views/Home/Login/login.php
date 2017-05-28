@@ -2,6 +2,8 @@
 <html>
 <head>
     <base href="home/">
+    <script type="text/javascript" src="Scripts/jquery.js"></script>
+
     <script>!function(a,b,c,d,e){a[c]=a[c]||{},a[c].env="",a[c].id=d,a[c].st=(new Date).getTime(),a[c].env="test"==a[c].env||"test2"==a[c].env||"pre"==a[c].env?a[c].env:"";var f=[],g=b.createElement("script");g.onload=g.onreadystatechange=function(){if(!g.readyState||/loaded|complete/.test(g.readyState)){g.onload=g.onreadystatechange=null;var a=f.length;if(0==a)return!1;for(var b=0;b<a;b++)"[object Function]"===Object.prototype.toString.call(f[b])&&f[b]()}},g.src="//lc"+a[c].env+".ucarinc.com/lc.js";var h=b.getElementsByTagName("script")[0];h.parentNode.insertBefore(g,h),a[c].putEvt=function(b){return a[c].putBe?(b&&b(),!1):void f.push(b)},a[c].types=e;for(var i=0;i<a[c].types.length;i++)if("pe"==a[c].types[i]){var j=[];a.onerror=function(b,d,e,f){j.push("m="+b+"&u="+d+"&l="+e+"&r="+f),a[c].initPe=j.join(",")};break}}(window,document,"LCTJ","eeffffff",["rc","pe","rt","cl","se"]);</script>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -48,10 +50,16 @@
                                 <input type="text" class="wipt t_val" id="normal_id"maxlength="18" name="username" placeholder="请输入手机号或者真实姓名" >
                                 <input type="text" class="wipt t_val" id="phone_id" placeholder="请输入注册手机号" maxlength="18" style="display:none">
                             </li>
+
+                            <span class="span_name" style="align-content: center"></span>
+
                             <li class="pass_switchover"><label class="icon_wz"><span class="zc-ipsw "></span></label>
                                 <input type="password" class="wipt"  placeholder="请输入密码" id="xpasstext" name="pwd">
                                 <input type="password" class="wipt"  value="" id="xpassword" >
                             </li>
+
+                            <span class="span_pwd" style="align-content: center"></span>
+
                             <li class="clearfix" id="imageYzmLi" style="display:none">
                                 <label class="icon_wz"><span class="zc-iyzm"></span></label>
                                 <span class="fl"><input class="zc-iptsht t_val" type="text" id="yzmVal" value="请输入右侧验证码" maxlength="6"></span>
@@ -64,12 +72,16 @@
 		                        <input id="idtmcount" class="btn-dtm btn-dtmdao" type="button" value="60秒后可重发" style="display: none;"></span>
                                 <input type="hidden" id="smsOverTime">
                             </li>
-                            <li class="zc_list_che">
-                                <label class="fl"><span class="zc-blyes"></span><span class="zc_blyes_kong"></span>
-                                    <input id="autoLogin" type="checkbox" checked class="login_checkbox" name="free" value="1">30天内自动登录</label>
+                            <li>
+                                <input type="checkbox" checked  name="free" value="1">&nbsp;&nbsp;30天内自动登录
                                 <a href="https://passport.zuche.com/member/loginandregist/getpassword.do" class="fr" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','忘记密码')">忘记密码？</a>
-                                <div class="clear"></div>
                             </li>
+                            <!--                            <li class="zc_list_che">-->
+                            <!--                                <label class="fl"><span class="zc-blyes"></span><span class="zc_blyes_kong"></span>-->
+                            <!--                                    <input type="checkbox" checked  name="free" value="1">30天内自动登录</label>-->
+                            <!--                                <a href="https://passport.zuche.com/member/loginandregist/getpassword.do" class="fr" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','忘记密码')">忘记密码？</a>-->
+                            <!--                                <div class="clear"></div>-->
+                            <!--                            </li>-->
                         </ul>
                         <ul class="login_sub" id="login_sub">
 
@@ -79,6 +91,105 @@
                             <li><div class="zc_login_rbox">还不是会员？<a href="/register" rel="nofollow" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','立即注册')">立即注册</a> </div></li>
                         </ul>
                     </form>
+
+                    <script>
+                        //定义全局变量
+                        var flag_name = 0;
+                        var flag_pwd = 0;
+                        //验证用户名
+                        $("#normal_id").blur(function(){
+                            var username = $(this).val();
+                            var reg_name = /^[\u4e00-\u9fa5]{2,5}$/;
+                            var reg_phone=/^1[3,5,8,7]\d{9}$/
+
+                            if(username == "") {
+                                $(".span_name").html("<font color='red'>! ! ! 请输入注册时的手机号或者姓名</font>");
+                            } else {
+                                if(!reg_name.test(username) && !reg_phone.test(username)) {
+                                    $(".span_name").html("<font color='red'>! ! ! 手机号或用户名输入有误</font>");
+                                } else {
+                                    $.ajax({
+                                        type: "get",
+                                        url: "/login/check_username",
+                                        data: "username="+username,
+                                        success: function(msg){
+                                            if(msg == 1) {
+                                                flag_name = 1;
+                                                $(".span_name").html("<font color='green'>√</font>");
+                                            } else {
+                                                $(".span_name").html("<font color='red'>! ! ! 手机号或用户名输入有误</font>");
+                                            }
+                                        }
+                                    });
+
+                                }
+                            }
+                        })
+
+
+
+
+                        //验证密码
+
+                        $("#xpasstext").focus(function(){
+                            var username = $("#normal_id").val();
+                            if (username == "") {
+                                $(".span_name").html("<font color='red'>! ! ! 请先输入手机号或者姓名</font>");
+                            }
+                        })
+
+
+                        $("#xpasstext").blur(function(){
+                            var pwd = $(this).val();
+                            var username = $("#normal_id").val();
+                            var reg_pwd =/^\w{6,18}$/;
+                            if(pwd == "") {
+                                $(".span_pwd").html("<font color='red'>! ! ! 请输入密码</font>")
+                            } else {
+                                if(!reg_pwd.test(pwd)) {
+                                    $(".span_pwd").html("<font color='red'>! ! ! 密码输入有误</font>")
+                                } else {
+                                    $.ajax({
+                                        type: "get",
+                                        url: "/login/check_pwd",
+                                        data: "username="+username+"&pwd="+pwd,
+                                        success: function(msg){
+                                            if(msg == 1) {
+                                                flag_pwd = 1;
+                                                $(".span_pwd").html("<font color='green'>√</font>")
+                                            } else {
+                                                $(".span_pwd").html("<font color='red'>! ! ! 密码输入有误</font>")
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        })
+
+
+                        //点击登录按钮时
+                        $("#loginBt").click(function(){
+                            if(flag_name==1 && flag_pwd==1) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        })
+                    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <input type="hidden" id="autoLogin" name="autoLogin"></input>
                 </div>
                 <div class="tabcontents cur" id="imgYzmDiv" style="float:left">
