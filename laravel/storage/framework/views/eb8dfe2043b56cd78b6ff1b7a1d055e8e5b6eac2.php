@@ -93,9 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -105,51 +105,74 @@
 							
 
 									<div class="col-xs-12">
+
 									
-									<form class="form-horizontal" role="form" method="post" action="staff_add_do" enctype="multipart/form-data">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 姓名 </label>
-										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-										<div class="col-sm-9">
-											<input type="text" name="admin_name" id="form-field-1" placeholder="姓名" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 密码 </label>
-				
-										<div class="col-sm-9">
-											<input type="password" name="admin_pwd" id="form-field-1" placeholder="密码" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图片 </label>
-
-										<div class="col-sm-9">
-											<input type="file" name="img[]" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
 									
-									<div class="form-group">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="submit" id="car_add">
-												<i class="icon-ok bigger-110"></i>
-												增加
-											</button>
+										<div class="table-responsive">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</th>
+														<th>司机编号</th>
+														<th>司机姓名</th>
+														<th>所属地区</th>
+														<th>司机电话</th>
+														<th>司机性别</th>
+														<th>司机身份证</th>
+														<th>司机驾驶证</th>
+														<th>出车状态</th>
+														<th>操作</th>
+													</tr>
+												</thead>
 
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="icon-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-									<div class="hr hr-24"></div>
+												<tbody>
+												<?php foreach($arr as $v): ?>
 
-									</form>
+													<tr>
+														<td class="center">
+															<label>
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</td>
+
+														<td><?= $v['driver_id']?></td>
+														<td><?= $v['driver_name']?></td>
+														<td><?= $v['region_id']?></td>
+														<td><?= $v['driver_phone']?></td>
+														<td>
+														<?php if ($v['driver_sex'] == 0): ?>
+															男
+														<?php else:?>
+															女
+														<?php endif;?>
+														</td>
+														<td><?= $v['idcard']?></td>
+														<td>
+															<img src="<?= $v['license_img']?>" alt="">							
+														</td>
+														<td>
+														<?php if ($v['status'] == 0): ?>
+															未出车
+														<?php else:?>
+															工作中
+														<?php endif;?>
+														</td>
+														<td>
+														<button class="btn">编辑</button>
+														<button class="btn btn-danger">删除</button>
+														</td>
+
+													</tr>
+												<?php endforeach; ?>
+												</tbody>
+											</table>
+										</div><!-- /.table-responsive -->
 									</div><!-- /span -->
 								</div><!-- /row -->
 
@@ -198,7 +221,7 @@
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
+		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
 		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>

@@ -5,8 +5,8 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
+		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 	</head>
 
 	<body>
-		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		@include('admin.layouts.header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
+					@include('admin.layouts.main')<!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -93,9 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -105,51 +105,74 @@
 							
 
 									<div class="col-xs-12">
+
 									
-									<form class="form-horizontal" role="form" method="post" action="staff_add_do" enctype="multipart/form-data">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 姓名 </label>
-										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-										<div class="col-sm-9">
-											<input type="text" name="admin_name" id="form-field-1" placeholder="姓名" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 密码 </label>
-				
-										<div class="col-sm-9">
-											<input type="password" name="admin_pwd" id="form-field-1" placeholder="密码" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图片 </label>
-
-										<div class="col-sm-9">
-											<input type="file" name="img[]" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
 									
-									<div class="form-group">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="submit" id="car_add">
-												<i class="icon-ok bigger-110"></i>
-												增加
-											</button>
+										<div class="table-responsive">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</th>
+														<th>司机编号</th>
+														<th>司机姓名</th>
+														<th>所属地区</th>
+														<th>司机电话</th>
+														<th>司机性别</th>
+														<th>司机身份证</th>
+														<th>司机驾驶证</th>
+														<th>出车状态</th>
+														<th>操作</th>
+													</tr>
+												</thead>
 
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="icon-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-									<div class="hr hr-24"></div>
+												<tbody>
+												@foreach ($arr as $v)
 
-									</form>
+													<tr>
+														<td class="center">
+															<label>
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</td>
+
+														<td><?= $v['driver_id']?></td>
+														<td><?= $v['driver_name']?></td>
+														<td><?= $v['region_id']?></td>
+														<td><?= $v['driver_phone']?></td>
+														<td>
+														<?php if ($v['driver_sex'] == 0): ?>
+															男
+														<?php else:?>
+															女
+														<?php endif;?>
+														</td>
+														<td><?= $v['idcard']?></td>
+														<td>
+															<img src="<?= $v['license_img']?>" alt="">							
+														</td>
+														<td>
+														<?php if ($v['status'] == 0): ?>
+															未出车
+														<?php else:?>
+															工作中
+														<?php endif;?>
+														</td>
+														<td>
+														<button class="btn">编辑</button>
+														<button class="btn btn-danger">删除</button>
+														</td>
+
+													</tr>
+												@endforeach
+												</tbody>
+											</table>
+										</div><!-- /.table-responsive -->
 									</div><!-- /span -->
 								</div><!-- /row -->
 
@@ -168,7 +191,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
+			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -178,7 +201,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
+			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -190,36 +213,36 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
 		</script>
-		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
+		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
 
 		<!-- ace scripts -->
 
-		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
 
 		<!-- inline scripts related to this page -->
 
