@@ -24,19 +24,24 @@ Route::group(['middleware'=>'web'], function (){
     Route::get('/store','Home\StoreController@index');
     Route::get('/activity','Home\ActivityController@index');
     Route::get('/country','Home\CountryController@index');
+
 //前台登录
     Route::post('/login/login','Home\LoginController@login');
     Route::get('/login/check_username','Home\LoginController@check_username');
     Route::get('/login/check_pwd','Home\LoginController@check_pwd');
+
 //前台注册
     Route::post('/register/register','Home\RegisterController@register');
     Route::get('/register/check_code','Home\RegisterController@check_code');
     Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
 
+
+
     /*******后台路由区******/
 //首页
     Route::get('/admin', 'Admin\IndexController@index');
+
 //车辆管理
     Route::get('/car', 'Admin\CarController@index');
     Route::get('/car_add', 'Admin\CarController@add');
