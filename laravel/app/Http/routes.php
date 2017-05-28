@@ -60,6 +60,11 @@ Route::get('/recycle','Admin\OrderController@recycle');
 Route::get('/add_order','Admin\OrderController@add_order');
 Route::get('/dele_order','Admin\OrderController@dele_order');
 Route::get('/search_order','Admin\OrderController@search_order');
+Route::get('/recycle_add','Admin\OrderController@recycle_add');
+Route::get('/recycle_index','Admin\OrderController@recycle_index');
+Route::get('/restore','Admin\OrderController@restore');
+Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
+
 
 
 
