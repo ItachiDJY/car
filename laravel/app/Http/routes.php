@@ -32,6 +32,8 @@ Route::group(['middleware'=>'web'], function (){
     Route::post('/register/register','Home\RegisterController@register');
     Route::get('/register/check_code','Home\RegisterController@check_code');
     Route::get('/register/check_phone','Home\RegisterController@check_phone');
+
+
     /*******后台路由区******/
 //首页
     Route::get('/admin', 'Admin\IndexController@index');
