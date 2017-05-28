@@ -125,33 +125,9 @@
 									<thead>
 
 									<div>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="{{ url('add_order')}}"><i class="fa fa-plus-square"></i>添加订单</a></span>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 7%;" id="recycle"><a href="javascript:;"><i class="fa fa-trash-o"></i>回收站</a></span>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 13%;" id="delAll"><a href="javascript:;" ><i class="fa fa-remove"></i>批量删除</a></span>
-										
-											<select name="" id="pay_status">
-												<option value="">选择支付状态</option>
-												<option value="1">已支付</option>
-												<option value="2">未支付</option>
-											</select>
-										
-											<select name="" id="order_status">
-												<option value="">选择订单状态</option>
-												<option value="1">租赁中</option>
-												<option value="2">已完成</option>
-												<option value="3">已取消</option>
-												<option value="4">预定成功</option>
-											</select>
-											
-											<select name="" id="term">
-												<option value="">选择订单条件</option>
-												<option value="1">客户姓名</option>
-												<option value="2">订单号</option>
-											</select>
-
-											<input type="text" name="search" >
-											<div class="fa-hover col-md-3 col-sm-4" style="float:right;width:268px;margin-top: 5px;" id="search_order"><a href="javascript:;"><i class="fa fa-search"></i>筛选</a></div>
-											
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;" id="restore"><a href="javascript:;"><i class="fa fa-mail-reply"></i>还原</a></span>
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 7%;" id="delete"><a href="javascript:;"><i class="fa fa-trash-o"></i>删除</a></span>
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 13%;" id="empty_recycle"><a href="javascript:;" ><i class="fa fa-times-circle"></i>清空回收站</a></span>		
 									</div>
 
 										<tr>
@@ -172,12 +148,11 @@
 											<th>下单时间</th>
 											<th>租赁车辆</th>
 											<th>订单金额</th>
-											<th>操作</th>											
 										</tr>
 									</thead>
 
 									<tbody id="tbody">
-									@foreach($order_info as $k=>$v)
+									@foreach($arr as $k=>$v)
 										<tr>
 											<td class="center">
 												<label>
@@ -213,17 +188,10 @@
 											<td>{{ $v['create_time'] }}</td>
 											<td>{{ $v['plate_number'] }}</td>
 											<td>{{ $v['order_amount'] }}</td>
-											<td>
-											<button class="upda btn-primary btn-circle" type="button" ids="{{ $v['order_id']}}"><i class="fa fa-list"></i>
-                            				</button>
-                            				<button class="dele btn-warning btn-circle" type="button" ids="{{ $v['order_id']}}"><i class="fa fa-times"></i>
-                            				</button>
-											</td>
 										</tr>
 									@endforeach	
 									</tbody>
 								</table>
-								<div style="text-align:center">{{ $order->links() }}</div>
 							</div><!-- /.table-responsive -->
 						</div><!-- /span -->
 					</div><!-- /row -->
@@ -303,8 +271,8 @@
 </body>
 
 <script>
-//加入回收站
-	$(document).on('click','#recycle',function(){
+//回收站还原
+	$(document).on('click','#restore',function(){
 		var _this = $(this);
 		var order_id = '';
 		$('[name=box]:checkbox:checked').each(function(){
@@ -314,7 +282,7 @@
 		$.ajax({
 			type:"GET",
 			data:{id:order_id},
-			url:"recycle_add",
+			url:"restore",
 			dataType:"json",
 			success:function(msg){
 				data(msg);
@@ -323,76 +291,41 @@
 
 	})
 
-//删除单个订单
-	$(document).on('click','.dele',function(){
+//删除回收站数据
+	$(document).on('click','#delete',function(){
 		var _this = $(this);
-		var order_id = _this.attr('ids'); //获取id值
-		//alert(id);
-		$.ajax({
-	   	type: "GET",
-	   	url: "dele_order",
-	   	data: {order_id:order_id},
-	   	success: function(msg){
-	    //alert(msg);
-		    if(msg)
-		    {
-		    	_this.parents('tr').remove();
-		    }
-	   }
-	   })
-	})
-
-//批量删除订单
-	$(document).on('click','#delAll',function(event)
-	{
-		var _this = $(this);
-		var ids = ''; //获取id值
-		//alert(id);
+		var order_id = '';
 		$('[name=box]:checkbox:checked').each(function(){
-			ids+= ','+$(this).attr('ids');
+			order_id+= ','+$(this).attr('ids');
 		})
-		ids = ids.substr(1);
-		//alert(ids);
+		order_id = order_id.substr(1);
 		$.ajax({
-	   	type: "GET",
-	   	url: "dele_order",
-	   	data: {order_id:ids},
-	   	success: function(msg){
-	    //alert(msg);
-	    if(msg)
-	    {
-	    	$('[name=box]:checkbox:checked').each(function(msg)
+			type:"GET",
+			data:{id:order_id},
+			url:"delete",
+			success:function(msg){
+			if(msg)
 	    	{
-	    		$(this).parent().parent().parent().remove();
-	    	})
-	    }
-	    }
-	   })
+		    	$('[name=box]:checkbox:checked').each(function(msg)
+		    	{
+		    		$(this).parent().parent().parent().remove();
+		    	})
+	    	}	
+			}
+		})
 	})
 
-//筛选订单
-	$(document).on('click','#search_order',function(){
-
-		var pay_status = $('#pay_status').val();
-		var order_status = $('#order_status').val();
-		var term = $('#term').val();
-		if (term == 1) {
-			var user_name = $('input[name="search"]').val();
-		} else {
-			var order_no = $('input[name="search"]').val();
-		}
-		// alert(user_name+order_no);
-
+//清空回收站
+	$(document).on('click','#empty_recycle',function(event)
+	{
 		$.ajax({
-	   		type: "GET",
-	   		url: "search_order",
-	   		data: {pay_status:pay_status,order_status:order_status,user_name:user_name,order_no:order_no},
-	   		dataType:'json',
-	   		success: function(msg){
-	   			// console.log(msg);return;
-	   			data(msg);	   			
-	   		}
-	   	})
+			url:"empty_recycle",
+			success:function(msg){
+				if (msg) {
+					$('#tbody').empty(); 
+				}
+			}
+		})
 	})
 
 //封装公共数据
@@ -429,7 +362,6 @@
 			str+='<td>'+v.create_time+'</td>';
 			str+='<td>'+v.plate_number+'</td>';
 			str+='<td>'+v.order_amount+'</td>';
-			str+='<td><button class="upda btn-primary btn-circle" type="button" ids="'+v.order_id+'"><i class="fa fa-list"></i></button><button class="dele btn-warning btn-circle" type="button" ids="'+v.order_id+'"><i class="fa fa-times"></i></button></td>';
 			str+='</tr>';
 		})
 		$('tbody').html(str);
