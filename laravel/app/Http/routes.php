@@ -26,6 +26,8 @@ Route::get('/activity','Home\ActivityController@index');
 Route::get('/country','Home\CountryController@index');
 //前台登录
 Route::post('/login/login','Home\LoginController@login');
+Route::get('/login/check_username','Home\LoginController@check_username');
+Route::get('/login/check_pwd','Home\LoginController@check_pwd');
 //前台注册
 Route::post('/register/register','Home\RegisterController@register');
 Route::get('/register/check_code','Home\RegisterController@check_code');
