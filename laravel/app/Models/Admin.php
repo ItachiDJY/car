@@ -23,6 +23,10 @@ class Admin extends Model
 	public function select($car_id){
         return $this->where('admin_id',$car_id)->get()->toArray();
     }
+    //后台登录查询
+    public function login($data) {
+        return $this->where('admin_name',$data['admin_name'])->get()->toArray();
+    }
     //添加操作   返回id值
     public function insert($data)
     {

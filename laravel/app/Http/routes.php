@@ -35,6 +35,7 @@ Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
 
 /*******后台路由区******/
+Route::group(['middleware'=>['web','illegal_login']],function(){
 //首页
 Route::get('/admin', 'Admin\IndexController@index');
 //车辆管理
@@ -66,7 +67,15 @@ Route::get('/recycle_add','Admin\OrderController@recycle_add');
 Route::get('/recycle_index','Admin\OrderController@recycle_index');
 Route::get('/restore','Admin\OrderController@restore');
 Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
+});
 
+Route::group(['middleware'=>'web'],function(){
+//登录
+Route::get('/admin_login','Admin\LoginController@login');
+Route::post('/login_to','Admin\LoginController@login_to');
+//退出登录
+Route::get('/login_out','Admin\LoginController@login_out');
+});
 
 
 
