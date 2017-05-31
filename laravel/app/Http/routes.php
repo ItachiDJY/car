@@ -26,6 +26,8 @@ Route::get('/activity','Home\ActivityController@index');
 Route::get('/country','Home\CountryController@index');
 //前台登录
 Route::post('/login/login','Home\LoginController@login');
+Route::get('/login/check_username','Home\LoginController@check_username');
+Route::get('/login/check_pwd','Home\LoginController@check_pwd');
 //前台注册
 Route::post('/register/register','Home\RegisterController@register');
 Route::get('/register/check_code','Home\RegisterController@check_code');
@@ -60,6 +62,11 @@ Route::get('/recycle','Admin\OrderController@recycle');
 Route::get('/add_order','Admin\OrderController@add_order');
 Route::get('/dele_order','Admin\OrderController@dele_order');
 Route::get('/search_order','Admin\OrderController@search_order');
+Route::get('/recycle_add','Admin\OrderController@recycle_add');
+Route::get('/recycle_index','Admin\OrderController@recycle_index');
+Route::get('/restore','Admin\OrderController@restore');
+Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
+
 
 
 
