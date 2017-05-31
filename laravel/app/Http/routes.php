@@ -64,7 +64,7 @@ Route::get('/recycle_add','Admin\OrderController@recycle_add');
 Route::get('/recycle_index','Admin\OrderController@recycle_index');
 Route::get('/restore','Admin\OrderController@restore');
 Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
-
+Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
 
 
 

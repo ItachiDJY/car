@@ -5,12 +5,13 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		
+
 		<!-- basic styles -->
-		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css') }}" />
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
-		  <link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome-ie7.min.css') }}" />
+		  <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome-ie7.min.css')); ?>" />
 		<![endif]-->
 
 		<!-- page specific plugin styles -->
@@ -21,44 +22,37 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-rtl.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-skins.min.css') }}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
-		  <link rel="stylesheet" href="{{ URL::asset('assets/css/ace-ie.min.css') }}" />
+		  <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-ie.min.css')); ?>" />
 		<![endif]-->
 
 		<!-- inline styles related to this page -->
 
 		<!-- ace settings handler -->
 
-		<script src="{{ URL::asset('assets/js/ace-extra.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js') }} IE8 support of HTML5 elements and media queries -->
 
 		<!--[if lt IE 9]>
-		<script src="{{ URL::asset('assets/js/html5shiv.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/respond.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/html5shiv.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/respond.min.js')); ?>"></script>
 		<![endif]-->
 		<!-- 日期插件 -->    
-		<script src="{{ URL::asset('assets/date/jquery.1.7.2.min.js') }}"></script>
-	    <script src="{{ URL::asset('assets/date/mobiscroll_002.js') }}" type="text/javascript"></script>
-		<script src="{{ URL::asset('assets/date/mobiscroll_004.js') }}" type="text/javascript"></script>
-		<link href="{{ URL::asset('assets/date1/mobiscroll_002.css') }}" rel="stylesheet" type="text/css">
-		<link href="{{ URL::asset('assets/date1/mobiscroll.css') }}" rel="stylesheet" type="text/css">
-		<script src="{{ URL::asset('assets/date/mobiscroll.js') }}" type="text/javascript"></script>
-		<script src="{{ URL::asset('assets/date/mobiscroll_003.js') }}" type="text/javascript"></script>
-		<script src="{{ URL::asset('assets/date/mobiscroll_005.js') }}" type="text/javascript"></script>
-		<link href="{{ URL::asset('assets/date1/mobiscroll_003.css') }}" rel="stylesheet" type="text/css">
+		<script src="<?php echo e(URL::asset('assets/date/jquery.1.7.2.min.js')); ?>"></script>
+	    <script src="<?php echo e(URL::asset('assets/date/mobiscroll_002.js')); ?>" type="text/javascript"></script>
+		<script src="<?php echo e(URL::asset('assets/date/mobiscroll_004.js')); ?>" type="text/javascript"></script>
+		<link href="<?php echo e(URL::asset('assets/date1/mobiscroll_002.css')); ?>" rel="stylesheet" type="text/css">
+		<link href="<?php echo e(URL::asset('assets/date1/mobiscroll.css')); ?>" rel="stylesheet" type="text/css">
+		<script src="<?php echo e(URL::asset('assets/date/mobiscroll.js')); ?>" type="text/javascript"></script>
+		<script src="<?php echo e(URL::asset('assets/date/mobiscroll_003.js')); ?>" type="text/javascript"></script>
+		<script src="<?php echo e(URL::asset('assets/date/mobiscroll_005.js')); ?>" type="text/javascript"></script>
+		<link href="<?php echo e(URL::asset('assets/date1/mobiscroll_003.css')); ?>" rel="stylesheet" type="text/css">
 		<!-- 日期插件结束 -->
-		<!-- 百度地图开始-->
-		<style type="text/css">
-		#allmap {width: 400px;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
-		#allmap {width: 400px;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
-		</style>
-
-		<!-- 百度地图结束 -->
 
 	</head>
 
@@ -68,7 +62,7 @@
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
 			</script>
 
-			@include('admin.layouts.header')
+			<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 		</div>
 
 		<div class="main-container" id="main-container">
@@ -99,7 +93,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')
+					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -122,7 +116,7 @@
 								<a href="#">首页</a>
 							</li>
 							<li class="active">租呗控制台</li>
-							<li class="active"><a href="{{ URL('order_index') }}">订单管理</a></li>
+							<li class="active"><a href="<?php echo e(URL('order_index')); ?>">订单管理</a></li>
 							<li class="active">添加订单</li>
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -376,7 +370,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{ URL::asset('assets/js/jquery-2.0.3.min.js') }}"></script>
+			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -386,47 +380,47 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{ URL::asset('assets/js/jquery-2.0.3.min.js') }}'>"+"<"+"script>");
+			window.jQuery || document.write("<script src='<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>'>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
 
 		<!--[if IE]>
 <script type="text/javascript">
- window.jQuery || document.write("<script src='{{ URL::asset('assets/js/jquery-1.10.2.min.js') }}'>"+"<"+"script>");
+ window.jQuery || document.write("<script src='<?php echo e(URL::asset('assets/js/jquery-1.10.2.min.js')); ?>'>"+"<"+"script>");
 </script>
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='{{ URL::asset('assets/js/jquery.mobile.custom.min.js') }}'>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>'>"+"<"+"script>");
 		</script>
-		<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/typeahead-bs2.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="{{ URL::asset('assets/js/excanvas.min.js') }}"></script>
+		  <script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
 		<![endif]-->
 
-		<script src="{{ URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.ui.touch-punch.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/chosen.jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/fuelux/fuelux.spinner.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/bootstrap-datepicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/bootstrap-timepicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/moment.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/daterangepicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/bootstrap-colorpicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.knob.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.autosize.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.maskedinput.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/bootstrap-tag.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{ URL::asset('assets/js/ace-elements.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
 		
 
 		<!-- inline scripts related to this page -->

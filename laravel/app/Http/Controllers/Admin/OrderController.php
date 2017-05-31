@@ -110,10 +110,11 @@ class OrderController extends Controller
     public function recycle_index()
     {
         $order = new Order();
+
         $arr = $order->recycle_list();
         $arr = $this->object_array($arr);
-
-        $arr = $this->common_data($arr['items']['items']);
+        $arr = $this->common_data($arr);
+        
         return view('Admin.order.recycle_index',['arr'=>$arr]);
     }
 
@@ -128,22 +129,22 @@ class OrderController extends Controller
         $order = new Order();
         $arr = $order->recycle_list();
         $arr = $this->object_array($arr);
-        $arr = $this->common_data($arr['items']['items']);
+        $arr = $this->common_data($arr);
 
         echo json_encode($arr);        
     }
 
     //删除回收站数据
-    public function delete()
+    public function delete_recycle()
     {
         $order_id = Input::get('id');
         $order_id = explode(',', $order_id);
         $order = new Order();
         $res = $order->whereIn('order_id' , $order_id)->delete();
+        
         $arr = $order->recycle_list();
         $arr = $this->object_array($arr);
-
-        $arr = $this->common_data($arr['items']['items']);
+        $arr = $this->common_data($arr);
 
         echo json_encode($arr);
     }

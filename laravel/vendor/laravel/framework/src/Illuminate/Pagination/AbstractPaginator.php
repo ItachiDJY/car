@@ -15,7 +15,7 @@ abstract class AbstractPaginator implements Htmlable
      *
      * @var \Illuminate\Support\Collection
      */
-    protected $items;
+    public $items;
 
     /**
      * The number of items to be shown per page.
