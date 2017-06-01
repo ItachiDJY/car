@@ -93,7 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="admin">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">车辆信息展示</li>
@@ -147,7 +147,7 @@
 														<td><?= $v['car_status']?></td>
 														<td>
 														<?php foreach($v['car_img'] as $val ):?>
-														<img src="<?= $val?>" alt="">
+														<img src="../<?= $val?>" alt="" >
 														<?php endforeach;?>
 														</td>
 														<td><?= $v['deploy_name']?></td>

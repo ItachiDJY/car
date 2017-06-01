@@ -93,7 +93,11 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
+<<<<<<< HEAD
 								<a href="#">首页</a>
+=======
+								<a href="admin">首页</a>
+>>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">修改车辆信息</li>

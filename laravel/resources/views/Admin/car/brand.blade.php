@@ -93,7 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="admin">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">车辆品牌展示</li>
@@ -142,8 +142,13 @@
 														<?= $v->brand_name?>
 														</td>
 														<td>
+<<<<<<< HEAD
 														<?php if (isset($v->brand_logo)) {  ?>
 															<img src="<?=$v->brand_logo?>" alt=""> 
+=======
+														<?php if (!empty($v->brand_logo)) {  ?>
+															<img src="../<?=$v->brand_logo?>" alt="" width="100px" height="40px"> 
+>>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
 														<?php	} ?>
 													     </td>
 														<td><?= $v->parent_id?></td>

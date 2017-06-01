@@ -19,6 +19,11 @@ class CarController extends Controller
    //展示车辆信息及使用情况
    public function index()
    {
+    /*$cars = DB::table('information')->Paginate(2);
+    $car= $cars->items->items;
+    $links = $cars ->links();
+         echo '<pre>';
+         print_r($links);die;*/
 		$carObj = new Car ;
 		$data = $carObj ->selectAll() ;
 		$deployObj = new Deploy ;
@@ -196,8 +201,13 @@ class CarController extends Controller
    public function car_brand()
    {
       
+<<<<<<< HEAD
        $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
       
+=======
+       $data = DB::select("select brand_id,brand_name,brand_logo,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
+      //print_r($data);die;
+>>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
        return view('admin.car.brand' ,['data' =>$data]);
    }
 
@@ -273,7 +283,11 @@ class CarController extends Controller
         if (!$path) {
             unset($post['brand_logo']) ;
         } else {
+<<<<<<< HEAD
             $post['brand_logo'] = $path['brand_logo'];
+=======
+            $post['brand_logo'] = $path['brand_logo'][0];
+>>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
         
         }
         $post['path'] = ($post['parent_id']==0) ? '0' : $post['path'].'-'.$post['parent_id'];
@@ -286,6 +300,11 @@ class CarController extends Controller
         if($validator->fails()){
            return $validator->errors();
         }
+<<<<<<< HEAD
+=======
+      
+
+>>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
         $brandObj = new Brand ;
         $bool = $brandObj ->updates($post ,$brand_id);
       
