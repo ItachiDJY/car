@@ -16,15 +16,17 @@ class StaffController extends Controller
    //展示后台管理员信息
    public function index()
    {
-		$staffObj = new Admin ;
-		$data = $staffObj ->selectAll() ;
-		return view('admin.staff.staffinfo', ['arr' =>$data]) ;
+      $info = $_SESSION['admin'];
+  		$staffObj = new Admin ;
+  		$data = $staffObj ->selectAll() ;
+  		return view('admin.staff.staffinfo', ['arr' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
 
    //员工添加列表
    public function add()
-   {
-      return view('admin.staff.staffadd') ;
+   {  
+      $info = $_SESSION['admin'];
+      return view('admin.staff.staffadd',['admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
    //执行添加的方法
    public function add_do(Request $request)
@@ -36,89 +38,13 @@ class StaffController extends Controller
       unset($post['_token']);
       $post['admin_img'] = implode(',', $path['img']);
       $post['admin_pwd'] = md5($post['admin_pwd']);
-      var_dump($post);die;
+     // var_dump($post);die;
       $staffObj = new Admin ;
       $bool = $staffObj ->adds($post);
       return redirect('/staff');
    }
    
-   // //显示配置的方法
-   // public function deployList() {
-   //    $deployObj = new Deploy ;
-   //    $data = $deployObj ->selectAll() ;
-
-   //    return view('admin.car.deploy' ,['data' =>$data]) ;
-   // }
-
-   // //显示添加的方法
-   // public function deploy_add() 
-   // {
-   //    $deployObj = new Deploy ;
-   //    $data = $deployObj ->selectAll() ;
-
-   //    return view('admin.car.deployadd') ;
-   // }
-   // //执行添加配置的方法
-   // public function deploy_add_do() 
-   // {
-   //     $post = Input::get();
-   //     $token = $post['_token'] ;
-   //     unset($post['_token']) ;
-   //     $deployObj = new Deploy ;
-   //     $bool = $deployObj ->adds($post);
-   //     return redirect('/deploy');
-
-      
-   // }
-
-   // //车辆品牌展示
-   // public function car_brand()
-   // {
-   //     /*$brandObj = new Brand ;
-   //     $data = $brandObj -> selectAll();*/
-   //     $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
-
-   //     return view('admin.car.brand' ,['data' =>$data]);
-   // }
-
-   // //车辆品牌添加
-   // public function car_brand_add()
-   // {
-   //   /* $brandObj = new Brand ;
-   //     $data = $brandObj -> brandSelect();*/
-   //     $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
-       
-   //     return view('admin.car.brandadd' ,['brand_list' =>$data]) ;
-   // }
-
-   // //执行车辆品牌添加
-   // public function car_brand_add_do(Request $request)
-   // {
-   //    $post = Input::get();
-   //    $token = $post['_token'] ;
-   //    unset($post['_token']) ;
-   //    $post['path'] = ($post['parent_id']==0) ? '0' : $post['path'].'-'.$post['parent_id'];
-   //    $path = $this ->upload($request);
-   //    $post['brand_logo'] =isset($path['brand_logo']) ? $path['brand_logo'] : '';
-   //    $brandObj = new Brand ;
-   //    $bool = $brandObj ->adds($post);
-   //    return redirect('/brand');
-    
-   // }
-
-   // //无限级分类
-   // public function cate_tree($arr ,$parent_id = 0) 
-   // {
-   //    $result = [];
-   //    if ($arr) {
-   //        foreach ($arr as $key => $value) {
-   //           $result[$key] = $value;
-   //           $result[$key]['son'] = $this ->cate_tree($arr ,$value['brand_id']);
-   //        }
-   //    }
-
-   //    return $result;
-   // }
+  
 
 
    /**

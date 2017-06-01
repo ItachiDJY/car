@@ -95,7 +95,7 @@
 								<i class="icon-home home-icon"></i>
 								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">租呗控制台</li>
+							<li class="active">管理员列表</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>

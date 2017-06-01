@@ -19,10 +19,10 @@
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle">
-								<img class="nav-user-photo" src="{{ URL::asset('assets/avatars/user.jpg') }}" alt="Jason's Photo" />
+								<img class="nav-user-photo" src="../<?php echo $admin_img?>" alt="Jason's Photo" />
 								<span class="user-info">
-									<small>欢迎光临,</small>
-									ADMIN
+									<small>欢迎,</small>
+                                    <b><?php echo $admin_name?></b>
 								</span>
 
 								<i class="icon-caret-down"></i>
@@ -46,9 +46,9 @@
 								<li class="divider"></li>
 
 								<li>
-									<a href="#">
+									<a href="/login_out">
 										<i class="icon-off"></i>
-										退出
+										退出登录
 									</a>
 								</li>
 							</ul>

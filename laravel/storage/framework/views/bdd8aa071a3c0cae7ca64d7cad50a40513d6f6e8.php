@@ -106,11 +106,11 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">租呗后台控制台</li>
+							<li class="active">租呗控制台</li>
 							<li class="active">订单管理</li>
-							<li class="active">订单列表</li>
+							<li class="active"><a href="<?php echo e(URL('order_index')); ?>">订单列表</a></li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -125,8 +125,8 @@
 									<thead>
 
 									<div>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="<?php echo e(url('add_order')); ?>"><i class="fa fa-plus-square"></i>添加订单</a></span>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 7%;"><a href="#trash-o"><i class="fa fa-trash-o"></i>回收站</a></span>
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="<?php echo e(URL('add_order')); ?>"><i class="fa fa-plus-square"></i>添加订单</a></span>
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 7%;" id="recycle"><a href="javascript:;"><i class="fa fa-trash-o"></i>回收站</a></span>
 										<span class="fa-hover col-md-3 col-sm-4" style="width: 13%;" id="delAll"><a href="javascript:;" ><i class="fa fa-remove"></i>批量删除</a></span>
 										
 											<select name="" id="pay_status">
@@ -214,8 +214,8 @@
 											<td><?php echo e($v['plate_number']); ?></td>
 											<td><?php echo e($v['order_amount']); ?></td>
 											<td>
-											<button class="upda btn-primary btn-circle" type="button" ids="<?php echo e($v['order_id']); ?>"><i class="fa fa-list"></i>
-                            				</button>
+											<a href="order_detail?order_id=<?php echo e($v['order_id']); ?>"><button class="upda btn-primary btn-circle" type="button" ><i class="fa fa-list"></i>
+                            				</button></a>
                             				<button class="dele btn-warning btn-circle" type="button" ids="<?php echo e($v['order_id']); ?>"><i class="fa fa-times"></i>
                             				</button>
 											</td>
@@ -223,6 +223,7 @@
 									<?php endforeach; ?>	
 									</tbody>
 								</table>
+								<div style="text-align:center"><?php echo e($order->links()); ?></div>
 							</div><!-- /.table-responsive -->
 						</div><!-- /span -->
 					</div><!-- /row -->
@@ -302,6 +303,26 @@
 </body>
 
 <script>
+//加入回收站
+	$(document).on('click','#recycle',function(){
+		var _this = $(this);
+		var order_id = '';
+		$('[name=box]:checkbox:checked').each(function(){
+			order_id+= ','+$(this).attr('ids');
+		})
+		order_id = order_id.substr(1);
+		$.ajax({
+			type:"GET",
+			data:{id:order_id},
+			url:"recycle_add",
+			dataType:"json",
+			success:function(msg){
+				data(msg);
+			}
+		})
+
+	})
+
 //删除单个订单
 	$(document).on('click','.dele',function(){
 		var _this = $(this);
@@ -329,7 +350,6 @@
 		//alert(id);
 		$('[name=box]:checkbox:checked').each(function(){
 			ids+= ','+$(this).attr('ids');
-			
 		})
 		ids = ids.substr(1);
 		//alert(ids);
@@ -370,45 +390,50 @@
 	   		dataType:'json',
 	   		success: function(msg){
 	   			// console.log(msg);return;
-	   			var str = '';
-	   			
-	   			$.each(msg,function(k,v){
-	   				var pay_sta = '';
-	   				if (v.pay_status ==1) {
-	   					pay_sta+='已支付';
-	   				} else {
-	   					pay_sta+='未支付';
-	   				}
-	   				var order_sta = '';
-	   				if (v.order_status == 1) {
-	   					order_sta+='租赁中';
-	   				} else if (v.order_status == 2) {
-	   					order_sta+='已完成';
-	   				} else if (v.order_status == 3) {
-	   					order_sta+='已取消';
-	   				} else {
-	   					order_sta+='预定成功';
-	   				}
-	   				str+='<tr>';
-	   				str+='<td class="center"><label><input type="checkbox" class="ace" name="box" ids="'+v.order_id+'"/><span class="lbl"></span></label></td>';
-	   				str+='<td>'+v.order_id+'</td>';
-	   				str+='<td>'+v.order_no+'</td>';
-	   				str+='<td>'+v.user_name+'</td>';
-	   				str+='<td>'+v.pop_time+'</td>';
-	   				str+='<td>'+v.return_time+'</td>';
-	   				str+='<td>'+v.pre_days+'天</td>';
-	   				str+='<td>'+order_sta+'</td>';
-	   				str+='<td>'+pay_sta+'</td>';
-	   				str+='<td>'+v.create_time+'</td>';
-	   				str+='<td>'+v.plate_number+'</td>';
-	   				str+='<td>'+v.order_amount+'</td>';
-	   				str+='<td><button class="upda btn-primary btn-circle" type="button" ids="'+v.order_id+'"><i class="fa fa-list"></i></button><button class="dele btn-warning btn-circle" type="button" ids="'+v.order_id+'"><i class="fa fa-times"></i></button></td>';
-	   				str+='</tr>';
-	   			})
-	   			$('tbody').html(str);
+	   			data(msg);	   			
 	   		}
 	   	})
 	})
+
+//封装公共数据
+	function data(msg)
+	{
+		var str = '';
+		$.each(msg,function(k,v){
+			var pay_sta = '';
+			if (v.pay_status ==1) {
+				pay_sta+='已支付';
+			} else {
+				pay_sta+='未支付';
+			}
+			var order_sta = '';
+			if (v.order_status == 1) {
+				order_sta+='租赁中';
+			} else if (v.order_status == 2) {
+				order_sta+='已完成';
+			} else if (v.order_status == 3) {
+				order_sta+='已取消';
+			} else {
+				order_sta+='预定成功';
+			}
+			str+='<tr>';
+			str+='<td class="center"><label><input type="checkbox" class="ace" name="box" ids="'+v.order_id+'"/><span class="lbl"></span></label></td>';
+			str+='<td>'+v.order_id+'</td>';
+			str+='<td>'+v.order_no+'</td>';
+			str+='<td>'+v.user_name+'</td>';
+			str+='<td>'+v.pop_time+'</td>';
+			str+='<td>'+v.return_time+'</td>';
+			str+='<td>'+v.pre_days+'天</td>';
+			str+='<td>'+order_sta+'</td>';
+			str+='<td>'+pay_sta+'</td>';
+			str+='<td>'+v.create_time+'</td>';
+			str+='<td>'+v.plate_number+'</td>';
+			str+='<td>'+v.order_amount+'</td>';
+			str+='<td><button class="upda btn-primary btn-circle" type="button" ids="'+v.order_id+'"><i class="fa fa-list"></i></button><button class="dele btn-warning btn-circle" type="button" ids="'+v.order_id+'"><i class="fa fa-times"></i></button></td>';
+			str+='</tr>';
+		})
+		$('tbody').html(str);
+	}
 </script>
 </html>
 	

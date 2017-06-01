@@ -95,7 +95,7 @@
 								<i class="icon-home home-icon"></i>
 								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">租呗控制台</li>
+							<li class="active">司机列表</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -154,7 +154,7 @@
 														</td>
 														<td><?= $v['idcard']?></td>
 														<td>
-															<img src="<?= $v['license_img']?>" alt="">							
+															<img src="../<?= $v['license_img']?>" alt="" higth="30" width="50">							
 														</td>
 														<td>
 														<?php if ($v['status'] == 0): ?>
