@@ -119,26 +119,19 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="form-elements.html">
-										<i class="icon-double-angle-right"></i>
-										添加会员
-									</a>
-								</li>
-
-								<li>
-									<a href="form-wizard.html">
-										<i class="icon-double-angle-right"></i>
-										删除会员
-									</a>
-								</li>
-								<li>
-									<a href="form-wizard.html">
+									<a href="/member">
 										<i class="icon-double-angle-right"></i>
 										会员列表
 									</a>
 								</li>
+                                <li>
+                                    <a href="/level_add">
+                                        <i class="icon-double-angle-right"></i>
+                                        添加会员级别
+                                    </a>
+                                </li>
 								<li>
-									<a href="form-wizard.html">
+									<a href="/level">
 										<i class="icon-double-angle-right"></i>
 										会员级别列表
 									</a>
@@ -163,7 +156,7 @@
 								</li>
 
 								<li>
-									<a href="form-wizard.html">
+									<a href="recycle_index">
 										<i class="icon-double-angle-right"></i>
 										回收站
 									</a>
@@ -208,14 +201,14 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="form-elements.html">
+									<a href="store">
 										<i class="icon-double-angle-right"></i>
 										门店列表
 									</a>
 								</li>
 
 								<li>
-									<a href="form-wizard.html">
+									<a href="store_add">
 										<i class="icon-double-angle-right"></i>
 										添加新门店
 									</a>

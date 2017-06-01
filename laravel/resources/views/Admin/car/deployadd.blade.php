@@ -94,7 +94,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="admin">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
 							<li class="active"><a href="deploy">配置信息</a></li>
 							<li class="active">添加配置信息</li>

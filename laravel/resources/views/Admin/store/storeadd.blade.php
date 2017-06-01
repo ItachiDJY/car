@@ -93,9 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">租呗控制台</li>
+							<li class="active">添加门店</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>

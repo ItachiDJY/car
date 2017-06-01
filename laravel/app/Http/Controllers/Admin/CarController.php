@@ -24,6 +24,7 @@ class CarController extends Controller
     $links = $cars ->links();
          echo '<pre>';
          print_r($links);die;*/
+    $info = $_SESSION['admin'];
 		$carObj = new Car ;
 		$data = $carObj ->selectAll() ;
 		$deployObj = new Deploy ;
@@ -35,18 +36,18 @@ class CarController extends Controller
 
 		}
 		
-		return view('admin.car.carinfo', ['arr' =>$data]) ;
+		return view('admin.car.carinfo', ['arr' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
 
    //展示车辆添加
    public function add()
    {
-      
+        $info = $_SESSION['admin'];
         $deployObj = new Deploy ;
         $data = $deployObj ->selectAll() ;
         $arr = array_column($data ,'deploy_name' ,'deploy_id') ;
 
-        return view('admin.car.caradd',['deploy_data' =>$arr]) ;
+        return view('admin.car.caradd',['deploy_data' =>$arr,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
    //执行添加的方法
    public function add_do(Request $request)
@@ -94,6 +95,7 @@ class CarController extends Controller
    //车辆信息修改
    public function car_update()
    {
+        $info = $_SESSION['admin'];
         $id = Input::get('id') ;
         $carObj = new Car ;
         $carRow = $carObj ->select($id) ;
@@ -101,7 +103,7 @@ class CarController extends Controller
         $data = $deployObj ->selectAll() ;
         $arr = array_column($data ,'deploy_name' ,'deploy_id') ; 
 
-        return view('admin.car.car_update' ,['car_info'=>$carRow ,'deploy_data' =>$arr]);
+        return view('admin.car.car_update' ,['car_info'=>$carRow ,'deploy_data' =>$arr,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
    }
    //执行车辆信息修改
    public function car_update_do(Request $request)
@@ -136,18 +138,19 @@ class CarController extends Controller
    //显示配置的方法
    public function deployList() 
    {
+        $info = $_SESSION['admin'];
         $deployObj = new Deploy ;
         $data = $deployObj ->selectAll() ;
 
-        return view('admin.car.deploy' ,['data' =>$data]) ;
+        return view('admin.car.deploy' ,['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
 
    //显示添加的方法
    public function deploy_add() 
    {
-     
+        $info = $_SESSION['admin'];
         $arr = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
-        return view('admin.car.deployadd' ,['brand_list' =>$arr]) ;
+        return view('admin.car.deployadd' ,['brand_list' =>$arr,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
    //执行添加配置的方法
    public function deploy_add_do() 
@@ -200,19 +203,19 @@ class CarController extends Controller
    //车辆品牌展示
    public function car_brand()
    {
-      
+      $info = $_SESSION['admin'];
        $data = DB::select("select brand_id,brand_name,brand_logo,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
       //print_r($data);die;
-       return view('admin.car.brand' ,['data' =>$data]);
+       return view('admin.car.brand' ,['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
    }
 
    //车辆品牌添加
    public function car_brand_add()
    {
-     
+       $info = $_SESSION['admin']; 
        $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
        
-       return view('admin.car.brandadd' ,['brand_list' =>$data]) ;
+       return view('admin.car.brandadd' ,['brand_list' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
 
    //执行车辆品牌添加
@@ -257,13 +260,14 @@ class CarController extends Controller
     //车辆信息修改
    public function car_brand_update()
    {
+        $info = $_SESSION['admin'];
         $id = Input::get('id') ;
         $brandObj = new Brand ;
         $brandRow = $brandObj ->select($id) ;
         $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
         
        
-        return view('admin.car.brand_update' ,['brand_info'=>$brandRow ,'brand_list' =>$data]);
+        return view('admin.car.brand_update' ,['brand_info'=>$brandRow ,'brand_list' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
     }
    //执行车辆信息修改
    public function car_brand_update_do(Request $request)
