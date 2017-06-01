@@ -149,7 +149,7 @@ class CarController extends Controller
    public function deploy_add() 
    {
         $info = $_SESSION['admin'];
-        $arr = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
+        $arr = DB::select("select brand_id,brand_name,brand_logo,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
         return view('admin.car.deployadd' ,['brand_list' =>$arr,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
    //执行添加配置的方法
@@ -213,7 +213,7 @@ class CarController extends Controller
    public function car_brand_add()
    {
        $info = $_SESSION['admin']; 
-       $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
+       $data = DB::select("select brand_id,brand_name,brand_logo,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
        
        return view('admin.car.brandadd' ,['brand_list' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
