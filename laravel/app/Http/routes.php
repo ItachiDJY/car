@@ -34,13 +34,11 @@ Route::group(['middleware'=>'web'], function (){
     Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
 
-
-
     /*******后台路由区******/
 Route::group(['middleware'=>['web','illegal_login']],function(){
     //首页
     Route::get('/admin', 'Admin\IndexController@index');
-//车辆管理
+    //车辆管理
     Route::get('/car', 'Admin\CarController@index');
     Route::get('/car_add', 'Admin\CarController@add');
     Route::post('/car_add_do', 'Admin\CarController@add_do');
@@ -50,7 +48,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/brand', 'Admin\CarController@car_brand');
     Route::get('/brand_add', 'Admin\CarController@car_brand_add');
     Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
-//员工管理
+    //员工管理
     Route::get('/staff','Admin\StaffController@index');
     Route::get('/staff_add','Admin\StaffController@add');
     Route::post('/staff_add_do','Admin\StaffController@add_do');
@@ -73,7 +71,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/driver_add','Admin\DriverController@add');
     Route::get('/reg_select','Admin\DriverController@reg_select');
     Route::post('/driver_add_do','Admin\DriverController@add_do');
-//订单管理
+    //订单管理
     Route::get('/order_index','Admin\OrderController@order_index');
     Route::get('/recycle','Admin\OrderController@recycle');
     Route::get('/dele_order','Admin\OrderController@dele_order');
