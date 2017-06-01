@@ -30,6 +30,7 @@ Route::get('/login/check_pwd','Home\LoginController@check_pwd');
 Route::post('/register/register','Home\RegisterController@register');
 Route::get('/register/check_code','Home\RegisterController@check_code');
 Route::get('/register/check_phone','Home\RegisterController@check_phone');
+
 /*******后台路由区******/
 //首页
 Route::get('/admin', 'Admin\IndexController@index');
@@ -65,7 +66,6 @@ Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
 Route::get('/add_order','Admin\OrderController@add_order');
 Route::post('/add_order_do','Admin\OrderController@add_order_do');
 Route::get('/order_detail','Admin\OrderController@order_detail');
-
 //门店管理
 Route::get('/store','Admin\StoreController@index');
 Route::get('/add_store','Admin\StoreController@add');
