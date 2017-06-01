@@ -24,82 +24,108 @@ Route::group(['middleware'=>'web'], function (){
     Route::get('/store','Home\StoreController@index');
     Route::get('/activity','Home\ActivityController@index');
     Route::get('/country','Home\CountryController@index');
-//前台登录
+    //前台登录
     Route::post('/login/login','Home\LoginController@login');
     Route::get('/login/check_username','Home\LoginController@check_username');
     Route::get('/login/check_pwd','Home\LoginController@check_pwd');
-//前台注册
+    //前台注册
     Route::post('/register/register','Home\RegisterController@register');
     Route::get('/register/check_code','Home\RegisterController@check_code');
     Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
 
     /*******后台路由区******/
-Route::group(['middleware'=>['web','illegal_login']],function(){
-    //首页
-    Route::get('/admin', 'Admin\IndexController@index');
-    //车辆管理
-    Route::get('/car', 'Admin\CarController@index');
-    Route::get('/car_add', 'Admin\CarController@add');
-    Route::post('/car_add_do', 'Admin\CarController@add_do');
-    Route::get('/deploy', 'Admin\CarController@deployList');
-    Route::get('/deploy_add', 'Admin\CarController@deploy_add');
-    Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
-    Route::get('/brand', 'Admin\CarController@car_brand');
-    Route::get('/brand_add', 'Admin\CarController@car_brand_add');
-    Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
-    //员工管理
-    Route::get('/staff','Admin\StaffController@index');
-    Route::get('/staff_add','Admin\StaffController@add');
-    Route::post('/staff_add_do','Admin\StaffController@add_do');
-    //会员管理
-    Route::get('member','Admin\MemberController@index');//会员列表
-    Route::get('member_delete','Admin\MemberController@delete');//会员删除
-    Route::get('member_change_name','Admin\MemberController@change_name');//修改会员名称
-    Route::get('member_change_phone','Admin\MemberController@change_phone');//修改会员电话
-    Route::get('member_change_email','Admin\MemberController@change_email');//修改会员邮箱
-    Route::get('level','Admin\MemberController@level');//会员级别列表
-    Route::get('level_delete','Admin\MemberController@level_delete');//会员级别删除
-    Route::get('level_name','Admin\MemberController@level_name');//修改会员级别名称
-    Route::get('level_min','Admin\MemberController@level_min');//修改最低消费金额
-    Route::get('level_max','Admin\MemberController@level_max');//修改最高消费金额
-    Route::get('level_point','Admin\MemberController@level_point');//修改积分兑换比例
-    Route::get('level_add','Admin\MemberController@add');//添加会员级别页面
-    Route::post('level_add_to','Admin\MemberController@add_to');//添加会员级别操作
-    //司机管理
-    Route::get('/driver','Admin\DriverController@index');
-    Route::get('/driver_add','Admin\DriverController@add');
-    Route::get('/reg_select','Admin\DriverController@reg_select');
-    Route::post('/driver_add_do','Admin\DriverController@add_do');
-    //订单管理
-    Route::get('/order_index','Admin\OrderController@order_index');
-    Route::get('/recycle','Admin\OrderController@recycle');
-    Route::get('/dele_order','Admin\OrderController@dele_order');
-    Route::get('/search_order','Admin\OrderController@search_order');
-    Route::get('/recycle_add','Admin\OrderController@recycle_add');
-    Route::get('/recycle_index','Admin\OrderController@recycle_index');
-    Route::get('/restore','Admin\OrderController@restore');
-    Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
-    Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
-    Route::get('/add_order','Admin\OrderController@add_order');
-    Route::post('/add_order_do','Admin\OrderController@add_order_do');
-    Route::get('/order_detail','Admin\OrderController@order_detail');
+    Route::group(['middleware'=>['web','illegal_login']],function(){
+        //首页
+        Route::get('/admin', 'Admin\IndexController@index');
+        //车辆管理
+        Route::get('/car', 'Admin\CarController@index');
+        Route::get('/car_add', 'Admin\CarController@add');
+        Route::post('/car_add_do', 'Admin\CarController@add_do');
+        Route::get('/deploy', 'Admin\CarController@deployList');
+        Route::get('/deploy_add', 'Admin\CarController@deploy_add');
+        Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
+        Route::get('/brand', 'Admin\CarController@car_brand');
+        Route::get('/brand_add', 'Admin\CarController@car_brand_add');
+        Route::post('/brand_add_do', 'Admin\CarController@car_brand_add_do');
+        //员工管理
+        Route::get('/staff','Admin\StaffController@index');
+        Route::get('/staff_add','Admin\StaffController@add');
+        Route::post('/staff_add_do','Admin\StaffController@add_do');
+        //会员管理
+        Route::get('member','Admin\MemberController@index');//会员列表
+        Route::get('member_delete','Admin\MemberController@delete');//会员删除
+        Route::get('member_change_name','Admin\MemberController@change_name');//修改会员名称
+        Route::get('member_change_phone','Admin\MemberController@change_phone');//修改会员电话
+        Route::get('member_change_email','Admin\MemberController@change_email');//修改会员邮箱
+        Route::get('level','Admin\MemberController@level');//会员级别列表
+        Route::get('level_delete','Admin\MemberController@level_delete');//会员级别删除
+        Route::get('level_name','Admin\MemberController@level_name');//修改会员级别名称
+        Route::get('level_min','Admin\MemberController@level_min');//修改最低消费金额
+        Route::get('level_max','Admin\MemberController@level_max');//修改最高消费金额
+        Route::get('level_point','Admin\MemberController@level_point');//修改积分兑换比例
+        Route::get('level_add','Admin\MemberController@add');//添加会员级别页面
+        Route::post('level_add_to','Admin\MemberController@add_to');//添加会员级别操作
+        //司机管理
+        Route::get('/driver','Admin\DriverController@index');
+        Route::get('/driver_add','Admin\DriverController@add');
+        Route::get('/reg_select','Admin\DriverController@reg_select');
+        Route::post('/driver_add_do','Admin\DriverController@add_do');
+        //订单管理
+        Route::get('/order_index','Admin\OrderController@order_index');
+        Route::get('/recycle','Admin\OrderController@recycle');
+        Route::get('/dele_order','Admin\OrderController@dele_order');
+        Route::get('/search_order','Admin\OrderController@search_order');
+        Route::get('/recycle_add','Admin\OrderController@recycle_add');
+        Route::get('/recycle_index','Admin\OrderController@recycle_index');
+        Route::get('/restore','Admin\OrderController@restore');
+        Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
+        Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
+        Route::get('/add_order','Admin\OrderController@add_order');
+        Route::post('/add_order_do','Admin\OrderController@add_order_do');
+        Route::get('/order_detail','Admin\OrderController@order_detail');
+        //门店管理
+        Route::get('/store','Admin\StoreController@index');
+        Route::get('/add_store','Admin\StoreController@add');
+        Route::get('/store_select','Admin\StoreController@store_select');
+        Route::get('/store_list','Admin\StoreController@store_list');
+        //会员管理
+        Route::get('member','Admin\MemberController@index');//会员列表
+        Route::get('member_delete','Admin\MemberController@delete');//会员删除
+        Route::get('member_change_name','Admin\MemberController@change_name');//修改会员名称
+        Route::get('member_change_phone','Admin\MemberController@change_phone');//修改会员电话
+        Route::get('member_change_email','Admin\MemberController@change_email');//修改会员邮箱
+        Route::get('level','Admin\MemberController@level');//会员级别列表
+        Route::get('level_delete','Admin\MemberController@level_delete');//会员级别删除
+        Route::get('level_name','Admin\MemberController@level_name');//修改会员级别名称
+        Route::get('level_min','Admin\MemberController@level_min');//修改最低消费金额
+        Route::get('level_max','Admin\MemberController@level_max');//修改最高消费金额
+        Route::get('level_point','Admin\MemberController@level_point');//修改积分兑换比例
+        Route::get('level_add','Admin\MemberController@add');//添加会员级别页面
+        Route::post('level_add_to','Admin\MemberController@add_to');//添加会员级别操作
+
+    });
+
+//后台登陆及防非登录
+    Route::group(['middleware'=>'web'],function(){
+        //登录
+        Route::get('/admin_login','Admin\LoginController@login');
+        Route::post('/login_to','Admin\LoginController@login_to');
+        //退出登录
+        Route::get('/login_out','Admin\LoginController@login_out');
+    });
+
+
+
+
+
 });
 
-Route::group(['middleware'=>'web'],function(){
-    //登录
-    Route::get('/admin_login','Admin\LoginController@login');
-    Route::post('/login_to','Admin\LoginController@login_to');
-    //退出登录
-    Route::get('/login_out','Admin\LoginController@login_out');
-});
 
 
 
 
 
 
-
-});
 
 
