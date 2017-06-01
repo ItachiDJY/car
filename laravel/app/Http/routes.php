@@ -91,6 +91,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
 	Route::get('/store_list','Admin\StoreController@store_list');
 });
 
+//后台登陆及防非登录
 Route::group(['middleware'=>'web'],function(){
     //登录
     Route::get('/admin_login','Admin\LoginController@login');
