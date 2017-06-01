@@ -94,7 +94,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="index">首页</a>
+								<a href="admin">首页</a>
 							</li>
 							<li class="active"><a href="deploy">配置信息</a></li>
 							<li class="active">添加配置信息</li>
@@ -299,8 +299,12 @@
 									<div class="col-sm-9">
 										<select name="brand_id">
 											<option value="">..请选择品牌</option>
-											
-											<option value=""></option>
+											<?php foreach($brand_list as $key=>$v) : ?>
+											<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
+											<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
+											<?=$v->brand_name?>
+											</option>
+											<?php  endforeach; ?>
 											
 										</select>
 										

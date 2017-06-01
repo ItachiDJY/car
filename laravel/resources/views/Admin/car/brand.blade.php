@@ -93,7 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="admin">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">车辆品牌展示</li>
@@ -115,7 +115,7 @@
 													<tr>
 														<th class="center">
 															<label>
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" id="check" />
 																<span class="lbl"></span>
 															</label>
 														</th>
@@ -130,10 +130,10 @@
 												<tbody>
 												@foreach ($data as $v)
 
-													<tr>
+													<tr ids="<?=$v->brand_id?>">
 														<td class="center">
 															<label>
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" name="box" />
 																<span class="lbl"></span>
 															</label>
 														</td>
@@ -141,17 +141,16 @@
 														<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
 														<?= $v->brand_name?>
 														</td>
-														<td><?php
-														if (isset($v->brand_logo)) {
-															echo $v->brand_logo ;
-
-														} 
-														?></td>
+														<td>
+														<?php if (!empty($v->brand_logo)) {  ?>
+															<img src="../<?=$v->brand_logo?>" alt="" width="100px" height="40px"> 
+														<?php	} ?>
+													     </td>
 														<td><?= $v->parent_id?></td>
 														
 														<td>
-														<button class="btn">编辑</button>
-														<button class="btn btn-danger">删除</button>
+														<button class="up btn">编辑</button>
+														<button class="del btn btn-danger">删除</button>
 														</td>
 
 													</tr>
@@ -179,7 +178,39 @@
 
 			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
 		<!-- <![endif]-->
+		<script>
+		    //编辑
+			$('.up').on('click' ,function(){
+		    	var id = $(this).parents('tr').attr('ids');
+		    	location.href ='brand_update?id='+id;
+		    })
+			//全选/全不选
+			$('#check').on('click' , function(){
+				if (this.checked == true) {
+					$('[name=box]:checkbox').prop('checked',true); 
+				} else {
+					$('[name=box]:checkbox').prop('checked',false); 
 
+				}
+			})
+			//单删
+			$(document).on('click' ,'.del' ,function(){
+				 var _this = $(this);
+				 var ids = _this.parents('tr').attr('ids') ;
+				 $.ajax({
+				 	 url:'brand_del',
+				 	 type:'GET',
+				 	 data:{id:ids},
+				 	 success:function(msg){
+				 	 	 if (msg) {
+				 	 	 	  _this.parents('tr').remove();
+				 	 	 } else {
+				 	 	 	  alert('删除失败');
+				 	 	 }
+				 	 }
+				 })
+			})
+		</script>
 		<!--[if IE]>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->

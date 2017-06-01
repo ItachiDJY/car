@@ -208,14 +208,14 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="form-elements.html">
+									<a href="store">
 										<i class="icon-double-angle-right"></i>
 										门店列表
 									</a>
 								</li>
 
 								<li>
-									<a href="form-wizard.html">
+									<a href="store_add">
 										<i class="icon-double-angle-right"></i>
 										添加新门店
 									</a>

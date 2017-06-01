@@ -96,7 +96,7 @@
 								<a href="admin">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
-							<li class="active">添加车辆品牌</li>
+							<li class="active">修改车辆品牌</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -107,12 +107,13 @@
 
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" method="post" action="brand_add_do" enctype="multipart/form-data">
+									<form class="form-horizontal" role="form" method="post" action="brand_update_do" enctype="multipart/form-data">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 品牌名称 </label>
-										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+										<input type="hidden" name="_token" value="<?=csrf_token(); ?>">
+										<input type="hidden" name="brand_id" value="<?=$brand_info['brand_id'] ?>">
 										<div class="col-sm-9">
-											<input type="text" name="brand_name" id="form-field-1" placeholder="品牌名称" class="col-xs-10 col-sm-5" />
+											<input type="text" name="brand_name" value="<?=$brand_info['brand_name']?>" id="form-field-1" placeholder="品牌名称" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -122,7 +123,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 品牌logo </label>
 
 										<div class="col-sm-9">
-											<input type="file" name="brand_logo" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
+											<input type="file" name="brand_logo[]" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
 										</div>
 									</div>
 
@@ -133,16 +134,16 @@
 
 														<div class="col-sm-9">
 															<select name="parent_id">
-																<option value="0">顶级分类</option>
+																<option value="0" <?php if($brand_info['parent_id'] == 0) {echo 'selected';}?>>顶级分类</option>
 																<?php foreach($brand_list as $key=>$v) : ?>
-																<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
+																<option value="<?=$v->brand_id?>" path="<?=$v->path?>" <?php if($brand_info['parent_id'] == ($v->brand_id)) {echo 'selected';}?>>
 																<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
 																<?=$v->brand_name?>
 																</option>
 																<?php  endforeach; ?>
 																        
 															</select>
-															<input type="hidden" name="path">
+															<input type="hidden" name="path" value="<?=$brand_info['path']?>">
 													    </div>
 
 
@@ -152,7 +153,7 @@
 										<div class="col-md-offset-3 col-md-9">
 											<button class="btn btn-info" type="submit" id="car_add">
 												<i class="icon-ok bigger-110"></i>
-												增加
+												修改
 											</button>
 
 											&nbsp; &nbsp; &nbsp;

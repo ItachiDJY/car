@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
+		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
 		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
 
 		<!--[if IE 7]>
@@ -93,10 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="admin">首页</a>
+								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">车辆管理</li>
-							<li class="active">添加车辆品牌</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -106,65 +105,36 @@
 							
 
 									<div class="col-xs-12">
-									
-									<form class="form-horizontal" role="form" method="post" action="brand_add_do" enctype="multipart/form-data">
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 品牌名称 </label>
-										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-										<div class="col-sm-9">
-											<input type="text" name="brand_name" id="form-field-1" placeholder="品牌名称" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
+									<p>
+									<?php foreach ($data as $key => $val): ?>
+										<a id="check_place"><?php echo $val['store_name']?></a><input type="hidden" value="<?= $val['store_id']?>">&nbsp;&nbsp;&nbsp;&nbsp;
+									<?php endforeach ?>
+									</p>
+									<p id="store"></p>
+										<div class="table-responsive">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th class="center">
+															<label>
+																<input type="checkbox" class="ace" />
+																<span class="lbl"></span>
+															</label>
+														</th>
+														<th>门店编号</th>
+														<th>所属省份</th>
+														<th>所属市/区</th>
+														<th>详细地址</th>
+														<th>联系电话</th>
+								
+													</tr>
+												</thead>
 
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 品牌logo </label>
-
-										<div class="col-sm-9">
-											<input type="file" name="brand_logo" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-
-									<div class="form-group">
-														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 上级品牌</label>
-
-														<div class="col-sm-9">
-															<select name="parent_id">
-																<option value="0">顶级分类</option>
-																<?php foreach($brand_list as $key=>$v) : ?>
-																<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
-																<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-																<?=$v->brand_name?>
-																</option>
-																<?php  endforeach; ?>
-																        
-															</select>
-															<input type="hidden" name="path">
-													    </div>
-
-
-									</div>
-									
-									<div class="form-group">
-										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="submit" id="car_add">
-												<i class="icon-ok bigger-110"></i>
-												增加
-											</button>
-
-											&nbsp; &nbsp; &nbsp;
-											<button class="btn" type="reset">
-												<i class="icon-undo bigger-110"></i>
-												重置
-											</button>
-										</div>
-									</div>
-									<div class="hr hr-24"></div>
-
-									</form>
+												<tbody id="store_info">
+											
+												</tbody>
+											</table>
+										</div><!-- /.table-responsive -->
 									</div><!-- /span -->
 								</div><!-- /row -->
 
@@ -191,15 +161,7 @@
 <![endif]-->
 
 		<!--[if !IE]> -->
-		<script>
-	
-		$(":input[name=parent_id]").change(function(){
-			//alert($(this).find(":selected").attr('path'));
-			var path=$(this).find(":selected").attr('path');
-			$(":input[name=path]").val(path);
-		})
-	
-		</script>
+
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
 		</script>
@@ -221,7 +183,7 @@
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="{{URL::asset('assets/js/excanvas.min.js')}}"></script>
+		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
 		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
@@ -247,6 +209,44 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		$(document).on('click','#check_where',function(){
+			var id = $(this).next().val();
+			var store_info = $('#store_info');
+			$.ajax({
+				type:'get',
+				url:'store_list',
+				data:{store_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = "";
+					$.each(msg,function(k,v){
+						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+					 });
+					
+					store.html(str);
+				}
+			});
+		});
+		$(document).on('click','#check_place',function(){
+			var id = $(this).next().val();
+			var store = $('#store');
+			$.ajax({
+				type:'get',
+				url:'store_select',
+				data:{store_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = "";
+					$.each(msg,function(k,v){
+						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+					 });
+					
+					store.html(str);
+				}
+			});
+		});
+
+
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
