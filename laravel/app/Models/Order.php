@@ -15,40 +15,41 @@ class Order extends Model
     //
     protected $dateFormat = 'U';
     //
-    protected $fillable = ['order_id' , 'order_no' , 'user_id' , 'order_status' , 'create_time' , 'pay_status' , 'order_amount' , 'coupon_amount' , 'discount_amount' , 'final_amount' , 'car_id' , 'region_id' , 'pop_type' , 'pop_time' , 'pop_address' , 'return_type' , 'return_time' , 'return_address' , 'pre_days' ,'service_amount' , 'foregift','is_delete'];
+    protected $fillable = ['order_id' , 'order_no' , 'user_phone' , 'order_status' , 'create_time' , 'pay_status' , 'order_amount' , 'coupon_amount' , 'discount_amount' , 'final_amount' , 'plate_number' , 'region_id' , 'pop_type' , 'pop_time' , 'pop_address' , 'return_type' , 'return_time' , 'return_address' , 'pre_days' ,'service_amount' , 'foregift' , 'is_delete'];
     //被重写的字段
     protected $guarded = [''];
     //隐藏字段
     protected $hidden = [];
 
-    //订单列表展示
-    // public function orderlist()
-    // {
-    //     return $this->get()->paginate(5);
-    // }
-
-    //删除订单
+     //删除订单
     public function dele($data)
     {
         return $this->where($data)
                     ->delete();
     }
 
-    //加入回收站后展示
+    //加入回收站后展示 
     public function recycleadd()
     {
-        return $this->where('is_delete','!=',1)->simplePaginate(5);
+        return $this->where('is_delete','!=',1)->get()->toArray();
     }
-
-    //回收站列表展示
-    // public function recycle_list()
-    // {
-    //     return $this->where('is_delete','=',1)->paginate(5);
-    // }
-
+    
     //回收站列表展示
     public function recycle_list()
     {
         return $this->where('is_delete','=',1)->get()->toArray();
+    }
+
+    //添加订单
+    public function add_order($data)
+    {
+        $this->fill($data);
+        return $this->save();
+    }
+
+    //订单详情查询 单条数据
+    public function order_detail($data)
+    {
+        return $this->where('order_id',$data)->first()->toArray();
     }
 }

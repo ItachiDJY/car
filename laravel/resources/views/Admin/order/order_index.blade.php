@@ -125,7 +125,7 @@
 									<thead>
 
 									<div>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="{{ url('add_order')}}"><i class="fa fa-plus-square"></i>添加订单</a></span>
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="{{ URL('add_order')}}"><i class="fa fa-plus-square"></i>添加订单</a></span>
 										<span class="fa-hover col-md-3 col-sm-4" style="width: 7%;" id="recycle"><a href="javascript:;"><i class="fa fa-trash-o"></i>回收站</a></span>
 										<span class="fa-hover col-md-3 col-sm-4" style="width: 13%;" id="delAll"><a href="javascript:;" ><i class="fa fa-remove"></i>批量删除</a></span>
 										
@@ -214,8 +214,8 @@
 											<td>{{ $v['plate_number'] }}</td>
 											<td>{{ $v['order_amount'] }}</td>
 											<td>
-											<button class="upda btn-primary btn-circle" type="button" ids="{{ $v['order_id']}}"><i class="fa fa-list"></i>
-                            				</button>
+											<a href="order_detail?order_id={{$v['order_id']}}"><button class="upda btn-primary btn-circle" type="button" ><i class="fa fa-list"></i>
+                            				</button></a>
                             				<button class="dele btn-warning btn-circle" type="button" ids="{{ $v['order_id']}}"><i class="fa fa-times"></i>
                             				</button>
 											</td>

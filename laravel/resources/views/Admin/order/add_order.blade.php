@@ -54,10 +54,10 @@
 		<!-- 日期插件结束 -->
 		<!-- 百度地图开始-->
 		<style type="text/css">
-		#allmap {width: 400px;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
-		#allmap {width: 400px;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		#allmap  {width: 400px;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
+		#allmap2 {width: 400px;height: 400px;overflow: hidden;margin:0;font-family:"微软雅黑";}
 		</style>
-
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=98m3McbUd7pPtPq4yvQVwPMdlZxEwaE6"></script>
 		<!-- 百度地图结束 -->
 
 	</head>
@@ -133,9 +133,8 @@
 
 									<div class="col-xs-12">
 
-
-									
-									<form class="form-horizontal" role="form" >
+									<form class="form-horizontal"  action="{{ URL::to('add_order_do') }}" method="post">
+									<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 									<div class="form-group">
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 订单号 </label>
 
@@ -149,7 +148,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 用户名 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="用户名" class="col-xs-10 col-sm-5" name="user_id"/>
+											<input type="text" id="form-field-2" placeholder="用户名" class="col-xs-10 col-sm-5" name="user_name"/>
 										</div>
 									</div>
 
@@ -178,8 +177,8 @@
 										<div class="col-sm-9">
 											<select name="pop_type">
 												<option value="">&nbsp;</option>
-												<option value="TC">门店自取</option>
-												<option value="GJ">送车上门</option>
+												<option value="0">门店自取</option>
+												<option value="1">送车上门</option>
 											</select>
 										</div>
 									</div>
@@ -189,8 +188,10 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 送车地址 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="送车地址" class="col-xs-10 col-sm-5" name="pop_address"/>
+											<input type="text" id="pop" placeholder="送车地址" class="col-xs-10 col-sm-5" name="pop_address"/>
+											<span asd="pop" obj="allmap" class="map">地图浏览</span>
 										</div>
+										<div id="allmap" style="display:none"></div>
 									</div>
 
 									<div class="space-4"></div>
@@ -218,8 +219,8 @@
 										<div class="col-sm-9">
 											<select name="return_type">
 												<option value="">&nbsp;</option>
-												<option value="TC">门店自还</option>
-												<option value="GJ">上门取车</option>
+												<option value="0">门店自还</option>
+												<option value="1">上门取车</option>
 											</select>
 										</div>
 									</div>
@@ -229,8 +230,10 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 取车地址 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="取车地址" class="col-xs-10 col-sm-5" name="return_address"/>
+											<input type="text" id="return" placeholder="取车地址" class="col-xs-10 col-sm-5" name="return_address"/>
+											<span asd="return" obj="allmap2" class="map">地图浏览</span>
 										</div>
+										<div id="allmap2" style="display:none"></div>
 									</div>
 
 									<div class="space-4"></div>
@@ -310,13 +313,13 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 租赁车辆 </label>
 
 										<div class="col-sm-9">
-											<input type="text" id="form-field-2" placeholder="租赁车辆" class="col-xs-10 col-sm-5" name="car_id"/>
+											<input type="text" id="form-field-2" placeholder="租赁车辆" class="col-xs-10 col-sm-5" name="plate_number"/>
 										</div>
 									</div>
 									
 									<div class="clearfix form-actions">
 										<div class="col-md-offset-3 col-md-9">
-											<button class="btn btn-info" type="button">
+											<button class="btn btn-info" type="submit">
 												<i class="icon-ok bigger-110"></i>
 												增加
 											</button>
@@ -326,12 +329,11 @@
 												<i class="icon-undo bigger-110"></i>
 												重置
 											</button>
+											
 										</div>
 									</div>
 
 									<div class="hr hr-24"></div>
-
-
 
 								</form>
 									</div><!-- /span -->
@@ -347,7 +349,56 @@
 				<i class="icon-double-angle-up icon-only bigger-110"></i>
 			</a>
 		</div><!-- /.main-container -->
+
+		<script type="text/javascript">
+		$('.map').on('click', function(){
+			var obj = $(this).attr('obj');    //获取名字
+			var asd = $(this).attr('asd');
+
+			if ($('#'+obj).css('display') == 'none') {
+				$('#'+obj).show();
+
+				var asd = $('#'+asd);
+				map(obj,asd);
+			} else {
+				$('#'+obj).hide();
+			}
+
+		})
+
+		// 百度地图API功能
+		function map(obj,asd){
+			var map = new BMap.Map(obj);
+			var point = new BMap.Point(116.331398,39.897445);
+			map.centerAndZoom(point,12);
+			var geoc = new BMap.Geocoder();    
+
+			map.addEventListener("click", function(e){        
+				var pt = e.point;
+				geoc.getLocation(pt, function(rs){
+					var addComp = rs.addressComponents;
+					var address = addComp.province + ", " + addComp.city + ", " + addComp.district + ", " + addComp.street + ", " + addComp.streetNumber;
+					asd.val(address);
+				});        
+			});
+
+			 var mapType2 = new BMap.MapTypeControl({anchor: BMAP_ANCHOR_TOP_RIGHT});
+			
+			 map.addControl(mapType2);          //左上角，默认地图控件
+			 map.setCurrentCity("北京");        //由于有3D图，需要设置城市哦
+			 //map.addControl(overView);          //添加默认缩略地图控件
+			// map.addControl(overViewOpen);      //右下角，打开
+			 //控件和比例尺
+			 var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
+			 var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
+			 map.addControl(top_left_control);
+			 map.addControl(top_left_navigation);
+			 map.enableScrollWheelZoom();   //启用滚轮放大缩小，默认禁用
+			 map.enableContinuousZoom();    //启用地图惯性拖拽，默认禁用
+		}
 		
+		</script>
+		<!-- 日期插件 -->
 		<script type="text/javascript">
         
 			var currYear = (new Date()).getFullYear();	
@@ -430,12 +481,7 @@
 		
 
 		<!-- inline scripts related to this page -->
-		
-		
-		
-		
-
-		
+	
 </body>
 </html>
 
