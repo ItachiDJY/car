@@ -64,14 +64,16 @@ Route::post('/driver_add_do','Admin\DriverController@add_do');
 //订单管理
 Route::get('/order_index','Admin\OrderController@order_index');
 Route::get('/recycle','Admin\OrderController@recycle');
-Route::get('/add_order','Admin\OrderController@add_order');
 Route::get('/dele_order','Admin\OrderController@dele_order');
 Route::get('/search_order','Admin\OrderController@search_order');
 Route::get('/recycle_add','Admin\OrderController@recycle_add');
 Route::get('/recycle_index','Admin\OrderController@recycle_index');
 Route::get('/restore','Admin\OrderController@restore');
 Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
-
+Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
+Route::get('/add_order','Admin\OrderController@add_order');
+Route::post('/add_order_do','Admin\OrderController@add_order_do');
+Route::get('/order_detail','Admin\OrderController@order_detail');
 
 
 
