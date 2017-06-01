@@ -4,22 +4,22 @@
 		<meta charset="utf-8" />
 		<title>租呗</title>
 		<!-- 引入css -->
-		<link rel="shortcut icon" href="favicon.ico"> <link href="{{ URL::asset('assets/css/bootstraps.min.css?v=3.3.6') }}" rel="stylesheet">
-	    <link href="{{ URL::asset('assets/css/font-awesome.css?v=4.4.0') }}" rel="stylesheet">
-	    <link href="{{ URL::asset('assets/css/animate.css') }}" rel="stylesheet">
-	    <!-- <link href="{{ URL::asset('assets/css/style.css?v=4.1.0') }}" rel="stylesheet"> -->
+		<link rel="shortcut icon" href="favicon.ico"> <link href="<?php echo e(URL::asset('assets/css/bootstraps.min.css?v=3.3.6')); ?>" rel="stylesheet">
+	    <link href="<?php echo e(URL::asset('assets/css/font-awesome.css?v=4.4.0')); ?>" rel="stylesheet">
+	    <link href="<?php echo e(URL::asset('assets/css/animate.css')); ?>" rel="stylesheet">
+	    <!-- <link href="<?php echo e(URL::asset('assets/css/style.css?v=4.1.0')); ?>" rel="stylesheet"> -->
 
 	    <!-- 全局js -->
-	    <script src="{{ URL::asset('assets/js/jquery.min.js?v=2.1.4') }}"></script>
-	    <script src="{{ URL::asset('assets/js/bootstraps.min.js?v=3.3.6') }}"></script>
+	    <script src="<?php echo e(URL::asset('assets/js/jquery.min.js?v=2.1.4')); ?>"></script>
+	    <script src="<?php echo e(URL::asset('assets/js/bootstraps.min.js?v=3.3.6')); ?>"></script>
 	    <!-- 自定义js -->
 	   
 		<!-- 结束 -->
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/font-awesome.min.css') }}" />
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -33,9 +33,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-rtl.min.css') }}" />
-		<link rel="stylesheet" href="{{ URL::asset('assets/css/ace-skins.min.css') }}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -45,7 +45,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{ URL::asset('assets/js/ace-extra.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -56,7 +56,7 @@
 	</head>
 
 	<body>
-		@include('admin.layouts.header')
+		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -86,7 +86,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')
+					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -110,7 +110,7 @@
 							</li>
 							<li class="active">租呗控制台</li>
 							<li class="active">订单管理</li>
-							<li class="active"><a href="{{ URL('order_index')}}">订单列表</a></li>
+							<li class="active"><a href="<?php echo e(URL('order_index')); ?>">订单列表</a></li>
 						</ul><!-- .breadcrumb -->
 					</div>
 
@@ -125,7 +125,7 @@
 									<thead>
 
 									<div>
-										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="{{ URL('add_order')}}"><i class="fa fa-plus-square"></i>添加订单</a></span>
+										<span class="fa-hover col-md-3 col-sm-4" style="width: 8%;"><a href="<?php echo e(URL('add_order')); ?>"><i class="fa fa-plus-square"></i>添加订单</a></span>
 										<span class="fa-hover col-md-3 col-sm-4" style="width: 7%;" id="recycle"><a href="javascript:;"><i class="fa fa-trash-o"></i>回收站</a></span>
 										<span class="fa-hover col-md-3 col-sm-4" style="width: 13%;" id="delAll"><a href="javascript:;" ><i class="fa fa-remove"></i>批量删除</a></span>
 										
@@ -177,53 +177,53 @@
 									</thead>
 
 									<tbody id="tbody">
-									@foreach($order_info as $k=>$v)
+									<?php foreach($order_info as $k=>$v): ?>
 										<tr>
 											<td class="center">
 												<label>
-													<input type="checkbox" class="ace" name="box" ids="{{ $v['order_id'] }}"/>
+													<input type="checkbox" class="ace" name="box" ids="<?php echo e($v['order_id']); ?>"/>
 													<span class="lbl"></span>
 												</label>
 											</td>
 
-											<td>{{ $v['order_id'] }}</td>
-											<td>{{ $v['order_no'] }}</td>
-											<td>{{ $v['user_name'] }}</td>
-											<td>{{ $v['pop_time'] }}</td>
-											<td>{{ $v['return_time'] }}</td>
-											<td>{{ $v['pre_days'] }}天</td>
+											<td><?php echo e($v['order_id']); ?></td>
+											<td><?php echo e($v['order_no']); ?></td>
+											<td><?php echo e($v['user_name']); ?></td>
+											<td><?php echo e($v['pop_time']); ?></td>
+											<td><?php echo e($v['return_time']); ?></td>
+											<td><?php echo e($v['pre_days']); ?>天</td>
 											<td>
-												@if($v['order_status'] ==1)
+												<?php if($v['order_status'] ==1): ?>
 												租赁中
-												@elseif($v['order_status'] ==2)
+												<?php elseif($v['order_status'] ==2): ?>
 												已完成
-												@elseif($v['order_status'] ==3)
+												<?php elseif($v['order_status'] ==3): ?>
 												已取消
-												@elseif($v['order_status'] == 4)
+												<?php elseif($v['order_status'] == 4): ?>
 												预定成功
-												@endif
+												<?php endif; ?>
 											</td>
 											<td>
-												@if($v['pay_status'] == 1)
+												<?php if($v['pay_status'] == 1): ?>
 												已支付
-												@elseif($v['pay_status'] == 2)
+												<?php elseif($v['pay_status'] == 2): ?>
 												未支付
-												@endif
+												<?php endif; ?>
 											</td>
-											<td>{{ $v['create_time'] }}</td>
-											<td>{{ $v['plate_number'] }}</td>
-											<td>{{ $v['order_amount'] }}</td>
+											<td><?php echo e($v['create_time']); ?></td>
+											<td><?php echo e($v['plate_number']); ?></td>
+											<td><?php echo e($v['order_amount']); ?></td>
 											<td>
-											<a href="order_detail?order_id={{$v['order_id']}}"><button class="upda btn-primary btn-circle" type="button" ><i class="fa fa-list"></i>
+											<a href="order_detail?order_id=<?php echo e($v['order_id']); ?>"><button class="upda btn-primary btn-circle" type="button" ><i class="fa fa-list"></i>
                             				</button></a>
-                            				<button class="dele btn-warning btn-circle" type="button" ids="{{ $v['order_id']}}"><i class="fa fa-times"></i>
+                            				<button class="dele btn-warning btn-circle" type="button" ids="<?php echo e($v['order_id']); ?>"><i class="fa fa-times"></i>
                             				</button>
 											</td>
 										</tr>
-									@endforeach	
+									<?php endforeach; ?>	
 									</tbody>
 								</table>
-								<div style="text-align:center">{{ $order->links() }}</div>
+								<div style="text-align:center"><?php echo e($order->links()); ?></div>
 							</div><!-- /.table-responsive -->
 						</div><!-- /span -->
 					</div><!-- /row -->
@@ -242,7 +242,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{ URL::asset('assets/js/jquery-2.0.3.min.js') }}"></script>
+			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -252,7 +252,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src='{{ URL::asset('assets/js/jquery-2.0.3.min.js') }}>"+"<"+"script>");
+			window.jQuery || document.write("<script src='<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -264,10 +264,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src='{{ URL::asset('assets/js/jquery.mobile.custom.min.js') }}>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src='<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 		</script>
-		<script src="{{ URL::asset('assets/js/bootstrap.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/typeahead-bs2.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -275,25 +275,25 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{ URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.ui.touch-punch.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/chosen.jquery.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/fuelux/fuelux.spinner.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/bootstrap-datepicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/bootstrap-timepicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/moment.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/date-time/daterangepicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/bootstrap-colorpicker.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.knob.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.autosize.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/jquery.maskedinput.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/bootstrap-tag.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{ URL::asset('assets/js/ace-elements.min.js') }}"></script>
-		<script src="{{ URL::asset('assets/js/ace.min.js') }}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 
