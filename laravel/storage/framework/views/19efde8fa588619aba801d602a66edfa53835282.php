@@ -105,9 +105,12 @@
 							
 
 									<div class="col-xs-12">
-
-									
-									
+									<p>
+									<?php foreach ($data as $key => $val): ?>
+										<a id="check_place"><?php echo $val['store_name']?></a><input type="hidden" value="<?= $val['store_id']?>">&nbsp;&nbsp;&nbsp;&nbsp;
+									<?php endforeach ?>
+									</p>
+									<p id="store"></p>
 										<div class="table-responsive">
 											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 												<thead>
@@ -118,58 +121,17 @@
 																<span class="lbl"></span>
 															</label>
 														</th>
-														<th>司机编号</th>
-														<th>司机姓名</th>
-														<th>所属地区</th>
-														<th>司机电话</th>
-														<th>司机性别</th>
-														<th>司机身份证</th>
-														<th>司机驾驶证</th>
-														<th>出车状态</th>
-														<th>操作</th>
+														<th>门店编号</th>
+														<th>所属省份</th>
+														<th>所属市/区</th>
+														<th>详细地址</th>
+														<th>联系电话</th>
+								
 													</tr>
 												</thead>
 
-												<tbody>
-												<?php foreach($arr as $v): ?>
-
-													<tr>
-														<td class="center">
-															<label>
-																<input type="checkbox" class="ace" />
-																<span class="lbl"></span>
-															</label>
-														</td>
-
-														<td><?= $v['driver_id']?></td>
-														<td><?= $v['driver_name']?></td>
-														<td><?= $v['region_id']?></td>
-														<td><?= $v['driver_phone']?></td>
-														<td>
-														<?php if ($v['driver_sex'] == 0): ?>
-															男
-														<?php else:?>
-															女
-														<?php endif;?>
-														</td>
-														<td><?= $v['idcard']?></td>
-														<td>
-															<img src="../<?= $v['license_img']?>" alt="" hight="50px;" width="50px;">							
-														</td>
-														<td>
-														<?php if ($v['status'] == 0): ?>
-															未出车
-														<?php else:?>
-															工作中
-														<?php endif;?>
-														</td>
-														<td>
-														<button class="btn">编辑</button>
-														<button class="btn btn-danger">删除</button>
-														</td>
-
-													</tr>
-												<?php endforeach; ?>
+												<tbody id="store_info">
+											
 												</tbody>
 											</table>
 										</div><!-- /.table-responsive -->
@@ -247,6 +209,44 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		$(document).on('click','#check_where',function(){
+			var id = $(this).next().val();
+			var store_info = $('#store_info');
+			$.ajax({
+				type:'get',
+				url:'store_list',
+				data:{store_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = "";
+					$.each(msg,function(k,v){
+						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+					 });
+					
+					store.html(str);
+				}
+			});
+		});
+		$(document).on('click','#check_place',function(){
+			var id = $(this).next().val();
+			var store = $('#store');
+			$.ajax({
+				type:'get',
+				url:'store_select',
+				data:{store_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = "";
+					$.each(msg,function(k,v){
+						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+					 });
+					
+					store.html(str);
+				}
+			});
+		});
+
+
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);

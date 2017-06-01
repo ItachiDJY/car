@@ -4,17 +4,17 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Region extends Model 
+class Store extends Model 
 {
 	//表名
-	protected  $table='region';
+	protected  $table='store';
 	//指定主键
-    protected  $primaryKey='region_id';
+    protected  $primaryKey='store_id';
     ////被重写的字段
     protected  $guarded=['*'];
     //默认添加开始时间和结束时间，默认开启ture
     public $timestamps=false;
-    protected $fillable = ['region_name','parent_id'];
+    protected $fillable = ['store_name','parent_id'];
 	//查看所有的方法
 	public function selectAll(){
 		return $this->get()->toArray();
@@ -29,7 +29,7 @@ class Region extends Model
     	$this->fill($data);  		 // 设置值  data为数组
 		$this->save();
         
-        return $this->attributes['region_id'];  
+        return $this->attributes['store_id'];  
     }
     //添加操作 
     public function adds($data)
@@ -46,7 +46,7 @@ class Region extends Model
     //修改操作
     public function updates($data,$id){
        
-        $resume= $this->where('region_id',$id);
+        $resume= $this->where('store_id',$id);
         return $resume->update($data);
     }
 }

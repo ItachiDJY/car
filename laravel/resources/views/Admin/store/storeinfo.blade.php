@@ -5,8 +5,8 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
+		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
-		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
+		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 	</head>
 
 	<body>
-		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+		@include('admin.layouts.header')
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
+					@include('admin.layouts.main')<!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -105,9 +105,12 @@
 							
 
 									<div class="col-xs-12">
-
-									
-									
+									<p>
+									<?php foreach ($data as $key => $val): ?>
+										<a id="check_place"><?php echo $val['store_name']?></a><input type="hidden" value="<?= $val['store_id']?>">&nbsp;&nbsp;&nbsp;&nbsp;
+									<?php endforeach ?>
+									</p>
+									<p id="store"></p>
 										<div class="table-responsive">
 											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 												<thead>
@@ -118,58 +121,17 @@
 																<span class="lbl"></span>
 															</label>
 														</th>
-														<th>司机编号</th>
-														<th>司机姓名</th>
-														<th>所属地区</th>
-														<th>司机电话</th>
-														<th>司机性别</th>
-														<th>司机身份证</th>
-														<th>司机驾驶证</th>
-														<th>出车状态</th>
-														<th>操作</th>
+														<th>门店编号</th>
+														<th>所属省份</th>
+														<th>所属市/区</th>
+														<th>详细地址</th>
+														<th>联系电话</th>
+								
 													</tr>
 												</thead>
 
-												<tbody>
-												<?php foreach($arr as $v): ?>
-
-													<tr>
-														<td class="center">
-															<label>
-																<input type="checkbox" class="ace" />
-																<span class="lbl"></span>
-															</label>
-														</td>
-
-														<td><?= $v['driver_id']?></td>
-														<td><?= $v['driver_name']?></td>
-														<td><?= $v['region_id']?></td>
-														<td><?= $v['driver_phone']?></td>
-														<td>
-														<?php if ($v['driver_sex'] == 0): ?>
-															男
-														<?php else:?>
-															女
-														<?php endif;?>
-														</td>
-														<td><?= $v['idcard']?></td>
-														<td>
-															<img src="../<?= $v['license_img']?>" alt="" hight="50px;" width="50px;">							
-														</td>
-														<td>
-														<?php if ($v['status'] == 0): ?>
-															未出车
-														<?php else:?>
-															工作中
-														<?php endif;?>
-														</td>
-														<td>
-														<button class="btn">编辑</button>
-														<button class="btn btn-danger">删除</button>
-														</td>
-
-													</tr>
-												<?php endforeach; ?>
+												<tbody id="store_info">
+											
 												</tbody>
 											</table>
 										</div><!-- /.table-responsive -->
@@ -191,7 +153,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
+			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
 		<!-- <![endif]-->
 
 		<!--[if IE]>
@@ -201,7 +163,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
+			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -213,10 +175,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
 		</script>
-		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -224,29 +186,67 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
 
 		<!-- ace scripts -->
 
-		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
-		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
+		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
+		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
 
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		$(document).on('click','#check_where',function(){
+			var id = $(this).next().val();
+			var store_info = $('#store_info');
+			$.ajax({
+				type:'get',
+				url:'store_list',
+				data:{store_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = "";
+					$.each(msg,function(k,v){
+						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+					 });
+					
+					store.html(str);
+				}
+			});
+		});
+		$(document).on('click','#check_place',function(){
+			var id = $(this).next().val();
+			var store = $('#store');
+			$.ajax({
+				type:'get',
+				url:'store_select',
+				data:{store_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = "";
+					$.each(msg,function(k,v){
+						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+					 });
+					
+					store.html(str);
+				}
+			});
+		});
+
+
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);

@@ -142,7 +142,7 @@
 														<td><?= $v['admin_id']?></td>
 														<td><?= $v['admin_name']?></td>
 														<td>
-															<img src="<?= $v['admin_img']?>" alt="">							
+															<img src="../<?= $v['admin_img']?>" alt="" higth="50px;" width="50px;">							
 														</td>
 														<td>
 														<button class="btn">编辑</button>

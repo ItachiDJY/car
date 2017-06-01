@@ -154,7 +154,7 @@
 														</td>
 														<td><?= $v['idcard']?></td>
 														<td>
-															<img src="<?= $v['license_img']?>" alt="">							
+															<img src="../<?= $v['license_img']?>" alt="" hight="50px;" width="50px;">							
 														</td>
 														<td>
 														<?php if ($v['status'] == 0): ?>
