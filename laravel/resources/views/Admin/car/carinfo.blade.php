@@ -93,9 +93,10 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="#">首页</a>
+								<a href="admin">首页</a>
 							</li>
-							<li class="active">安居客控制台</li>
+							<li class="active">车辆管理</li>
+							<li class="active">车辆信息展示</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -109,12 +110,13 @@
 									
 									
 										<div class="table-responsive">
+										    <button class="btn" id="pdel">批量删除</button>
 											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
 												<thead>
 													<tr>
 														<th class="center">
 															<label>
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" id="check" />
 																<span class="lbl"></span>
 															</label>
 														</th>
@@ -132,10 +134,10 @@
 												<tbody>
 												@foreach ($arr as $v)
 
-													<tr>
+													<tr ids="<?=$v['car_id']?>">
 														<td class="center">
 															<label>
-																<input type="checkbox" class="ace" />
+																<input type="checkbox" class="ace" name="box" />
 																<span class="lbl"></span>
 															</label>
 														</td>
@@ -145,15 +147,15 @@
 														<td><?= $v['car_status']?></td>
 														<td>
 														<?php foreach($v['car_img'] as $val ):?>
-														<img src="<?= $val?>" alt="">
+														<img src="../<?= $val?>" alt="" >
 														<?php endforeach;?>
 														</td>
-														<td><?= $v['deploy_id']?></td>
+														<td><?= $v['deploy_name']?></td>
 														<td><?= $v['renta_num']?></td>
 														
 														<td>
-														<button class="btn">编辑</button>
-														<button class="btn btn-danger">删除</button>
+														<button class="up btn">编辑</button>
+														<button class="del btn btn-danger">删除</button>
 														</td>
 
 													</tr>
@@ -186,6 +188,64 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->
 
+		<script>
+		    $('.up').on('click' ,function(){
+		    	var id = $(this).parents('tr').attr('ids');
+		    	location.href ='car_update?id='+id;
+		    })
+			//全选/全不选
+			$('#check').on('click' , function(){
+				if (this.checked == true) {
+					$('[name=box]:checkbox').prop('checked',true); 
+				} else {
+					$('[name=box]:checkbox').prop('checked',false); 
+
+				}
+			})
+			//批量删除
+			$(document).on('click' ,'#pdel' ,function(){
+				var ids = '';
+				var box = $(":input[name=box]") ;
+				$('[name=box]:checkbox:checked').each(function(){
+					ids += ','+$(this).parents('tr').attr('ids');                    //获取选中值 
+				});
+				ids = ids.substr(1) ;
+				$.ajax({
+				 	 url:'car_del',
+				 	 type:'GET',
+				 	 data:{id:ids},
+				 	 success:function(msg){
+				 	 	 if (msg) {
+				 	 	 	for (var i = 0; i < box.length; i++) {
+				 	 	 		if (box.eq(i).prop('checked') == true) {
+				 	 	 			box.eq(i).parents('tr').remove();
+				 	 	 		}
+				 	 	 	}
+				 	 	 	 // _this.parents('tr').remove();
+				 	 	 } else {
+				 	 	 	  alert('删除失败');
+				 	 	 }
+				 	 }
+				 })
+			})
+		    //单删
+			$(document).on('click' ,'.del' ,function(){
+				 var _this = $(this);
+				 var ids = _this.parents('tr').attr('ids') ;
+				 $.ajax({
+				 	 url:'car_del',
+				 	 type:'GET',
+				 	 data:{id:ids},
+				 	 success:function(msg){
+				 	 	 if (msg) {
+				 	 	 	  _this.parents('tr').remove();
+				 	 	 } else {
+				 	 	 	  alert('删除失败');
+				 	 	 }
+				 	 }
+				 })
+			})
+		</script>
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">

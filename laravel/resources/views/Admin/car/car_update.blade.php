@@ -96,7 +96,7 @@
 								<a href="admin">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
-							<li class="active">添加车辆品牌</li>
+							<li class="active">修改车辆信息</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -107,42 +107,62 @@
 
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" method="post" action="brand_add_do" enctype="multipart/form-data">
+									<form class="form-horizontal" role="form" method="post" action="car_update_do" enctype="multipart/form-data">
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 品牌名称 </label>
-										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 车牌号 </label>
+										<input type="hidden" name="_token" value="<?=csrf_token(); ?>">
+										<input type="hidden" name="car_id" value="<?=$car_info['car_id']  ?>">
 										<div class="col-sm-9">
-											<input type="text" name="brand_name" id="form-field-1" placeholder="品牌名称" class="col-xs-10 col-sm-5" />
+											<input type="text" name="plate_number" id="form-field-1" value="<?=$car_info['plate_number']?>" placeholder="车牌号" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
 									<div class="space-4"></div>
 
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 品牌logo </label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 图片 </label>
 
 										<div class="col-sm-9">
-											<input type="file" name="brand_logo" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
+											<input type="file" name="img[]" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
 										</div>
 									</div>
 
 									<div class="space-4"></div>
 
 									<div class="form-group">
-														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 上级品牌</label>
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 出租次数 </label>
+
+										<div class="col-sm-9">
+											<input type="text" name="renta_num" value="<?=$car_info['renta_num']?>" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 出行状态 </label>
+
+										<div class="col-sm-9">
+										    <select name="car_status" id="">
+										    	<option value="0" <?php if ($car_info['car_status'] == 0) {echo 'selected' ;}?>>未出行</option>
+										    	<option value="1" <?php if ($car_info['car_status'] == 1) {echo 'selected' ;}?>>已出行</option>
+										    </select>
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 车辆配置</label>
 
 														<div class="col-sm-9">
-															<select name="parent_id">
-																<option value="0">顶级分类</option>
-																<?php foreach($brand_list as $key=>$v) : ?>
-																<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
-																<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-																<?=$v->brand_name?>
-																</option>
-																<?php  endforeach; ?>
-																        
+															<select name="deploy_id">
+																<option value="">..请选择配置</option>
+																@foreach ($deploy_data as $k =>$v)
+																<option value="<?= $k?>" <?php if ($car_info['deploy_id'] == $k) {echo 'selected' ;}?>><?= $v?></option>
+																@endforeach
 															</select>
-															<input type="hidden" name="path">
+															
 													    </div>
 
 
@@ -191,15 +211,7 @@
 <![endif]-->
 
 		<!--[if !IE]> -->
-		<script>
-	
-		$(":input[name=parent_id]").change(function(){
-			//alert($(this).find(":selected").attr('path'));
-			var path=$(this).find(":selected").attr('path');
-			$(":input[name=path]").val(path);
-		})
-	
-		</script>
+
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
 		</script>

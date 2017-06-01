@@ -4,24 +4,24 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Deploy extends Model 
+class Store extends Model 
 {
 	//表名
-	protected  $table='deploy';
+	protected  $table='store';
 	//指定主键
-    protected  $primaryKey='deploy_id';
+    protected  $primaryKey='store_id';
     ////被重写的字段
     protected  $guarded=['*'];
     //默认添加开始时间和结束时间，默认开启ture
     public $timestamps=false;
-    protected $fillable = ['deploy_name','seat_num','doors_num','fuel_type','tran_type','output','roz','dirver_type','motor_form','skylight','tank_capacity','air','navigation','reversing_radar','DVD','rental_price','brand_id','foregift'];
+    protected $fillable = ['store_name','parent_id'];
 	//查看所有的方法
 	public function selectAll(){
 		return $this->get()->toArray();
 	}
 	//查询单条
 	public function select($id){
-        return $this->where('deploy_id',$id)->first()->toArray();
+        return $this->where('parent_id',$id)->get()->toArray();
     }
     //添加操作   返回id值
     public function insert($data)
@@ -29,7 +29,7 @@ class Deploy extends Model
     	$this->fill($data);  		 // 设置值  data为数组
 		$this->save();
         
-        return $this->attributes['deploy_id'];  
+        return $this->attributes['store_id'];  
     }
     //添加操作 
     public function adds($data)
@@ -43,15 +43,10 @@ class Deploy extends Model
         $data=$this->find($id);
        return $data->delete();
     }
-    //批量删除
-    public function pdel($ids){
-       // $data=$this->get();
-        return $this->whereIn('deploy_id',$ids)->delete();
-    }
     //修改操作
     public function updates($data,$id){
        
-        $resume= $this->where('deploy_id',$id);
+        $resume= $this->where('store_id',$id);
         return $resume->update($data);
     }
 }

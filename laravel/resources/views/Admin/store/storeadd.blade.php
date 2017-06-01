@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
@@ -93,10 +93,9 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="admin">首页</a>
+								<a href="#">首页</a>
 							</li>
-							<li class="active">车辆管理</li>
-							<li class="active">添加车辆品牌</li>
+							<li class="active">租呗控制台</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -107,46 +106,46 @@
 
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" method="post" action="brand_add_do" enctype="multipart/form-data">
+									<form class="form-horizontal" role="form" method="post" action="driver_add_do" enctype="multipart/form-data">
+									
 									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 品牌名称 </label>
-										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
-										<div class="col-sm-9">
-											<input type="text" name="brand_name" id="form-field-1" placeholder="品牌名称" class="col-xs-10 col-sm-5" />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-
-									<div class="form-group">
-										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 品牌logo </label>
-
-										<div class="col-sm-9">
-											<input type="file" name="brand_logo" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
-										</div>
-									</div>
-
-									<div class="space-4"></div>
-
-									<div class="form-group">
-														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 上级品牌</label>
-
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 所属地区</label>
+														
 														<div class="col-sm-9">
-															<select name="parent_id">
-																<option value="0">顶级分类</option>
-																<?php foreach($brand_list as $key=>$v) : ?>
-																<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
-																<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-																<?=$v->brand_name?>
-																</option>
-																<?php  endforeach; ?>
-																        
-															</select>
-															<input type="hidden" name="path">
+														行政区
+															<select name="province" id="province">
+																<option value="">..请选择</option>
+																@foreach ($data as $k =>$v)
+																<option value="<?= $v['region_id']?>"><?= $v['region_name']?></option>
+																@endforeach
+															</select>&nbsp;&nbsp;
+															市、区
+															<select name="city" id="city">
+																<option value="">..请选择</option>
+															
+															</select>&nbsp;&nbsp;
 													    </div>
 
 
+
 									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 详细地址 </label>
+										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+										<div class="col-sm-9">
+											<input type="text" name="address" id="form-field-1" placeholder="司机姓名" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 门店电话 </label>
+										
+										<div class="col-sm-9">
+											<input type="text" name="driver_phone" id="form-field-1" placeholder="门店电话" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									
 									
 									<div class="form-group">
 										<div class="col-md-offset-3 col-md-9">
@@ -191,15 +190,7 @@
 <![endif]-->
 
 		<!--[if !IE]> -->
-		<script>
-	
-		$(":input[name=parent_id]").change(function(){
-			//alert($(this).find(":selected").attr('path'));
-			var path=$(this).find(":selected").attr('path');
-			$(":input[name=path]").val(path);
-		})
-	
-		</script>
+
 		<script type="text/javascript">
 			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
 		</script>
@@ -247,6 +238,28 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		$(document).on('change','#province',function(){
+			var id = $(this).val();
+			var reg = $('#city');
+			if(id == '') {
+				return false;
+			}
+			$.ajax({
+				type:'get',
+				url:'reg_select',
+				data:{parent_id:id},
+				dataType:'json',
+				success:function(msg) {
+					var str = '<option value="">..请选择</option>';
+					$.each(msg,function(k,v){
+						str += '<option value='+v.region_id+'>'+v.region_name+'</option>';
+					});
+					reg.html(str);
+				}
+			});
+		});
+
+	
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
