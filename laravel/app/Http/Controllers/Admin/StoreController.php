@@ -10,6 +10,7 @@ use DB;
 
 use App\Models\Region;
 use App\Models\Store;
+use App\Models\Shop_store;
 use Illuminate\Support\Facades\Input;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -29,25 +30,29 @@ class StoreController extends Controller
    public function add()
    {
       $info = $_SESSION['admin'];
-      $deployObj = new Region ;
-      $data = $deployObj ->select(1);
+     $storeObj = new Store;
+      $data = $storeObj ->select(0) ;
       
       return view('admin.store.storeadd',['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
    //执行添加的方法
-   // public function add_do(Request $request)
-   // {
-	  //  $path = $this ->upload($request);
-   //    $post = Input::get();
-   //    $token = $post ['_token'];
-   //    unset($post['_token']);
-   //    $post['car_img'] = implode(',', $path['img']);
-   //    $post['car_status'] = 0 ;
-   //    $post['renta_num'] = 0 ;
-   //    $carObj = new Car ;
-   //    $bool = $carObj ->adds($post);
-   //    return redirect('/car');
-   // }
+   public function add_do()
+   {
+
+      $post = Input::get();
+      $phone_info['store_phone'] = $post['store_phone'];
+      $token = $post ['_token'];
+      unset($post['_token']);
+      unset($post['store_phone']);
+      $storeObj = new Store;
+      $shopObj = new Shop_store;
+      $id = $storeObj ->insert($post);
+      $phone_info['store_id'] = $id;
+ 
+      $shopObj->adds($phone_info);
+   
+      return redirect('/store');
+   }
    
    public function store_select()
    {
@@ -62,8 +67,18 @@ class StoreController extends Controller
    {
       $id = Input::get('store_id');
       $storeObj = new Store;
+      $shopeObj = new Shop_store;
       $data = $storeObj ->select($id);
-      print_r($data);die;
+      $info = $shopeObj->selectAll();
+
+      for ($i=0;$i<count($data);$i++) {
+         foreach ($info as $key => $val) {
+            if($data[$i]['store_id'] == $val['store_id']) {
+               $data[$i]['phone'] = $val['store_phone'];
+            }
+         }
+      }
+    
       return json_encode($data);
    }
 }

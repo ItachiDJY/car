@@ -95,7 +95,7 @@
 								<i class="icon-home home-icon"></i>
 								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">门店列表</li>
+							<li class="active">添加门店</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -105,34 +105,65 @@
 							
 
 									<div class="col-xs-12">
-									<p>
-									<?php foreach ($data as $key => $val): ?>
-										<a id="check_place"><?php echo $val['store_name']?></a><input type="hidden" value="<?= $val['store_id']?>">&nbsp;&nbsp;&nbsp;&nbsp;
-									<?php endforeach ?>
-									</p>
-									<p id="store"></p>
-										<div class="table-responsive">
-											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th class="center">
-															<label>
-																<input type="checkbox" class="ace" />
-																<span class="lbl"></span>
-															</label>
-														</th>
-														<th>门店编号</th>
-														<th>详细地址</th>
-														<th>联系电话</th>
-								
-													</tr>
-												</thead>
+									
+									<form class="form-horizontal" role="form" method="post" action="store_add_do" enctype="multipart/form-data">
+									
+									<div class="form-group">
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 所属地区</label>
+														
+														<div class="col-sm-9">
+														行政区
+															<select name="" id="province">
+																<option value="">..请选择</option>
+																<?php foreach($data as $k =>$v): ?>
+																<option value="<?= $v['store_id']?>"><?= $v['store_name']?></option>
+																<?php endforeach; ?>
+															</select>&nbsp;&nbsp;
+															市、区
+															<select name="parent_id" id="city">
+																<option value="">..请选择</option>
+															
+															</select>&nbsp;&nbsp;
+													    </div>
 
-												<tbody id="store_info">
-											
-												</tbody>
-											</table>
-										</div><!-- /.table-responsive -->
+
+
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 详细地址 </label>
+										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+										<div class="col-sm-9">
+											<input type="text" name="store_name" id="form-field-1" placeholder="详细地址" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 门店电话 </label>
+										
+										<div class="col-sm-9">
+											<input type="text" name="store_phone" id="form-field-1" placeholder="门店电话" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+									
+									
+									<div class="form-group">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit" id="car_add">
+												<i class="icon-ok bigger-110"></i>
+												增加
+											</button>
+
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+									<div class="hr hr-24"></div>
+
+									</form>
 									</div><!-- /span -->
 								</div><!-- /row -->
 
@@ -181,7 +212,7 @@
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="assets/js/excanvas.min.js"></script>
+		  <script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
 		<![endif]-->
 
 		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
@@ -207,47 +238,28 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
-		$(document).on('click','#check_where',function(){
-			var id = $(this).next().val();
-			var store_info = $('#store_info');
-			$.ajax({
-				type:'get',
-				url:'store_list',
-				data:{store_id:id},
-				dataType:'json',
-				success:function(msg) {
-					var str = "";
-					$.each(msg,function(k,v){
-						str += '<tr><td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>';
-						str += "<td>"+v.store_id+"</td>";
-						str += "<td>"+v.store_name+"</td>";
-						str += "<td>"+v.phone+"</td></tr>";
-					});
-				
-					store_info.html(str);
-				}
-			});
-		});
-		$(document).on('click','#check_place',function(){
-			var id = $(this).next().val();
-			var store = $('#store');
+		$(document).on('change','#province',function(){
+			var id = $(this).val();
+			var reg = $('#city');
+			if(id == '') {
+				return false;
+			}
 			$.ajax({
 				type:'get',
 				url:'store_select',
 				data:{store_id:id},
 				dataType:'json',
 				success:function(msg) {
-					var str = "";
+					var str = '<option value="">..请选择</option>';
 					$.each(msg,function(k,v){
-						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
-					 });
-					
-					store.html(str);
+						str += '<option value='+v.store_id+'>'+v.store_name+'</option>';
+					});
+					reg.html(str);
 				}
 			});
 		});
 
-
+	
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
