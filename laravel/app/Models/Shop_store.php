@@ -14,7 +14,7 @@ class Shop_store extends Model
     protected  $guarded=['*'];
     //默认添加开始时间和结束时间，默认开启ture
     public $timestamps=false;
-    protected $fillable = ['stone_phone','store_id'];
+    protected $fillable = ['store_phone','store_id'];
 	//查看所有的方法
 	public function selectAll(){
 		return $this->get()->toArray();

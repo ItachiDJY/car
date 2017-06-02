@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Login</title>
+    <title>租呗后台登陆</title>
 
     <!-- Bootstrap Core CSS -->
 <!--    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->

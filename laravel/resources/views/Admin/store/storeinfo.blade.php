@@ -122,8 +122,6 @@
 															</label>
 														</th>
 														<th>门店编号</th>
-														<th>所属省份</th>
-														<th>所属市/区</th>
 														<th>详细地址</th>
 														<th>联系电话</th>
 								
@@ -220,10 +218,13 @@
 				success:function(msg) {
 					var str = "";
 					$.each(msg,function(k,v){
-						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
-					 });
-					
-					store.html(str);
+						str += '<tr><td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>';
+						str += "<td>"+v.store_id+"</td>";
+						str += "<td>"+v.store_name+"</td>";
+						str += "<td>"+v.phone+"</td></tr>";
+					});
+				
+					store_info.html(str);
 				}
 			});
 		});

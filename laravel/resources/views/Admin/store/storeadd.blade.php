@@ -106,21 +106,21 @@
 
 									<div class="col-xs-12">
 									
-									<form class="form-horizontal" role="form" method="post" action="driver_add_do" enctype="multipart/form-data">
+									<form class="form-horizontal" role="form" method="post" action="store_add_do" enctype="multipart/form-data">
 									
 									<div class="form-group">
 														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 所属地区</label>
 														
 														<div class="col-sm-9">
 														行政区
-															<select name="province" id="province">
+															<select name="" id="province">
 																<option value="">..请选择</option>
 																@foreach ($data as $k =>$v)
-																<option value="<?= $v['region_id']?>"><?= $v['region_name']?></option>
+																<option value="<?= $v['store_id']?>"><?= $v['store_name']?></option>
 																@endforeach
 															</select>&nbsp;&nbsp;
 															市、区
-															<select name="city" id="city">
+															<select name="parent_id" id="city">
 																<option value="">..请选择</option>
 															
 															</select>&nbsp;&nbsp;
@@ -134,7 +134,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 详细地址 </label>
 										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
 										<div class="col-sm-9">
-											<input type="text" name="address" id="form-field-1" placeholder="司机姓名" class="col-xs-10 col-sm-5" />
+											<input type="text" name="store_name" id="form-field-1" placeholder="详细地址" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 
@@ -142,7 +142,7 @@
 										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 门店电话 </label>
 										
 										<div class="col-sm-9">
-											<input type="text" name="driver_phone" id="form-field-1" placeholder="门店电话" class="col-xs-10 col-sm-5" />
+											<input type="text" name="store_phone" id="form-field-1" placeholder="门店电话" class="col-xs-10 col-sm-5" />
 										</div>
 									</div>
 									
@@ -246,13 +246,13 @@
 			}
 			$.ajax({
 				type:'get',
-				url:'reg_select',
-				data:{parent_id:id},
+				url:'store_select',
+				data:{store_id:id},
 				dataType:'json',
 				success:function(msg) {
 					var str = '<option value="">..请选择</option>';
 					$.each(msg,function(k,v){
-						str += '<option value='+v.region_id+'>'+v.region_name+'</option>';
+						str += '<option value='+v.store_id+'>'+v.store_name+'</option>';
 					});
 					reg.html(str);
 				}

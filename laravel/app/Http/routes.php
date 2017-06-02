@@ -86,7 +86,8 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/order_detail','Admin\OrderController@order_detail');
     //门店管理
 	Route::get('/store','Admin\StoreController@index');
-	Route::get('/add_store','Admin\StoreController@add');
+    Route::get('/store_add','Admin\StoreController@add');
+	Route::post('/store_add_do','Admin\StoreController@add_do');
 	Route::get('/store_select','Admin\StoreController@store_select');
 	Route::get('/store_list','Admin\StoreController@store_list');
 });
