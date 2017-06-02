@@ -89,6 +89,12 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
 	Route::get('/add_store','Admin\StoreController@add');
 	Route::get('/store_select','Admin\StoreController@store_select');
 	Route::get('/store_list','Admin\StoreController@store_list');
+    //活动管理
+    Route::get('/active_index','Admin\ActiveController@active_index');
+    Route::get('/active_add','Admin\ActiveController@active_add');
+    Route::post('/active_add_do','Admin\ActiveController@active_add_do');
+    Route::get('/active_delete','Admin\ActiveController@active_delete');
+    Route::get('/active_change_name','Admin\ActiveController@active_change_name');
 });
 
 //后台登陆及防非登录
