@@ -49,5 +49,9 @@ class Admin extends Model
         $resume= $this->where('admin_id',$id);
         return $resume->update($data);
     }
+     //后台登录查询
+    public function login($data) {
+        return $this->where('admin_name',$data['admin_name'])->get()->toArray();
+    }
 }
 

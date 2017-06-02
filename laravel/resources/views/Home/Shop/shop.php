@@ -738,12 +738,10 @@
 <div class="zc_foottool">
     <ul>
         <li>
-            <a href="javascript:void(0);" onclick="javascript:window.open('http://qiao.baidu.com/v3/?module=default&controller=im&action=index&ucid=3812987&type=n&siteid=1401017',
-            		'newwindow','toolbar=no,scrollbars=yes,resizable=no,top=50%,left=50%,width=800,height=600');">
-                <span class="zc_service_i"></span></a>
+            <a href="http://wpa.qq.com/msgrd?V=3&uin=507536932&site=liuyanbao.net&menu=yes">
+            <span class="zc_service_i"></span></a>
             <div class="zc_foottooltipe">
                 <div class="p-re"><div class="rightsj">◆</div>在线客服</div>
-            </div>
         </li>
         <li>
             <a href="https://help.zuche.com/" target="_blank"><span class="zc_help_i"></span></a>

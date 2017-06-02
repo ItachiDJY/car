@@ -16,17 +16,19 @@ class OrderController extends Controller
     //订单列表首页
     public function order_index()
     {
+        $info = $_SESSION['admin'];
         $order = DB::table('order')->Paginate(5);
         $order_info = $this->object_array($order);
         // print_r($order_info);die;
         $order_info = $this->common_data($order_info['items']['items']);
         // echo strtotime('2017-6-06');die;
-        return view('Admin.order.order_index',['order_info'=>$order_info],['order'=>$order]);
+        return view('Admin.order.order_index',['order_info'=>$order_info,'order'=>$order,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
     }
 
     //查看订单详情
     public function  order_detail()
     {
+        $info = $_SESSION['admin'];
         $order_id = Input::get('order_id');
         $order = new Order();
         $one_info = $order->order_detail($order_id);
@@ -43,7 +45,7 @@ class OrderController extends Controller
         $car_info = DB::table('information')->where('plate_number' , $one_info['plate_number'])->first();
         $car_info = $this->object_array($car_info); 
         // echo '<pre>';
-        return view('Admin.order.order_detail', ['one_info'=>$one_info] , ['user_info'=>$user_info] , ['car_info'=>$car_info]);
+        return view('Admin.order.order_detail', ['one_info'=>$one_info,'user_info'=>$user_info,'car_info'=>$car_info,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
     }
 
     //订单加入回收站
@@ -66,7 +68,8 @@ class OrderController extends Controller
     //添加订单展示页面
     public function add_order()
     {
-        return view('Admin.order.add_order');
+        $info = $_SESSION['admin'];
+        return view('Admin.order.add_order',['admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
     }
 
     //添加订单 
@@ -132,13 +135,14 @@ class OrderController extends Controller
     //回收站列表首页
     public function recycle_index()
     {
+        $info = $_SESSION['admin'];
         $order = new Order();
 
         $arr = $order->recycle_list();
         $arr = $this->object_array($arr);
         $arr = $this->common_data($arr);
         
-        return view('Admin.order.recycle_index',['arr'=>$arr]);
+        return view('Admin.order.recycle_index',['arr'=>$arr,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
     }
 
     //还原回收站数据

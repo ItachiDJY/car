@@ -94,10 +94,14 @@
 							<li>
 								<i class="icon-home home-icon"></i>
 <<<<<<< HEAD
+<<<<<<< HEAD
 								<a href="index">首页</a>
 =======
 								<a href="admin">首页</a>
 >>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
+=======
+								<a href="/index.php/admin">首页</a>
+>>>>>>> 23791d287c1ac75688757c328f4b49095a706ddc
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">修改车辆品牌</li>

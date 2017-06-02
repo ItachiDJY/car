@@ -20,19 +20,19 @@ class StoreController extends Controller
    {
 		$storeObj = new Store;
 		$data = $storeObj ->select(0) ;
-	
+	   $info = $_SESSION['admin'];
 		//print_r($data);die;
-		return view('admin.store.storeinfo',['data' =>$data]) ;
+		return view('admin.store.storeinfo',['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
 
    //展示门店添加
    public function add()
    {
-      
+      $info = $_SESSION['admin'];
       $deployObj = new Region ;
       $data = $deployObj ->select(1);
       
-      return view('admin.store.storeadd',['data' =>$data]) ;
+      return view('admin.store.storeadd',['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
    //执行添加的方法
    // public function add_do(Request $request)
