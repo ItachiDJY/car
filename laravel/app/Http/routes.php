@@ -28,10 +28,26 @@ Route::get('/country','Home\CountryController@index');
 Route::post('/login/login','Home\LoginController@login');
 Route::get('/login/check_username','Home\LoginController@check_username');
 Route::get('/login/check_pwd','Home\LoginController@check_pwd');
+Route::get('/login/out_login','Home\LoginController@out_login');
+
 //前台注册
 Route::post('/register/register','Home\RegisterController@register');
 Route::get('/register/check_code','Home\RegisterController@check_code');
 Route::get('/register/check_phone','Home\RegisterController@check_phone');
+
+//前台 个人中心
+Route::get('/person/account','Home\PersonController@account');
+Route::get('/person/check','Home\PersonController@check');
+
+
+//前台门店
+Route::get('/store/get_cat_son','Home\StoreController@get_cat_son');
+Route::get('/store/index','Home\StoreController@index');
+
+//前台首页
+Route::any('/Index/get_city','Home\IndexController@get_city');
+
+//前台上门取送
 
 
 /*******后台路由区******/
