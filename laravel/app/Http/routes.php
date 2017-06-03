@@ -28,11 +28,23 @@ Route::group(['middleware'=>'web'], function (){
 	Route::post('/login/login','Home\LoginController@login');
 	Route::get('/login/check_username','Home\LoginController@check_username');
 	Route::get('/login/check_pwd','Home\LoginController@check_pwd');
+    Route::get('/login/out_login','Home\LoginController@out_login');
 	//前台注册
 	Route::post('/register/register','Home\RegisterController@register');
 	Route::get('/register/check_code','Home\RegisterController@check_code');
 	Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
+    //前台 个人中心
+    Route::get('/person/account','Home\PersonController@account');
+    Route::get('/person/check','Home\PersonController@check');
+
+
+    //前台门店
+    Route::get('/store/get_cat_son','Home\StoreController@get_cat_son');
+    Route::get('/store/index','Home\StoreController@index');
+
+    //前台首页
+    Route::get('/Index/get_city','Home\IndexController@get_city');
 
 /*******后台路由区******/
 Route::group(['middleware'=>['web','illegal_login']],function(){
@@ -85,7 +97,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::post('/add_order_do','Admin\OrderController@add_order_do');
     Route::get('/order_detail','Admin\OrderController@order_detail');
     //门店管理
-	Route::get('/store','Admin\StoreController@index');
+	Route::get('/store_index','Admin\StoreController@index');
     Route::get('/store_add','Admin\StoreController@add');
 	Route::post('/store_add_do','Admin\StoreController@add_do');
 	Route::get('/store_select','Admin\StoreController@store_select');
