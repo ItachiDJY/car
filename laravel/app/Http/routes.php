@@ -47,7 +47,6 @@ Route::get('/store/index','Home\StoreController@index');
 //前台首页
 Route::any('/Index/get_city','Home\IndexController@get_city');
 
-//前台上门取送
 
 
 /*******后台路由区******/
