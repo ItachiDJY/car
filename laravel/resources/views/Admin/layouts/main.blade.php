@@ -201,7 +201,7 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="store">
+									<a href="store_index">
 										<i class="icon-double-angle-right"></i>
 										门店列表
 									</a>

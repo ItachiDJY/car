@@ -201,7 +201,7 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="store">
+									<a href="store_index">
 										<i class="icon-double-angle-right"></i>
 										门店列表
 									</a>
@@ -217,5 +217,28 @@
 
 							</ul>
 						</li>
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-edit"></i>
+                                <span class="menu-text"> 活动管理 </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/active_add">
+                                        <i class="icon-double-angle-right"></i>
+                                        添加活动
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/active_index">
+                                        <i class="icon-double-angle-right"></i>
+                                        活动列表
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
 
 					</ul>
