@@ -201,7 +201,7 @@
 
 							<ul class="submenu">
 								<li>
-									<a href="store">
+									<a href="store_index">
 										<i class="icon-double-angle-right"></i>
 										门店列表
 									</a>
@@ -236,6 +236,48 @@
                                     <a href="/active_index">
                                         <i class="icon-double-angle-right"></i>
                                         活动列表
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-edit"></i>
+                                <span class="menu-text"> 代金券管理 </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/voucher_add">
+                                        <i class="icon-double-angle-right"></i>
+                                        添加代金券
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/voucher_index">
+                                        <i class="icon-double-angle-right"></i>
+                                        代金券列表
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li>
+                            <a href="#" class="dropdown-toggle">
+                                <i class="icon-edit"></i>
+                                <span class="menu-text"> 长租预定管理 </span>
+
+                                <b class="arrow icon-angle-down"></b>
+                            </a>
+
+                            <ul class="submenu">
+                                <li>
+                                    <a href="/long_index">
+                                        <i class="icon-double-angle-right"></i>
+                                        长租预定列表
                                     </a>
                                 </li>
                             </ul>
