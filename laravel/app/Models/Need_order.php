@@ -14,7 +14,7 @@ class Need_order extends Model
     protected  $guarded=['*'];
     //默认添加开始时间和结束时间，默认开启ture
     public $timestamps=false;
-    protected $fillable = ['need_id','city','pop_time','lease','lease_num','brand','audi_brand','contacts','link_phone','email','company','status'];
+    protected $fillable = ['need_id','city','pop_time','lease','lease_num','brand','audi_brand','contacts','link_phone','email','company','status','need_time'];
     //查看所有的方法
     public function selectAll(){
         return $this->get()->toArray();
