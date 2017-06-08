@@ -108,6 +108,17 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::post('/active_add_do','Admin\ActiveController@active_add_do');
     Route::get('/active_delete','Admin\ActiveController@active_delete');
     Route::get('/active_change_name','Admin\ActiveController@active_change_name');
+    //代金券管理
+    Route::get('/voucher_index','Admin\VoucherController@voucher_index');//代金券页面展示
+    Route::get('/voucher_add','Admin\VoucherController@voucher_add');//代金券添加展示
+    Route::post('/voucher_add_do','Admin\VoucherController@voucher_add_do');//代金券添加操作
+    Route::get('/voucher_delete','Admin\VoucherController@voucher_delete');//删除代金券
+    Route::get('voucher_change_name','Admin\VoucherController@voucher_change_name');//修改代金券名称
+    Route::get('voucher_change_value','Admin\VoucherController@voucher_change_value');//修改代金券面额
+    //长租预定管理
+    Route::get('/long_index','Admin\LongController@long_index');//长租预定页面展示
+    Route::get('/long_delete','Admin\LongController@long_delete');//删除长租预定
+    Route::get('long_status','Admin\LongController@long_status');//修改状态
 });
 
 //后台登陆及防非登录
