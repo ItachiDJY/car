@@ -220,6 +220,67 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		//全选
+        $("#all").click(function() {
+            $("input[name='check']").prop("checked",true);
+        });
+        //不选
+        $("#no").click(function() {
+            $("input[name='check']").prop("checked",false);
+        });
+        //反选
+        $("#other").click(function() {
+            $("input[name='check']").each(function() {
+                $(this).prop("checked",!$(this).prop("checked"));
+            });
+        });
+        //单删
+        $(".delete").click(function() {
+            var ids = $(this).attr("ids");
+            var rm = $(this);
+            $.ajax({
+                type:"get",
+                url:"/admin_delete",
+                data:
+                {
+                    ids:ids
+                },
+                dataType:'json',
+                success:function(data)
+                {
+                    if(data.status==1000)
+                    {
+                        rm.parent().parent().remove();
+                    }
+                }
+            });
+        });
+        //批删
+        $("#del").click(function() {
+            var str = "";
+            $("input[name='check']:checked").each(function() {
+                str += ","+$(this).val();
+            });
+            var newstr = str.substr(1);
+            $.ajax({
+            	type:"get",
+                url:"/admin_delete",
+                data:
+                {
+                    ids:newstr
+                },
+                dataType:'json',
+                success:function(data) {
+                    if(data.status==1000)
+                    {
+                        $("input[name='check']:checked").each(function() {
+                            $(this).parent().parent().remove();
+                        });
+                    }
+                }
+            });
+        });
+        
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);
@@ -497,69 +558,6 @@
 			
 			});
 		</script>
-		<script type="text/javascript">
-    $(function() {
-        //全选
-        $("#all").click(function() {
-            $("input[name='check']").prop("checked",true);
-        });
-        //不选
-        $("#no").click(function() {
-            $("input[name='check']").prop("checked",false);
-        });
-        //反选
-        $("#other").click(function() {
-            $("input[name='check']").each(function() {
-                $(this).prop("checked",!$(this).prop("checked"));
-            });
-        });
-        //单删
-        $(".delete").click(function() {
-            var ids = $(this).attr("ids");
-            var rm = $(this);
-            $.ajax({
-                type:"get",
-                url:"/admin_delete",
-                data:
-                {
-                    ids:ids
-                },
-                dataType:'json',
-                success:function(data)
-                {
-                    if(data.status==1000)
-                    {
-                        rm.parent().parent().remove();
-                    }
-                }
-            });
-        });
-        //批删
-        $("#del").click(function() {
-            var str = "";
-            $("input[name='check']:checked").each(function() {
-                str += ","+$(this).val();
-            });
-            var newstr = str.substr(1);
-            $.ajax({
-                url:"/admin_delete",
-                data:
-                {
-                    ids:newstr
-                },
-                dataType:'json',
-                success:function(data) {
-                    if(data.status==1000)
-                    {
-                        $("input[name='check']:checked").each(function() {
-                            $(this).parent().parent().remove();
-                        });
-                    }
-                }
-            });
-        });
-        
-</script>
 </body>
 </html>
 
