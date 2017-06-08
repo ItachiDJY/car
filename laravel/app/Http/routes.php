@@ -64,6 +64,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/staff','Admin\StaffController@index');
     Route::get('/staff_add','Admin\StaffController@add');
     Route::post('/staff_add_do','Admin\StaffController@add_do');
+    Route::get('/admin_delete','Admin\StaffController@admin_delete');
     //会员管理
     Route::get('member','Admin\MemberController@index');//会员列表
     Route::get('member_delete','Admin\MemberController@delete');//会员删除
