@@ -128,6 +128,7 @@
                                     <th>企业/个人名称</th>
                                     <th>联系电话</th>
                                     <th>邮箱</th>
+                                    <th>下单时间</th>
                                     <th>状态</th>
                                     <th>操作</th>
                                 </tr>
@@ -148,6 +149,7 @@
                                         <td>{{$val -> company}}</td>
                                         <td>{{$val -> link_phone}}</td>
                                         <td>{{$val -> email}}</td>
+                                        <td>{{$val -> need_time}}</td>
                                         <td>
                                             @if ($val -> status == 1)
                                                 <B><font color='green'>已审核</font></B>

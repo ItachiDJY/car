@@ -64,6 +64,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/staff','Admin\StaffController@index');
     Route::get('/staff_add','Admin\StaffController@add');
     Route::post('/staff_add_do','Admin\StaffController@add_do');
+    Route::get('/admin_delete','Admin\StaffController@admin_delete');
     //会员管理
     Route::get('member','Admin\MemberController@index');//会员列表
     Route::get('member_delete','Admin\MemberController@delete');//会员删除
@@ -119,6 +120,10 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/long_index','Admin\LongController@long_index');//长租预定页面展示
     Route::get('/long_delete','Admin\LongController@long_delete');//删除长租预定
     Route::get('long_status','Admin\LongController@long_status');//修改状态
+    //个人用户修改密码
+    Route::get('/password_update','Admin\PasswordController@password_update');//个人用户修改密码页面展示
+    Route::post('/password_update_to','Admin\PasswordController@password_update_to');//个人用户修改密码操作
+    Route::get('/sure_old_pwd','Admin\PasswordController@sure_old_pwd');//旧密码查证
 });
 
 //后台登陆及防非登录

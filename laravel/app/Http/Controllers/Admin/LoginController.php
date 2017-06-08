@@ -65,7 +65,7 @@ class LoginController extends Controller
             return "用户名必须为中文";
         }else if(!preg_match($preg_pwd,$data['admin_pwd']))
         {
-            return "密码必须为6-12位纯数字或字母";
+            return "密码必须为6-12位数字或字母";
         }
         //实例化model层
         $model = new Admin();
