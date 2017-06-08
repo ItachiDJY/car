@@ -111,21 +111,21 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 原密码 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="old_pwd" id="form-field-1" placeholder="请输入原始密码" class="col-xs-10 col-sm-5" />
+                                    <input type="password" name="old_pwd" id="form-field-1" placeholder="请输入原始密码" class="col-xs-10 col-sm-5" />
                                     <span id="old"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 新密码 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="new_pwd" id="form-field-1" placeholder="请输入新密码" class="col-xs-10 col-sm-5" />
+                                    <input type="password" name="new_pwd" id="form-field-1" placeholder="请输入新密码" class="col-xs-10 col-sm-5" />
                                     <span id="new"></span>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 确认新密码 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="sure_pwd" id="form-field-1" placeholder="请重新输入新密码" class="col-xs-10 col-sm-5" />
+                                    <input type="password" name="sure_pwd" id="form-field-1" placeholder="请重新输入新密码" class="col-xs-10 col-sm-5" />
                                     <span id="sure"></span>
                                 </div>
                             </div>
