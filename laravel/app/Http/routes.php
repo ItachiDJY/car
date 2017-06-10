@@ -49,7 +49,7 @@ Route::group(['middleware'=>'web'], function (){
 /*******后台路由区******/
 Route::group(['middleware'=>['web','illegal_login']],function(){
     //首页
-    Route::get('/admin', 'Admin\IndexController@index');
+    Route::get('/admin_index', 'Admin\IndexController@index');
     //车辆管理
     Route::get('/car', 'Admin\CarController@index');
     Route::get('/car_add', 'Admin\CarController@add');

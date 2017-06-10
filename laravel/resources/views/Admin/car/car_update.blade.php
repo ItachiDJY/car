@@ -93,7 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="/index.php/admin">首页</a>
+								<a href="/admin_index">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">修改车辆信息</li>

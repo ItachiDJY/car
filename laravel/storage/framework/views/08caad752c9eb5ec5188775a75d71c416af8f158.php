@@ -5,8 +5,8 @@
     <title>租呗</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- basic styles -->
-    <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+    <link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
     <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
     <!-- ace styles -->
 
-    <link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
     <!-- ace settings handler -->
 
-    <script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+    <script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 </head>
 
 <body>
-@include('admin.layouts.header')
+<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <div class="main-container" id="main-container">
     <script type="text/javascript">
@@ -73,7 +73,7 @@
                 </div>
             </div><!-- #sidebar-shortcuts -->
 
-            @include('admin.layouts.main')<!-- /.nav-list -->
+            <?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">
                 <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -93,11 +93,11 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home home-icon"></i>
-                        <a href="/admin_index">首页</a>
+                        <a href="/index.php/admin">首页</a>
                     </li>
                     <li class="active">租呗控制台</li>
-                    <li class="active">会员管理</li>
-                    <li class="active">添加会员级别</li>
+                    <li class="active">代金券管理</li>
+                    <li class="active">添加代金券</li>
                 </ul><!-- .breadcrumb -->
             </div>
 
@@ -107,30 +107,18 @@
 
                     <div class="col-xs-12">
 
-                        <form class="form-horizontal" role="form" method="post" action="/level_add_to" enctype="multipart/form-data">
+                        <form class="form-horizontal" role="form" method="post" action="/voucher_add_do" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 会员级别名称 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 代金券名称 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="member_name" id="form-field-1" placeholder="会员级别名称" class="col-xs-10 col-sm-5" />
+                                    <input type="text" name="chit_name" id="form-field-1" placeholder="代金券名称" class="col-xs-10 col-sm-5" />
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 最低消费金额 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 代金券面额 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="min_consum" id="form-field-1" placeholder="最低消费金额" class="col-xs-10 col-sm-5" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 最高消费金额 </label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="max_consum" id="form-field-1" placeholder="最高消费金额" class="col-xs-10 col-sm-5" />
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 积分兑换比例 </label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="point_change" id="form-field-1" placeholder="积分兑换比例" class="col-xs-10 col-sm-5" />
+                                    <input type="text" name="chit_value" id="form-field-1" placeholder="5.00" class="col-xs-10 col-sm-5" />
                                 </div>
                             </div>
 
@@ -169,7 +157,7 @@
 
 <!--[if !IE]> -->
 
-<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 <!-- <![endif]-->
 
 <!--[if IE]>
@@ -179,7 +167,7 @@
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+    window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 </script>
 
 <!-- <![endif]-->
@@ -191,36 +179,36 @@
 <![endif]-->
 
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+    if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 </script>
-<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 <!-- page specific plugin scripts -->
 
 <!--[if lte IE 8]>
-<script src="{{URL::asset('assets/js/excanvas.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
 <![endif]-->
 
-<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 <!-- ace scripts -->
 
-<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 <!-- inline scripts related to this page -->
 
