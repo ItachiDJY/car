@@ -93,7 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="/index.php/admin">首页</a>
+								<a href="/admin_index">首页</a>
 							</li>
 							<li class="active">添加管理员</li>
 							

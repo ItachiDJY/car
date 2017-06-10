@@ -94,7 +94,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="/index.php/admin">首页</a>
+								<a href="/admin_index">首页</a>
 							</li>
 							<li class="active">租呗控制台</li>
 							<li class="active"><a href="{{URL('order_index')}}">订单管理</a></li>

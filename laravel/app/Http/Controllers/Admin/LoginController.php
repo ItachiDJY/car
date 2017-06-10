@@ -85,7 +85,7 @@ class LoginController extends Controller
                 session_start();
                 $id=$res[0]['admin_id'];
                 $_SESSION['admin'] = $res;
-                return redirect("index.php/admin")->with('登录成功！');
+                return redirect("/admin_index")->with('登录成功！');
             }else
             {
                 return redirect()->back()->withInput()->withErrors('密码错误！');

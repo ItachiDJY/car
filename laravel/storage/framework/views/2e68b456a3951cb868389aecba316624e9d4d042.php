@@ -5,8 +5,8 @@
     <title>租呗</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- basic styles -->
-    <link href="{{ URL::asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+    <link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
     <!--[if IE 7]>
     <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
     <!-- ace styles -->
 
-    <link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-    <link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+    <link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
     <!--[if lte IE 8]>
     <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
     <!-- ace settings handler -->
 
-    <script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+    <script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 </head>
 
 <body>
-@include('admin.layouts.header')
+<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 <div class="main-container" id="main-container">
     <script type="text/javascript">
@@ -73,7 +73,7 @@
                 </div>
             </div><!-- #sidebar-shortcuts -->
 
-            @include('admin.layouts.main')<!-- /.nav-list -->
+            <?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
 
             <div class="sidebar-collapse" id="sidebar-collapse">
                 <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -93,11 +93,10 @@
                 <ul class="breadcrumb">
                     <li>
                         <i class="icon-home home-icon"></i>
-                        <a href="/admin_index">首页</a>
+                        <a href="/index.php/admin">首页</a>
                     </li>
                     <li class="active">租呗控制台</li>
-                    <li class="active">会员管理</li>
-                    <li class="active">添加会员级别</li>
+                    <li class="active">修改密码</li>
                 </ul><!-- .breadcrumb -->
             </div>
 
@@ -107,38 +106,34 @@
 
                     <div class="col-xs-12">
 
-                        <form class="form-horizontal" role="form" method="post" action="/level_add_to" enctype="multipart/form-data">
+                        <form class="form-horizontal" id="form" role="form" method="post" action="/password_update_to" enctype="multipart/form-data">
                             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 会员级别名称 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 原密码 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="member_name" id="form-field-1" placeholder="会员级别名称" class="col-xs-10 col-sm-5" />
+                                    <input type="password" name="old_pwd" id="form-field-1" placeholder="请输入原始密码" class="col-xs-10 col-sm-5" />
+                                    <span id="old"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 最低消费金额 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 新密码 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="min_consum" id="form-field-1" placeholder="最低消费金额" class="col-xs-10 col-sm-5" />
+                                    <input type="password" name="new_pwd" id="form-field-1" placeholder="请输入新密码" class="col-xs-10 col-sm-5" />
+                                    <span id="new"></span>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 最高消费金额 </label>
+                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 确认新密码 </label>
                                 <div class="col-sm-9">
-                                    <input type="text" name="max_consum" id="form-field-1" placeholder="最高消费金额" class="col-xs-10 col-sm-5" />
+                                    <input type="password" name="sure_pwd" id="form-field-1" placeholder="请重新输入新密码" class="col-xs-10 col-sm-5" />
+                                    <span id="sure"></span>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 积分兑换比例 </label>
-                                <div class="col-sm-9">
-                                    <input type="text" name="point_change" id="form-field-1" placeholder="积分兑换比例" class="col-xs-10 col-sm-5" />
-                                </div>
-                            </div>
-
                             <div class="form-group">
                                 <div class="col-md-offset-3 col-md-9">
                                     <button class="btn btn-info" type="submit" id="car_add">
                                         <i class="icon-ok bigger-110"></i>
-                                        增加
+                                        修改
                                     </button>
 
                                     &nbsp; &nbsp; &nbsp;
@@ -169,7 +164,7 @@
 
 <!--[if !IE]> -->
 
-<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 <!-- <![endif]-->
 
 <!--[if IE]>
@@ -179,7 +174,7 @@
 <!--[if !IE]> -->
 
 <script type="text/javascript">
-    window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+    window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 </script>
 
 <!-- <![endif]-->
@@ -191,36 +186,36 @@
 <![endif]-->
 
 <script type="text/javascript">
-    if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+    if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 </script>
-<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 <!-- page specific plugin scripts -->
 
 <!--[if lte IE 8]>
-<script src="{{URL::asset('assets/js/excanvas.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
 <![endif]-->
 
-<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 <!-- ace scripts -->
 
-<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 <!-- inline scripts related to this page -->
 
@@ -545,4 +540,93 @@
 </script>
 </body>
 </html>
-
+<script src="jquery-1.10.2.min.js"></script>
+<script type="text/javascript">
+    $(function() {
+        /*
+        * 定义三个全局变量
+        * */
+        var flag_old = 0;
+        var flag_new = 0;
+        var flag_sure = 0;
+        /*
+        * 验证原密码
+        * */
+        //原密码框失去焦点事件
+         $("input[name='old_pwd']").blur(function() {
+             //获取原密码框里面输入的值
+            var old_pwd = $("input[name='old_pwd']").val();
+             //判断原密码框为空
+            if(old_pwd == "") {
+                //为空就给出提示
+                $("#old").html("<font color='red'>您还没有输入原始密码</font>");
+            }else {
+                //不为空就发送数据到后台，与数据库查出的密码作对比，并给出相应提示
+                $.ajax( {
+                    type:"get",
+                    url:"/sure_old_pwd",
+                    data: {
+                        old_pwd:old_pwd
+                    },
+                    dataType:"json",
+                    success:function(data) {
+                        $.each(data,function(k,v) {
+                            if(v.status == 201) {
+                                $("#old").html("<font color='red'>您输入的原始密码有误</font>");
+                            }else {
+                                $("#old").html("<font color='green'>输入正确</font>");
+                                flag_old = 1;
+                            }
+                        });
+                    }
+                });
+            }
+        });
+        /*
+        * 验证新密码
+        * */
+        //新密码框失去焦点事件
+         $("input[name='new_pwd']").blur(function() {
+             //获取新密码框里面的值
+            var new_pwd = $("input[name='new_pwd']").val();
+            //密码正则表达式
+            var reg = /^\w{6,12}$/;
+             //判断
+            if(new_pwd == "") {
+                $("#new").html("<font color='red'>您还没有输入新密码</font>");
+            }else if(!reg.test(new_pwd)) {
+                $("#new").html("<font color='red'>您输入的新密码必须为6-12位数字或字母</font>");
+            }else {
+                $("#new").html("<font color='green'>符合要求，您可以使用</font>");
+                flag_new = 1;
+            }
+        });
+        /*
+        * 验证确认密码
+        * */
+        //确认密码框失去焦点事件
+         $("input[name='sure_pwd']").blur(function() {
+             //获取确认密码框里面的值
+            var sure_pwd = $("input[name='sure_pwd']").val();
+             //获取新密码框里面的值
+            var new_pwd = $("input[name='new_pwd']").val();
+             //判断
+            if(sure_pwd == "") {
+                $("#sure").html("<font color='red'>您还没有重新输入新密码</font>");
+            }else if(sure_pwd != new_pwd) {
+                $("#sure").html("<font color='red'>您输入的密码与新密码不符</font>");
+            }else {
+                $("#sure").html("<font color='green'>与新密码一致</font>");
+                flag_sure = 1;
+            }
+        });
+        //阻止表单提交
+        $("#car_add").click(function() {
+            if(flag_old==1 && flag_new==1 && flag_sure==1) {
+                return true;
+            }else {
+                return false;
+            }
+        });
+    });
+</script>
