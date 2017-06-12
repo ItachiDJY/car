@@ -3,7 +3,51 @@
 <head>
     <base href="Home/">
 <script>!function(a,b,c,d,e){a[c]=a[c]||{},a[c].env="",a[c].id=d,a[c].st=(new Date).getTime(),a[c].env="test"==a[c].env||"test2"==a[c].env||"pre"==a[c].env?a[c].env:"";var f=[],g=b.createElement("script");g.onload=g.onreadystatechange=function(){if(!g.readyState||/loaded|complete/.test(g.readyState)){g.onload=g.onreadystatechange=null;var a=f.length;if(0==a)return!1;for(var b=0;b<a;b++)"[object Function]"===Object.prototype.toString.call(f[b])&&f[b]()}},g.src="//lc"+a[c].env+".ucarinc.com/lc.js";var h=b.getElementsByTagName("script")[0];h.parentNode.insertBefore(g,h),a[c].putEvt=function(b){return a[c].putBe?(b&&b(),!1):void f.push(b)},a[c].types=e;for(var i=0;i<a[c].types.length;i++)if("pe"==a[c].types[i]){var j=[];a.onerror=function(b,d,e,f){j.push("m="+b+"&u="+d+"&l="+e+"&r="+f),a[c].initPe=j.join(",")};break}}(window,document,"LCTJ","eeffffff",["rc","pe","rt","cl","se"]);</script>
-
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .hide{
+            display: none;
+        }
+        .popWindow{
+            width: 500px;
+            height: 300px;
+            background: #abcdef;
+            padding: 2px;
+            margin: 10px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 102;
+        }
+        .popWindow h3{
+            height: 30px;
+            line-height: 30px;
+        }
+        .popWindow h3 span{
+            float: right;
+            font-size: 14px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+        .popWindow h3 span:hover{
+            color: #f00;
+        }
+        .popWindow .content{
+            height: 270px;
+            background: #fff;
+        }
+        .mask{
+            background: #000;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0.4;
+            z-index: 100;
+        }
+    </style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -156,7 +200,7 @@
 
 <div class="w1190" style="*+z-index: 999;"> 
     <!-- 搜索 start -->
-    <div class="lonReSearch" style="top:-280px;">
+    <div class="lonReSearch" style="top:-280px;z-index:101">
         <h3 class="ac f18h1 borderBlueB">长租服务<span class="f12 gray">（90天以上）</span></h3>
         <div class="lonReSeaCon pt10" style=" *+width:100%;*+padding-left:20px;">
             <div class="height13"></div>
@@ -167,38 +211,57 @@
                <input type="hidden" id="longcityid" value="" />
                 <label style="position:relative;" class="pl10">取车时间</label>
                 <div class="divin">
-                <input type="text" readonly="readonly" value="2017-05-24" class="wdate iptDate t_val bluewords" name="leasetime" id="leasetime">
+                <input type="text" readonly="readonly" value="<?php echo date("Y-m-d") ?>" class="wdate iptDate t_val bluewords" name="leasetime" id="leasetime">
                 </div>              
             </div>
             <div class="height13"></div>
             <div class="sz_item">
                 <label>租&#12288;&#12288;期</label>
-                <input id="leaseterm_year_name" name="leaseterm_year_name" type="text" value="" class="iptSe wCity t_val chooseLeaseTermTime"  default-value="请选择" readonly/>
+                <select id="lease">
+                    <option value=""> 请选择……</option>
+                    <option value="3个月">3个月</option>
+                    <option value="4个月">4个月</option>
+                    <option value="5个月">5个月</option>
+                    <option value="6个月">6个月</option>
+                    <option value="7个月">7个月</option>
+                    <option value="8个月">8个月</option>
+                    <option value="9个月">9个月</option>
+                    <option value="10个月">10个月</option>
+                    <option value="11个月">11个月</option>
+                    <option value="一年">一年</option>
+                    <option value="两年">两年</option>
+                </select>
                 <div id='vehicleyearDL' style="width:86px;height:215px;overflow:scroll;overflow-x:hidden;background:#ffffff;" class="pc_stratum d_none">
                 </div>
                 <input type="hidden" id="leaseterm_year" name="leaseterm_year" />
                 <label class="pl10">用车数量</label>
                 <div class="divin">
-                <input type="text" value="" class="wCity t_val" name="vehicleCount" id="vehicle_count"  default-value="请输入用车数量" style="width: 155px;" maxlength="3">
+                <input type="text" value="" class="wCity t_val" name="vehicleCount" id="vehicle_count"   style="width: 155px;" maxlength="3">
                 </div>              
             </div>
             <div class="height13"></div>
             <div class="sz_item">
                 <label>品&#12288;&#12288;牌</label>
-                <input type="text" value="" class="iptSe wCity t_val getVehicleModeCar" name="" id="vehiclebrandname" readonly default-value="请选择品牌">
+                <select id="sele">
+                    <option value="0">请选择……</option>
+                    <?php foreach($data as $k=>$v){ ?>
+                    <option value="<?php echo $v->brand_id ?>"><?php echo $v->brand_name ?>&nbsp;&nbsp;</option>
+                    <?php } ?>
+                </select>
                 <div id='vehiclebrandDL' style="width:86px;max-height:215px;overflow:scroll;overflow-x:hidden;" class="pc_stratum d_none"></div>
                 <input type="hidden" id="vehiclebrand" name="vehiclebrand" />
                 <label style="position:relative;" class="pl10">车&#12288;&#12288;型</label>
                 <div class="divin">
-                <input type="text" value="" class="iptSe wCity t_val" name="" id="vehiclemodename"  readonly style="width: 130px;padding-right: 25px;" default-value="请选择车型">
-                <div id='vehiclemodeDL' style="width:158px;max-height:215px;overflow:scroll;overflow-x:hidden;background-color:#fff;" class="pc_stratum d_none"></div>
+                      <span id="span"><select>
+                          <option>请选择……</option>
+                      </select></span>
                 <input type="hidden" id="vehiclemode" name="vehiclemode" />
                 </div>              
             </div>
             <div class="height20">
                 <div class="red f12 rebwrong_icon d_none" id="newInfoT" style="line-height: 20px;"></div>
             </div>
-            <div class="ac fl"><a href="javascript:void(0);" class="btn_bluewauto f18h1 bold white btnApply" id="checkVehicleInfo" style="height: 35px;line-height: 35px;">去 申 请</a></div>
+            <button class="btn_bluewauto f18h1 bold white btnApply" style="height: 35px;line-height: 35px;" id="show">申请</button>
         </div>
     </div>
     <!-- 搜索 end -->
@@ -295,14 +358,14 @@
 <!-- 页脚 start -->
 <div class="sz_footer">
 	<p>
-		<a title="关于我们" href="https://huodong.zuche.com/gywm/">关于我们</a>
-		|&nbsp;<a title="投资者关系" target="_blank" href="https://ir.zuche.com">投资者关系</a>
-		|&nbsp;<a rel="nofollow" target="_parent" title="新闻中心" href="https://news.zuche.com/">新闻中心</a>
-		|&nbsp;<a title="加盟合作" target="_blank" href="https://jiameng.zuche.com">加盟合作</a>
-		|&nbsp;<a title="隐私保护" target="_parent" href="https://huodong.zuche.com/ysbh/">隐私保护</a>
-		|&nbsp;<a title="网站导航" target="_parent" href="https://help.zuche.com/sitemap/">网站导航</a>
-		|&nbsp;<a title="联系我们" target="_parent" href="https://huodong.zuche.com/lxwm/">联系我们</a>
-		|&nbsp;<a title="招贤纳士" target="_blank" href="http://hr.zuche.com">招贤纳士</a>
+		<a title="关于我们" href="#">关于我们</a>
+		|&nbsp;<a title="投资者关系" target="_blank" href="#">投资者关系</a>
+		|&nbsp;<a rel="nofollow" target="_parent" title="新闻中心" href="#">新闻中心</a>
+		|&nbsp;<a title="加盟合作" target="_blank" href="#">加盟合作</a>
+		|&nbsp;<a title="隐私保护" target="_parent" href="#">隐私保护</a>
+		|&nbsp;<a title="网站导航" target="_parent" href="#">网站导航</a>
+		|&nbsp;<a title="联系我们" target="_parent" href="#">联系我们</a>
+		|&nbsp;<a title="招贤纳士" target="_blank" href="#">招贤纳士</a>
 	</p>
 	<p class="p10">
 		<a target="_blank" href="https://ss.knet.cn/verifyseal.dll?sn=2011091400100014977&amp;ct=df&amp;pa=294005" tabindex="-1" id="urlknet" class="sz_k">&nbsp;</a>
@@ -313,56 +376,40 @@
 	<p>神州租车官网 京ICP备10005002号&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;京公网安备号 11010502026705</p>
 </div><!-- 页脚 end -->
 
-<!-- jQuery 遮罩层 -->  
-<div id="dialog" class="popup_block" mask-data="#?w=517">   
-    <h3 class="ac f18h1 borderBlueB">联系信息<a href="javascript:zuche_maskplayer.close('dialog')" class="close maskclose" >&nbsp;</a></h3>
-    <div class="pt20 pr10 contactInfo">
+<!-- jQuery 遮罩层 -->
+<div class="popWindow hide">
+    <h3>取车信息<span>关闭</span></h3>
+    <div class="content">
         <div class="sz_item">
             <label>企业/个人名称</label>
             <input type="text" value="" default-value="如个人租车请填个人姓名" class="t_val w268 checkCompanyInput" name="" id="company_name" maxlength="50">
-        </div>  
+        </div>
         <div class="height13"></div>
         <div class="sz_item">
-            <label><span class="fontRed">*</span>联 系 人</label>
+            <label><span class="fontRed">*</span>联 系 人&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" value="" default-value="请输入联系人姓名" class="t_val w268 checkNameInput" name="" id="contact_name"  maxlength="15">
-        </div>  
+        </div>
         <div class="height13"></div>
         <div class="sz_item">
-            <label><span class="fontRed">*</span>联系电话</label>
+            <label><span class="fontRed">*</span>联系电话&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" value=""  default-value="固定电话请按<区号-电话号码>格式输入" class="t_val w268 checkPhoneInput" name="" id="contact_mobile"  maxlength="20">
-        </div>  
+        </div>
         <div class="height13"></div>
         <div class="sz_item">
-            <label>&nbsp;Email</label>
+            <label>&nbsp;Email&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
             <input type="text" value="" default-value="请输入您的Email地址" class="t_val w268 checkEmailInput" name="" id="contact_mail"  maxlength="30">
         </div>
-                <div class="red f12 rebwrong_icon d_none" id="newInfo"></div>   
-        <div class="pb10" style="padding-top:5px;"><label>&nbsp;</label>请填写您的邮件地址，我们的需求单将通过邮件的方式自动发送给您</div>
+        <div class="red f12 rebwrong_icon d_none" id="newInfo"></div>
+        <div class="pb10" style="padding-top:5px;"><label>&nbsp;</label>&nbsp;&nbsp;&nbsp;&nbsp;请填写您的邮件地址，我们的需求单将通过邮件的方式自动发送给您</div>
         <div class="btnSubmit ac line_h24">
-            <a id="submitLongTermOrderInformation" class="btn_bluewauto f18h1 bold white ac">提交信息</a>
-            24小时客服热线：400－616－6666
+            <a id="submitLongTermOrderInformation" class="btn_bluewauto f18h1 bold white ac"><span id="spans">提交信息</span></a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;24小时客服热线：138－3838－4381
         </div>
-        <p class="fontRed ar">请注意带*的选项为必填项</p>
     </div>
 </div>
 <!-- end jQuery 遮罩层 -->
 <!-- 此页面总表单 start -->
-<form action="https://changzu.zuche.com/order/firstConfirm.do" method="post" id="selectCarForm">
-            <input type="hidden" name="cityName" value="cityName" id="cityName">
-            <input type="hidden" name="cityId" value="cityId" id="cityId">
-            <input type="hidden" name="pickupTime" value="pickupTime" id="pickupTime">
-            <input type="hidden" name="term" value="term" id="term">
-            <input type="hidden" name="vehicleNum" value="vehicleNum" id="vehicleNum">
-            <input type="hidden" name="customBrand" value="customBrand" id="customBrand">
-            <input type="hidden" name="brandId" value="brandId" id="brandId">
-            <input type="hidden" name="customVehicleModel" value="customVehicleModel" id="customVehicleModel">
-            <input type="hidden" name="modelId" value="modelId" id="modelId">
-            
-            <input type="hidden" name="companyName" value="companyName" id="companyName">
-            <input type="hidden" name="contact" value="contact" id="contact">
-            <input type="hidden" name="contactTel" value="contactTel" id="contactTel">
-            <input type="hidden" name="mailAddress" value="mailAddress" id="mailAddress">
-</form>
+
 <input type="hidden" value="2017-08-24" id="maxDate">
 <input type="hidden" value="" id="longTimeRental_backcityname">
 <input type="hidden" value="" id="longRentalcityid">
@@ -393,6 +440,7 @@
 <script type="text/javascript" src="Scripts/sea@89b3a8eaa1.js"></script>
 <script type="text/javascript" src="Scripts/seajs-preload@11b2cc155e.js"></script>
 <script type="text/javascript" src="Scripts/seaconfig@6ecc8d0dfe.js"></script>
+<script src="jquery-1.7.2.min.js"></script>
 <!-- 新版公用js文件start -->
 <!-- 新版公用js文件end -->
 <script type="text/javascript" >
@@ -406,7 +454,150 @@
         seajs.use(['divided/lom/entry/index@830ad37e08'])
     });
 </script>
+<script>
+    $(function(){
+        var oBtn = $('#show');
+        var popWindow = $('.popWindow');
+        var oClose = $('.popWindow h3 span');
+        //浏览器可视区域的宽度
+        var browserWidth = $(window).width();
+        //浏览器可视区域的高度
+        var browserHeight = $(window).height();
+        //浏览器纵向滚动条距离上边界的值
+        var browserScrollTop = $(window).scrollTop();
+        //浏览器横向滚动条距离左边界的值
+        var browserScrollLeft = $(window).scrollLeft();
+        //弹出窗口的宽度
+        var popWindowWidth = popWindow.outerWidth(true);
+        //弹出窗口的高度
+        var popWindowHeight = popWindow.outerHeight(true);
+        //left的值＝浏览器可视区域的宽度／2－弹出窗口的宽度／2+浏览器横向滚动条距离左边界的值
+        var positionLeft = browserWidth/2 - popWindowWidth/2+browserScrollLeft;
+        //top的值＝浏览器可视区域的高度／2－弹出窗口的高度／2+浏览器纵向滚动条距离上边界的值
+        var positionTop = browserHeight/2 - popWindowHeight/2+browserScrollTop;
+        var oMask = '<div class="mask"></div>'
+        //遮照层的宽度
+        var maskWidth = $(document).width();
+        //遮照层的高度
+        var maskHeight = $(document).height();
+        oBtn.click(function(){
+            popWindow.show().animate({
+                'left':positionLeft+'px',
+                'top':positionTop+'px'
+            },500);
+            $('body').append(oMask);
+            $('.mask').width(maskWidth).height(maskHeight);
+        });
+        $(window).resize(function(){
+            if(popWindow.is(':visible')){
+                browserWidth = $(window).width();
+                browserHeight = $(window).height();
+                positionLeft = browserWidth/2 - popWindowWidth/2+browserScrollLeft;
+                positionTop = browserHeight/2 - popWindowHeight/2+browserScrollTop;
+                popWindow.animate({
+                    'left':positionLeft+'px',
+                    'top':positionTop+'px'
+                },500);
+            }
+        });
+        $(window).scroll(function(){
+            if(popWindow.is(':visible')){
+                browserScrollTop = $(window).scrollTop();
+                browserScrollLeft = $(window).scrollLeft();
+                positionLeft = browserWidth/2 - popWindowWidth/2+browserScrollLeft;
+                positionTop = browserHeight/2 - popWindowHeight/2+browserScrollTop;
+                popWindow.animate({
+                    'left':positionLeft+'px',
+                    'top':positionTop+'px'
+                },500).dequeue();
+            }
+        });
+        oClose.click(function(){
+            popWindow.hide();
+            $('.mask').remove();
+        });
+    });
+</script>
+<!--    点击品牌获取车辆信息   -->
+<script>
+    $(function(){
+        var obj = "";
+        $("#sele").change(function(){
+            obj = $(this);
+            var id = obj.val();
+            var str = "";
+            if(id==0){
+                str += '<select  id="names">';
+                str += '<option option value="0">'+ '请选择……'+'</option>'
+                str += '</select>'
+                $("#span").html(str);
+            }else{
+                $.ajax({
+                    type: "GET",
+                    url: "/select",
+                    dataType:'json',
+                    data: {
+                        id:id
+                    },
+                    success: function(msg){
+                        if(msg==0){
+                            alert('暂无此品牌车辆')
+                            str += '<select  id="names">';
+                            str += '<option option value="0">'+ '请选择……'+'</option>'
+                            str += '</select>'
+                            $("#span").html(str);
+                        }else{
+                            str += '<select  id="names">';
+                            $.each( msg, function(i, n){
+                                str += '<option value="'+ n.brand_id +'">'+ n.brand_name +'&nbsp;&nbsp;&nbsp;&nbsp;</option>';
+                            });
+                            str += '</select>';
+                            $("#span").html(str);
+                        }
+                    }
+                });
+            }
+        })
 
+    })
+</script>
+<script>
+    $(document).on('click',"#spans",function(){
+        var name = $("#longTime_backcityname").val();
+        var time = $("#leasetime").val();
+        var lease = $("#lease").val();
+        var number = $("#vehicle_count").val();
+        var brand = $("#sele").val();
+        var type = $("#names").val();
+        var names = $("#company_name").val();
+        var contact_name = $("#contact_name").val();
+        var mobile = $("#contact_mobile").val();
+        var email = $("#contact_mail").val();
+        $.ajax({
+            type: "GET",
+            url: "/add_show",
+            data: {
+                name:name,
+                time:time,
+                lease:lease,
+                number:number,
+                brand:brand,
+                type:type,
+                names:names,
+                contact_name:contact_name,
+                mobile:mobile,
+                email:email
+            },
+            success: function(msg){
+                if(msg==1){
+                    window.location.href = '/show';
+                }else{
+                    alert('请认真核对信息')
+                }
+
+            }
+        });
+    })
+</script>
 </body>
 </html>
-
