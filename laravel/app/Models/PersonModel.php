@@ -3,89 +3,48 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use DB;
 class PersonModel extends Model
 {
 
-
+    //获取当前登录人的信息并转换成数组
+    public function person_info()
+    {
+        $username = $_COOKIE['username'];
+        $logo = $_COOKIE['logo'];
+        $info = DB::table('user')->where('pwd_hash',$logo)->first();
+        $info = $this->object_array($info);
+        return $info;
+    }
     /**
      * 真实姓名和身份证号码判断是否一致
      */
-    public function check($card,$name)
+    public function check($name,$idcard)
     {
-        $appkey = "42b5ccf74ecd3230fbd05025ad1694bf";
-
-        $url = "http://op.juhe.cn/idcard/query";
-
-        $params = array(
-            "idcard" => $card,//身份证号码
-            "realname" => $name,//真实姓名
-            "key" => $appkey,//应用APPKEY(应用详细页查询)
-        );
-        $paramstring = http_build_query($params);
-        $content = $this->juhecurl($url,$paramstring);
-        $result = json_decode($content,true);
-        if($result){
-            if($result['error_code']=='0'){
-                if($result['result']['res'] == '1'){
-                    echo "身份证号码和真实姓名一致";die;
-                }else{
-                    echo "身份证号码和真实姓名不一致";die;
-                }
-                #print_r($result);
-            }else{
-                echo $result['error_code'].":".$result['reason'];
-            }
-        }else{
-            echo "请求失败";die;
-        }
-    }
-
-
-
-   //实名认证
-    /**
-     * 请求接口返回内容
-     * @param  string $url [请求的URL地址]
-     * @param  string $params [请求的参数]
-     * @param  int $ipost [是否采用POST形式]
-     * @return  string
-     */
-    function juhecurl($url,$params=false,$ispost=0){
-        $httpInfo = array();
+        $url = "http://api.avatardata.cn/IdCardCertificate/Verify";
+        $vars['key']='6d4fa0c60784462280c0fcb988cccd5d';
+        $vars['realname']=$name;
+        $vars['idcard']="420682199512120513";
         $ch = curl_init();
+        $params[CURLOPT_URL] = $url;    //请求url地址
+        $params[CURLOPT_HEADER] = false; //是否返回响应头信息
+        $params[CURLOPT_RETURNTRANSFER] = true; //是否将结果返回
+        $params[CURLOPT_FOLLOWLOCATION] = true; //是否重定向
+        $params[CURLOPT_USERAGENT] = 'Mozilla/5.0 (Windows NT 5.1; rv:9.0.1) Gecko/20100101 Firefox/9.0.1';
+        $params[CURLOPT_SSL_VERIFYPEER] = false;
 
-        curl_setopt( $ch, CURLOPT_HTTP_VERSION , CURL_HTTP_VERSION_1_1 );
-        curl_setopt( $ch, CURLOPT_USERAGENT , 'JuheData' );
-        curl_setopt( $ch, CURLOPT_CONNECTTIMEOUT , 60 );
-        curl_setopt( $ch, CURLOPT_TIMEOUT , 60);
-        curl_setopt( $ch, CURLOPT_RETURNTRANSFER , true );
-        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-        if( $ispost )
+        $postfields = '';
+        foreach ($vars as $key => $value)
         {
-            curl_setopt( $ch , CURLOPT_POST , true );
-            curl_setopt( $ch , CURLOPT_POSTFIELDS , $params );
-            curl_setopt( $ch , CURLOPT_URL , $url );
+            $postfields .= urlencode($key) . '=' . urlencode($value) . '&';
         }
-        else
-        {
-            if($params){
-                curl_setopt( $ch , CURLOPT_URL , $url.'?'.$params );
-            }else{
-                curl_setopt( $ch , CURLOPT_URL , $url);
-            }
-        }
-        $response = curl_exec( $ch );
-        if ($response === FALSE) {
-            //echo "cURL Error: " . curl_error($ch);
-            return false;
-        }
-        $httpCode = curl_getinfo( $ch , CURLINFO_HTTP_CODE );
-        $httpInfo = array_merge( $httpInfo , curl_getinfo( $ch ) );
-        curl_close( $ch );
-        return $response;
+        $params[CURLOPT_POST] = true;
+        $params[CURLOPT_POSTFIELDS] = $postfields;
+        curl_setopt_array($ch, $params); //传入curl参数
+        $content = curl_exec($ch); //执行
+        $arr= json_decode($content,true);
+        return $arr;
     }
-
 
 
 
@@ -100,6 +59,19 @@ class PersonModel extends Model
         }
     }
         return $array;
+    }
+
+
+    // 保存数据（修改car_user表）
+    public function updates($data,$id)
+    {
+       return DB::table('user')->where('pwd_hash',$id)->update($data);
+    }
+
+    //查出订单数量
+    public function select_order($user_id)
+    {
+        return DB::table('order')->whereRaw("user_id=$user_id")->count();
     }
 
 }

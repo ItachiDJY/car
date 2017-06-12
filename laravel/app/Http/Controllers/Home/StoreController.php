@@ -20,14 +20,30 @@ class StoreController extends Controller
         isset($city_name) ? $city_name = $city_name: $city_name = $_COOKIE['city_name'];
         isset($city_view) ? $city_view = $city_view: $city_view = "beijingshi";
 
+        //判断是否有静态页，如果有就用静态页，没有就重新生成
+        if(file_exists("html/$city_view.html"))
+        {
+            include("./html/$city_view.html");die;
+        }
+
         $model = new StoreModel();
         $store_id = $model->get_id($city_name);
         $result = $model->get_cat_son($store_id);
         $data = $model->get_cat_childs($result,$store_id);
         if(isset($_COOKIE['username'])) {
             $username = $_COOKIE['username'];
+            ob_start();
+            echo view("Home/Store/$city_view",['data'=>$data,'city_name'=>$city_name,'username'=>$username]);
+            $content=ob_get_contents();
+
+            file_put_contents("html/$city_view.html",$content);
             return view("Home/Store/$city_view",['data'=>$data,'city_name'=>$city_name,'username'=>$username]);
+
         } else {
+            ob_start();
+            echo view("Home/Store/$city_view",['data'=>$data,'city_name'=>$city_name]);
+            $content=ob_get_contents();
+            file_put_contents("html/$city_view.html",$content);
             return view("Home/Store/$city_view",['data'=>$data,'city_name'=>$city_name]);
         }
 

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -39,12 +40,12 @@
             <li><a href="/country">国际租车</a></li>
         </ul>
         <div class="zcindex_login" >
-<!--            <div class="wdl" id="notLogin">-->
-<!--                <a href="javascript:void(0);" class="colfabe00" id="loginBT">登录</a>-->
-<!--                <b>/</b>-->
-<!--                <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=registerSys" class="colfabe00">注册</a>-->
-<!--                <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=loginSys&flag=order" class="colc8c8ce ml20">我的神州</a>-->
-<!--            </div>-->
+            <!--            <div class="wdl" id="notLogin">-->
+            <!--                <a href="javascript:void(0);" class="colfabe00" id="loginBT">登录</a>-->
+            <!--                <b>/</b>-->
+            <!--                <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=registerSys" class="colfabe00">注册</a>-->
+            <!--                <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=loginSys&flag=order" class="colc8c8ce ml20">我的神州</a>-->
+            <!--            </div>-->
             <div class="ydl"  style="display: block;" id="">
                 <h1 id="" >您好 , <?php echo $info['user_name']?></h1>
                 <div class="zc_index_my">
@@ -55,7 +56,7 @@
                             <a href="https://mycar.zuche.com/queryOrder/queryOrder.do"  class="bhpr reddot">我的订单
                             </a>
                             <a href="/">我的资产</a>
-<!--                            <a href="/person/account">我的账户</a>-->
+                            <a href="/person/account">我的账户</a>
                             <a href="/login/out_login">退出登录</a>
                         </div>
                     </div>
@@ -154,8 +155,8 @@
             <dt>我的订单</dt>
             <dd id="orderTitle"><a href="javascript:void(0);" onclick="window.location.href='/queryOrder/queryOrder.do'">短租自驾
                     <span id="leftOrderCount1">(<?php echo $count?>)</span></a></dd>
-<!--            <dd id="sfcheTitle"><a href="javascript:void(0);" onclick="window.location.href='/queryOrder/queryOrder.do?source=sf'">顺风车-->
-<!--                    <span id="leftOrderCount2">(0)</span></a></dd>-->
+            <!--            <dd id="sfcheTitle"><a href="javascript:void(0);" onclick="window.location.href='/queryOrder/queryOrder.do?source=sf'">顺风车-->
+            <!--                    <span id="leftOrderCount2">(0)</span></a></dd>-->
         </dl>
 <!--        <dl class="meberlist" id="assertTitle">-->
 <!--            <dt id="assertTitle">我的资产</dt>-->
@@ -168,7 +169,7 @@
         <dl class="meberlist" id="accountTitle">
             <dt id="accountTitle">我的账户</dt>
             <dd class="ma1"><a href="/person/account">我的信息</a></dd>
-<!--            <dd class="ma2"><a href="/member/person/faceDetect.do">人脸识别</a></dd>-->
+            <!--            <dd class="ma2"><a href="/member/person/faceDetect.do">人脸识别</a></dd>-->
 <!--            <dd class="ma5"><a href="https://mycar.zuche.com/member/getMemberLevel.do">我的等级</a></dd>-->
             <dd class="ma6"><a href="/person/login_pwd">登录密码</a></dd>
 <!--            <dd class="ma7"><a href="/member/person/paymentPWD.do">支付密码</a></dd>-->
@@ -179,200 +180,62 @@
             <dd id="mebruleTitle"><a href="/person/member_detail">会员细则</a></dd>
         </dl>
     </div>    <div class="zc_myright fr">
-        <div class="zc_ipttitle_bd zc_coltdinfo" >
-            <h2>我的信息</h2>
-            <div id="originalDiv">
+        <div class="zc_ipttitle_bd" >
+            <h2>修改密码</h2>
+            <div id="modifyPassword">
+                <div class="p-re" id="zcprompt_pre" style="z-index:20"></div>
                 <ul>
                     <li>
-                        <div class="p-re" id="errorTip1" style="z-index:20"></div>
-                        <div class="p-re" id="verifyCardErrorTip" style="z-index:20"></div>
-                        <label class="fl">姓名</label>
-                        <?php if(isset($info['user_name'])) {?>
-                        <span class="fl" id="username"> <?php echo $info['user_name']?></span>
-                        <?php } else {?>
-                        <input type="text" name="user_name"  style="height: 40px; align-content: center" id="username">
-                        <?php }?>
-                        <div class="fr" id="div_name">真实姓名，方便租车时核对身份</div>
-                        <div class="clear"></div>
-                    </li>
-                    <!-- 证件号输入后 -->
-                    <li class="cards_info">
-                        <label class="fl">证件类型</label>
-                            <span class="fl cards_show">
-                        	<span id="id_type">身份证 </span>
-
-
-                        </span>
-                        <div class="fr">请输入真实的证件号</div>
-                        <div class="clear"></div>
-                    </li>
-
-                    <li class="cards_info">
-                        <label class="fl">证件号码</label>
-                        <?php if(isset($info['id_member'])) {?>
-                        <span class="fl" id="id_member"><?php echo $info['id_member']?></span>
-                        <?php } else {?>
-                        <input type="text" name="id_member"  style="height: 40px; align-content: center" id="id_member">
-                        <?php }?>
-                            <span class="fl cards_show"></span>
-
-
-
-
-                        <div class="fr" id="div_card">请输入真实的证件号</div>
-                        <div class="clear"></div>
-                    </li>
-                    <li>
-                        <label class="fl">手机号码</label>
-
-                        <span class="fl fc_c6" id="xmobile"><?php echo $info['user_phone']?></span>
-<!--                        <div class="fr" id="modifyToggle" ><a href="javascript:void(0)">修改</a></div>-->
-                        <div class="clear"></div>
-                    </li>
-                    <li class="modify_no" id="modifyDiv" style="display:none">
-                        <div class="p-re" id="errorTip2" style="z-index:20"></div>
-                        <label class="fl">手机号码</label>
+                        <label class="fl">原密码</label>
                         <span class="fl">
-                            <input type="hidden" id="modifyMobileFlag" value="1" >
-                            <input class="zc-ipt p-re old_telno" type="text" id="oldTelid" value="原手机号">
-                            <input class="zc-ipt p-re old_telno" type="hidden" id="oldTelidHidden">
-                            <input class="zc-ipt p-re new_telno" type="text" id="newTelid" value="新手机号">
-                            <input class="zc-ipt p-re new_telno" type="hidden" id="newTelidHidden">
-                            <div class="dy_code">
-                                <a href="javascript:void(0)" class="get_code" id="getYzmBtn" >获取手机动态码</a>
-                                <input class="zc-ipt" type="text" id="validateCode" value="手机动态码" style="width:170px;" maxlength="6">
-                            </div>
+<!--                            <input class="zc-ipt ipt-passwordH" type="password" placeholder="请输入原来密码" style="display:none"  id="oldpassword">-->
+                            <input class="" type="password" id="oldpasswordS"  placeholder="请输入原来密码">
+                            <span class="zc-secret zc-peyeh" id="oldeye"></span>
                         </span>
+                        <div class="fr">核对身份后，才可修改密码</div>
                         <div class="clear"></div>
                     </li>
                     <li>
-                        <div class="p-re" id="errorTip3" style="z-index:20"></div>
-                        <label class="fl">电子邮箱</label>
-                        <?php if(isset($info['user_email'])) {?>
-                        <span class="fl" id="user_email"><?php echo $info['user_email']?></span>
-                        <?php } else {?>
-                        <input type="text" name="user_email"  style="height: 40px; align-content: center" id="user_email">
-                        <?php }?>
-                        <div class="fr" id="div_email">请输入真实的邮箱</div>
-<!--                        <div class="fr" id="yzemail"><a href="javascript:void(0)">验证</a></div>-->
+                        <label class="fl">新密码</label>
+                        <span class="fl">
+<!--                            <input class="zc-ipt ipt-passwordH" type="password" id="newpasswordH" value="建议6-18位数字、字母、符号的组合密码" style="display:none">-->
+                            <input class="" type="password" id="newpasswordS"  placeholder="建议6-18位数字、字母、符号的组合密码">
+                            <span class="zc-secret zc-peyeh" id="neweye"></span>
+                        </span>
+<!--                        <div class="zc-safepsw zc-safepsw_0 fl" id="pwdLevelDiv">-->
+<!--                            <span class="safe_1">弱</span>-->
+<!--                            <span class="safe_2">中</span>-->
+<!--                            <span class="safe_3">强</span>-->
+<!--                        </div>-->
+                        <div class="fr">请牢记新密码</div>
+                        <div class="clear"></div>
+                    </li>
+                    <li>
+                        <label class="fl">确认密码</label>
+                        <span class="fl">
+<!--                            <input class="zc-ipt ipt-passwordH" type="password" id="passwordAgainH"  value="再次输入密码" style="display:none">-->
+                            <input class="" type="password" id="passwordAgainS"  placeholder="再次输入密码">
+                            <span class="zc-secret zc-peyeh" id="neweyeAgain"></span>
+                        </span>
+                        <div class="fr">再次输入新密码</div>
                         <div class="clear"></div>
                     </li>
                 </ul>
                 <div class="graybutbox">
                     <a href="javascript:void(0);" class="zc_orange_bigsub" id="save">保存</a>
-
                 </div>
-
-
-
-                <div class="h20"></div>
-                <ul>
-                    <li id="unsubscribe" style="display:none;">
-                        <label class="fl">邮件订阅</label>
-                        <span class="fl fc_c6" >为您推送超值优惠活动信息</span>
-                        <div class="fr blue" id="unsubscribeEmail" >立即订阅</div>
-                        <div class="clear"></div>
-                    </li>
-                    <li id="subscribe" style="display:none;">
-                        <label class="fl">邮件订阅</label>
-                        <span class="fl fc_c6" >为您推送超值优惠活动信息</span>
-                        <div class="fr green" id="" >已订阅</div>
-                        <div class="clear"></div>
-                    </li>
-                </ul>
             </div>
+
             <div class="zc_mysucceed_bd" id="modifySuccess" style="display:none">
-                <p class="rok-lcongra pb0"><span class="zc-gryes"></span>您已经成功修改个人信息，请妥善保管</p>
-                <p class="ac gray16">如需任何帮助，欢迎致电神州租车24小时全国客服中心 400-616-6666.</p>
-                <p class="ac"><a class="zc_orange_bigsub" href="https://mycar.zuche.com/member/person/personinfo.do">返回</a></p>
+                <p class="rok-lcongra"><span class="zc-gryes"></span>恭喜您，密码修改成功！请牢记您的新密码。</p>
+                <p class="ac"><a class="zc_orange_bigsub" href="https://order.zuche.com">马上租车</a></p>
             </div>
         </div>
     </div>
     <div class="clear"></div>
 </div>
-
-<div id="isContinue"  style="width:520px;height:245px;display:none;" class="popup_block" >
-    <h1 class="f18h1 ac black pb20" style="margin-top:15px">温馨提示</h1>
-    <a href="#" onclick="closeBg('isContinue');" style="position:absolute;right:0;top:0;" id="closeBg">
-        <img src="https://image.zuchecdn.com/newversion/common/close.png">
-    </a>
-    <div class="ac f14w m20_0 pt20 pb20">您是企业用户,修改邮箱可能会导致与企业失去关联!</div>
-    <div style="text-align:center;margin-top:25px;">
-        <input type="button" value="确定" class="btn_bluewauto white f14w w80" onclick="reSetBsnEmail()">
-        <input type="button" value="取消" class="btn_graywauto gray f14w  w80" onclick="cacleEmailModify()">
-    </div>
-</div>
-<div id="isRelate" style="width:520px;height: 245px;display:none;" class="popup_block" >
-    <input id="xbemail" type="hidden" />
-    <h1 class="f18h1 ac black pb20" style="margin-top:15px">温馨提示</h1>
-    <a href="#" onclick="know();" style="position:absolute;right:0;top:0;" id="closeBg">
-        <img src="https://image.zuchecdn.com/newversion/common/close.png">
-    </a>
-    <div class="ac f14w m20_0 pt20 pb20">您是否要将您的账户关联到<span id="bcName"></span>企业下？如果是，激活邮件已发送，请注意查收！</div>
-    <div style="text-align:center;margin-top:25px;">
-        <input name="" type="button" value="知道了" class="btn_bluewauto white f14w w80" onclick="know();">
-    </div>
-</div>
-<div class="bg_zhezhao" style="display: none;"></div>
-<div class="zc_yzm_alert" style="display: none;">
-    <div class="top">
-        <p>请先输入以下验证码，获取手机动态码</p>
-        <span class="yzm-close zc-close" id="alertclose"></span>
-    </div>
-    <ul class="yzmul">
-        <li class="zc-iptbox" 	>
-            <label><span class="zc-iyzm"></span></label>
-            <input class="zc-iptsht t_val" id="xyzm" type="text" value="请输入右侧验证码" maxlength="6" style="width:145px;color: rgb(147, 147, 158);">
-            <span class="pic-yzm"><img id="kaptchaImage" ><i class="zc-fresh" id="changeYzmBT"></i></span>
-            <div class="input-errlog ipt-err" id="codecheck_tips" style="display: none;">
-                <span class="arrowbox">◆<span class="arrow">◆</span></span>
-                <span class="zc-retan"></span>
-                <i class="pl0"></i>
-                <span class="zc-close"></span>
-            </div>
-        </li>
-    </ul>
-    <div class="btndiv">
-        <a class="zc-btn btn-confirm" id="yzmconfirm">确认</a>
-    </div>
-
-</div>
-</div><div id="showCancle" class="popup_block areaSelection" style="display: none;width: 500px;">
-    <a href="javascript:masklayer.closeBg('showCancle');" class="close" id="closeBg">&nbsp;</a>
-    <h1 class="f18h1 pc_masklayer_b">&nbsp;&nbsp;&nbsp;&nbsp;解除关联</h1>
-    <div class="pc_sfzbox p20_0">
-        <p class="f14w p20" style="color:#e89013;">你确定与企业账号解除关联？一经解除你将不再享受企业专属折扣。</p>
-    </div>
-    <div class="p20 ac">
-        <input name="" type="button" value="&nbsp;&nbsp;&nbsp;确定解除&nbsp;&nbsp;&nbsp;" class="btn_bluewauto white f14w" onclick="javascript:showCancel();" >
-    </div>
-</div>
-<div id="popbox"  style="width:250px;height:160px;display:none;position:absolute;top:50%;left:50%;margin-left:-150px;margin-top:-100px;background:#FFF;z-index:3;">
-    <h1 class="f18h1 pc_masklayer_b" style="position: relative;border-bottom:solid 1px #ccc;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;温馨提示
-        <a style="position:absolute;right: 10px;top:-4px;*+top:6px;" id="closeBgBT"><img src="https://image.zuchecdn.com/newversion/common/gray_x.png"></a>
-    </h1>
-    <div class="pc_bd" style="padding-bottom:10px;">
-        <p id="ppopbox" class="ac pt20 f14">退订成功</p>
-        <ul class="m0_auto" style="padding-left:110px;align:center">
-            <li class="height20" style="padding-left:85px;">
-                <div class="red f12 rebwrong_icon"  id="yzmInfo"></div>
-            </li>
-        </ul>
-    </div>
-    <div class="pb30 ac">
-        <input id='finishBT' name="" type="button" value="确定" class="btn_bluewauto white f14w w80" >
-    </div>
-</div>
-<!-- 隐藏域 -->
-<input type="hidden" id="member" value="17366592">
-<input type="hidden" id="currentDate" value="2017-06-01" />
-<input type="hidden" id="memberid" value="">
-<input type="hidden" id="xid" value="17366592">
-<input type="hidden" id="carwsztoneURL" value="https://carbusiness.zuche.com">
-<input type="hidden" id="success" value="">
-<input type="hidden" id="error" value="">
-<input type="hidden" id="membernameHidden" value='杨***'>
-
+<!--my main end -->
+<input type="hidden" name="member" id="member" value="17366592"/>
 <!--footmenu start -->
 <div class="zc_righttool">
     <div class="zc_tool">
@@ -399,7 +262,7 @@
 <div class="zc_foottool">
     <ul>
         <li>
-            <a href="javascript:void(0);" onclick="javascript:window.open('http://qiao.baidu.com/v3/?module=default&controller=im&action=index&ucid=3812987&type=n&siteid=1401017',
+            <a href="javascript:void(0);" onclick="javascript:window.open('http://p.qiao.baidu.com/cps/chat?siteId=1401017&userId=3812987',
             		'newwindow','toolbar=no,scrollbars=yes,resizable=no,top=50%,left=50%,width=800,height=600');">
                 <span class="zc_service_i"></span></a>
             <div class="zc_foottooltipe">
@@ -517,6 +380,7 @@
     var driverURL='';
     var carwsztoneURL="https://carbusiness.zuche.com";
     var remarkimgURL="https://remarkimg.zuche.com";
+    var internationalURL="https://international.zuche.com";
 </script>
 <script type="text/javascript" src="https://js.zuchecdn.com/divided/mm/public/lib/sea/sea@89b3a8eaa1.js"></script>
 <script type="text/javascript" src="https://js.zuchecdn.com/divided/mm/public/lib/sea/plugin/seajs-preload@11b2cc155e.js"></script>
@@ -524,104 +388,83 @@
 
 <script type="text/javascript">
     seajs.use('divided/mm/entry/lib@62702b3809',function(){
-        seajs.use(['divided/mm/entry/common@b0b3ad0c94']); //引入js
+        seajs.use(['divided/mm/entry/common@dbbe58bf03']); //引入js
     });
     seajs.use(['divided/mm/dcs_tag_zc.js']);
 </script><script type="text/javascript">
     seajs.use(['divided/mm/entry/lib@62702b3809'],function(){
-        seajs.use(['divided/mm/entry/accountmanage/personInfo@8d7136249e']); //引入js
+        seajs.use(['divided/mm/entry/accountmanage/modifyPassWord@e3d277c62c']); //引入js
     });
 </script>
 </body>
 </html>
 
-
-
-<script type="text/javascript" src="Home/Scripts/jquery.js"></script>
+<script type="text/javascript" src="/Home/Scripts/jquery.js"></script>
 
 <script>
-    //定义全局变量
-    var flag_name = 0;
-    var flag_card = 0;
-    var flag_email = 0;
-  //验证姓名为2-5位汉字
-   $("#username").blur(function(){
-       var username = $(this).val();
-       if(username == "") {
-           $("#div_name").html("<font color='red'>用户名不能为空!</font>");
-       } else {
-           //正则验证用户名为2-5位汉字
-           var reg_name = /^[\u4e00-\u9fa5]{2,5}$/;
-           if(reg_name.test(username)) {
-               $("#div_name").html("<font color='green'>√</font>");
-               flag_name = 1;
-           } else {
-               $("#div_name").html("<font color='red'>用户名位2-5位汉字!</font>");
-           }
-       }
-   })
 
+    $(function(){
+        var flag = 0;
+        $("#oldpasswordS").blur(function(){
+            var old_pwd = $("#oldpasswordS").val();
 
-    //验证身份证号
-    $("#id_member").blur(function(){
-        var card = $(this).val();
-        if(card == "") {
-            $("#div_card").html("<font color='red'>身份证号不能为空!</font>");
-        } else {
-            //正则验证身份证号码
-            var card_reg = /^\d{18}|\d{17}x$/i;
-            if(card_reg.test(card)) {
-                $("#div_card").html("<font color='green'>√</font>");
-                flag_card = 1;
+            if (old_pwd == "") {
+                alert("请输入原密码!")
             } else {
-                $("#div_card").html("<font color='red'>身份证号码格式有误!</font>");
+                $.ajax({
+                    type: "get",
+                    url: "/person/check_pwd",
+                    data: {old_pwd:old_pwd},
+                    dataType:'json',
+                    success: function(msg){
+                        if (msg.status==1) {
+                            alert(msg.msg);
+                        } else {
+                            flag = 1;
+                        }
+                    }
+                });
             }
-        }
-    })
+        })
 
-    //验证邮箱
-    $("#user_email").blur(function(){
-        var email = $(this).val();
-        if(email == "") {
-            $("#div_email").html("<font color='red'>邮箱不能为空!</font>");
-        } else {
-            //正则验证邮箱(通用邮箱)
-            var email_reg = /^\w+@\w+(\.)\w+$/;
-            if(email_reg.test(email)) {
-                $("#div_email").html("<font color='green'>√</font>");
-                flag_email= 1;
+        $("#save").click(function(){
+            var old_pwd = $("#oldpasswordS").val();
+            var new_pwd = $("#newpasswordS").val();
+            var sure_pwd = $("#passwordAgainS").val();
+            var flag1 = 0;
+            var flag2 = 0;
+            var reg_pwd =/^\w{6,18}$/;
+
+
+            if(reg_pwd.test(new_pwd)) {
+                flag1 = 1;
+            }
+
+
+            if(new_pwd==sure_pwd) {
+                flag2 = 1;
+            }
+
+
+            if(flag1 == 1 && flag==1 && flag2==1) {
+                $.ajax({
+                    type: "get",
+                    url: "/person/change_pwd",
+                    data: {new_pwd:new_pwd},
+                    dataType:'json',
+                    success: function(msg){
+                        if (msg.status==1) {
+                            alert(msg.msg);
+                        } else {
+                            alert(msg.msg);
+                        }
+                    }
+                });
             } else {
-                $("#div_email").html("<font color='red'>邮箱格式有误!</font>");
+                return false;
             }
-        }
+
+
+        })
     })
-    //点击保存时
-  $("#save").click(function(){
-
-      if (flag_card == 1 && flag_email== 1) {
-          var user_name = $("#username").html();
-          var id_type = $("#id_type").html();
-          var xmobile = $("#xmobile").html();
-          var id_member = $("#id_member").val();
-          var user_email = $("#user_email").val();
-          $.ajax({
-              type: "get",
-              url: "/person/check",
-              data: {user_name:user_name,id_type:id_type,xmobile:xmobile,user_email:user_email,id_member:id_member},
-              dataType:'json',
-              success: function(msg){
-                 if (msg.status == 1) {
-                     alert(msg.msg);
-                 } else {
-                     alert('已保存');
-                 }
-              }
-          });
-      } else {
-           alert('信息填写有误');
-           return false;
-      }
-
-
-  })
 </script>

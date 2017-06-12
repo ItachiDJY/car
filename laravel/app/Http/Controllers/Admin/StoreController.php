@@ -21,7 +21,7 @@ class StoreController extends Controller
    {
 		$storeObj = new Store;
 		$data = $storeObj ->select(0) ;
-	   $info = $_SESSION['admin'];
+	    $info = $_SESSION['admin'];
 		//print_r($data);die;
 		return view('admin.store.storeinfo',['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
@@ -30,7 +30,7 @@ class StoreController extends Controller
    public function add()
    {
       $info = $_SESSION['admin'];
-     $storeObj = new Store;
+      $storeObj = new Store;
       $data = $storeObj ->select(0) ;
       
       return view('admin.store.storeadd',['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;

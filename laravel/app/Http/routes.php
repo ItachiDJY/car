@@ -37,6 +37,11 @@ Route::group(['middleware'=>'web'], function (){
     //前台 个人中心
     Route::get('/person/account','Home\PersonController@account');
     Route::get('/person/check','Home\PersonController@check');
+    Route::get('/person/login_pwd','Home\PersonController@login_pwd');
+    Route::get('/person/check_pwd','Home\PersonController@check_pwd');
+    Route::get('/person/change_pwd','Home\PersonController@change_pwd');
+    Route::get('/person/member_rule','Home\PersonController@member_rule');
+    Route::get('/person/member_detail','Home\PersonController@member_detail');
 
 
     //前台门店
@@ -46,8 +51,8 @@ Route::group(['middleware'=>'web'], function (){
     //前台首页
     Route::get('/Index/get_city','Home\IndexController@get_city');
 
-/*******后台路由区******/
-Route::group(['middleware'=>['web','illegal_login']],function(){
+    /*******后台路由区******/
+    Route::group(['middleware'=>['web','illegal_login']],function(){
     //首页
     Route::get('/admin', 'Admin\IndexController@index');
     //车辆管理
