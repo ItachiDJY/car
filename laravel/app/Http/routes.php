@@ -29,15 +29,33 @@ Route::group(['middleware'=>'web'], function (){
 	Route::get('/login/check_username','Home\LoginController@check_username');
 	Route::get('/login/check_pwd','Home\LoginController@check_pwd');
     Route::get('/login/out_login','Home\LoginController@out_login');
+	//退出登录
+    Route::get('/login/loginout','Home\LoginController@loginout');
 	//前台注册
 	Route::post('/register/register','Home\RegisterController@register');
 	Route::get('/register/check_code','Home\RegisterController@check_code');
 	Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
+	//前台订单
+    Route::get('/order','Home\OrderController@index');
+    Route::get('/order_search','Home\OrderController@search');
+    Route::get('/order_show','Home\OrderController@show');
+    Route::get('/order_del','Home\OrderController@del');
+    //下订单
+    Route::post('/order_ok','Home\OrderController@order_ok');
 
-<<<<<<< HEAD
+    Route::get('/shop_info','Home\ShopController@store_info');
+    Route::get('/shop_phone','Home\ShopController@store_phone');
+    //多条件搜索
+    Route::get('/shop_serach','Home\ShopController@shop_serach');
+    //立即选车
+    Route::get('/right_choose_car','Home\ShopController@right_choose_car');
+    //租车
+    Route::get('/rent_car','Home\ShopController@rent_car');
+
+
 /*******后台路由区******/
-<<<<<<< HEAD
+
 //首页
 Route::get('/index', 'Admin\IndexController@index');
 //车辆管理
@@ -77,9 +95,9 @@ Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
 Route::get('/add_order','Admin\OrderController@add_order');
 Route::post('/add_order_do','Admin\OrderController@add_order_do');
 Route::get('/order_detail','Admin\OrderController@order_detail');
-=======
+
 Route::group(['middleware'=>['web','illegal_login']],function(){
-=======
+
     //长租
     Route::get('/select','Home\LongRentController@select');
     Route::get('/add_show','Home\longRentController@add_show');
@@ -105,7 +123,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
 
     /*******后台路由区******/
     Route::group(['middleware'=>['web','illegal_login']],function(){
->>>>>>> db7e98f87ec926cac57fd528b6c856a598f82973
+
     //首页
     Route::get('/admin_index', 'Admin\IndexController@index');
     //车辆管理
@@ -192,7 +210,7 @@ Route::group(['middleware'=>'web'],function(){
     //退出登录
     Route::get('/login_out','Admin\LoginController@login_out');
 });
->>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
+
 
 
 
