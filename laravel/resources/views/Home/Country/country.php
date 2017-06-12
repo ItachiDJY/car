@@ -118,16 +118,7 @@
 						长租服务
 					</a>
 				</li>
-				<li >
-					<a id="top_monitor_enterprise" target="_parent" href="/company">
-						企业租车
-					</a>
-				</li>
-				<li >
-					<a id="top_monitor_convenience" target="_parent" href="/free">
-						顺风车站
-					</a>
-				</li>
+				
 				<li class="none980">
 					<a id="top_monitor_store" target="_parent" href="/store" >
 						门店查询
@@ -138,11 +129,7 @@
 						特惠活动
 					</a>
 				</li>
-				<li class="none980">
-					<a id="top_monitor_internationalCar" href="/country" >
-						国际租车
-					</a>
-				</li>
+				
 				<li class="morecur">
 					<a href="#">更多<span class="index_moreup">&nbsp;</span></a>
 					<div class="sz_more_menu">

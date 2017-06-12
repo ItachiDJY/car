@@ -125,16 +125,6 @@
 						长租服务
 					</a>
 				</li>
-				<li >
-					<a id="top_monitor_enterprise" target="_parent" href="https://carbusiness.zuche.com"> 
-						企业租车
-					</a>
-				</li>
-				<li >
-					<a id="top_monitor_convenience" target="_parent" href="https://easyride.zuche.com">
-						顺风车站
-					</a>
-				</li>
 				<li class="none980">
 					<a id="top_monitor_store" target="_parent" href="https://service.zuche.com" >
 						门店查询
@@ -145,11 +135,6 @@
 						特惠活动
 					</a>
 				</li>
-				<li class="none980">
-					<a id="top_monitor_internationalCar" href="https://international.zuche.com" >
-						国际租车
-					</a>
-				</li>
 				<li class="morecur">
 					<a href="#">更多<span class="index_moreup">&nbsp;</span></a>
 					<div class="sz_more_menu">
@@ -157,7 +142,7 @@
 							<dd class="sz_m_m_l">&nbsp;</dd>
 							<dd class="sz_m_m_b" style="padding:0px;"><a target="_parent" href="https://service.zuche.com" >门店查询</a></dd>
 							<dd class="sz_m_m_b"><a target="_blank" href="https://huodong.zuche.com/" >特惠活动</a></dd>
-							<dd class="sz_m_m_b"><a href="https://international.zuche.com">国际租车</a></dd>
+	
 							<dd class="sz_m_m_r">&nbsp;</dd>
 						</dl>
 					</div>

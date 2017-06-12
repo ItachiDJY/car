@@ -59,33 +59,24 @@
     <div class="zc_main">
         <a href="/" class="zc_logo" alt="神州租车"></a>
         <ul class="zc_menu">
-            <li >
-           	 	<a href="/" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-首页（顶）')">首页</a>
-            </li>
-            <li >
-            	<a href="/door" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-上门取送（顶）')">上门取送</a>
-            </li>
-            <li >
-            	<a href="/shop" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-到店取还（顶）')">到店取还</a>
-            </li>
-            <li >
-            	<a href="/long" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-长租（顶）')">长租</a>
-            </li>
-            <li >
-           		<a href="/company" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-企业租车（顶）')">企业租车</a>
-            </li>
-            <li >
-            	<a href="/free" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-顺风车（顶）')">顺风车</a>
-            </li>
-            <li class="cur">
-            	<a href="/store" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-门店（顶）')">门店</a>
-            </li>
-            <li>
-            	<a href="/activity" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-活动（顶）')">活动</a>
-            </li>
-            <li >
-           		<a href="/country" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-国际租车（顶）')">国际租车</a>
-           	</li>
+             <li class="homecur" >
+                    <a href="/" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-首页（顶）')">首页</a>
+                </li>
+                <li  >
+                    <a href="/door" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-上门取送（顶）')">上门取送</a>
+                </li>
+                <li  >
+                    <a href="/shop" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-到店取还（顶）')">到店取还</a>
+                </li>
+                <li  >
+                    <a href="/long" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-长租（顶）')">长租</a>
+                </li>
+                <li  >
+                    <a href="/store" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-门店（顶）')">门店</a>
+                </li>
+                <li>
+                    <a href="/activity" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-活动（顶）')">活动</a>
+                </li>
         </ul>
         <div class="zcindex_login" >
             <div class="wdl" id="notLogin">
