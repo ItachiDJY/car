@@ -203,22 +203,12 @@ class CarController extends Controller
    //车辆品牌展示
    public function car_brand()
    {
-<<<<<<< HEAD
-      
-<<<<<<< HEAD
-       $data = DB::select("select brand_id,brand_name,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
-      
-=======
-       $data = DB::select("select brand_id,brand_name,brand_logo,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
-      //print_r($data);die;
->>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
-       return view('admin.car.brand' ,['data' =>$data]);
-=======
+
       $info = $_SESSION['admin'];
        $data = DB::select("select brand_id,brand_name,brand_logo,parent_id,path,CONCAT(path,'-',brand_id) AS depath from car_brand order by depath");
       //print_r($data);die;
        return view('admin.car.brand' ,['data' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]);
->>>>>>> 23791d287c1ac75688757c328f4b49095a706ddc
+
    }
 
    //车辆品牌添加
@@ -284,7 +274,7 @@ class CarController extends Controller
    //执行车辆信息修改
    public function car_brand_update_do(Request $request)
    {
-        $path = $this ->upload($request ,'brand_logo');
+        $path = $this ->upload($request);
       
         $post = Input::get();
         $brand_id =$post['brand_id'];
@@ -294,11 +284,11 @@ class CarController extends Controller
         if (!$path) {
             unset($post['brand_logo']) ;
         } else {
-<<<<<<< HEAD
-            $post['brand_logo'] = $path['brand_logo'];
-=======
-            $post['brand_logo'] = $path['brand_logo'][0];
->>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
+
+            $post['brand_logo'] = implode(',', $path['img']);
+
+            //$post['brand_logo'] = $path['brand_logo'][0];
+
         
         }
         $post['path'] = ($post['parent_id']==0) ? '0' : $post['path'].'-'.$post['parent_id'];
@@ -311,11 +301,7 @@ class CarController extends Controller
         if($validator->fails()){
            return $validator->errors();
         }
-<<<<<<< HEAD
-=======
-      
 
->>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
         $brandObj = new Brand ;
         $bool = $brandObj ->updates($post ,$brand_id);
       
@@ -347,9 +333,9 @@ class CarController extends Controller
         $path = [];
         $file = $request->file();
         //return $file;
-        if($file[$imgName][0] == '') {
-            return false;      
-        } 
+        // if($file[$imgName][0] == '') {
+        //     return false;      
+        // } 
         //多个input标签
         foreach ($file as $key => $val) {
             //input标签是数组情况
@@ -386,7 +372,7 @@ class CarController extends Controller
             $tempPath = $file->getRealPath();                //临时文件的绝对路径
 
             //检测文件格式
-            $allowed_extensions = ["png", "jpg", "gif"];
+            $allowed_extensions = ["png", "jpg", "gif",'JPG','PNG','GIF','jpeg','JPEG'];
             if (!in_array($ext, $allowed_extensions)) {
                 return false;
             }

@@ -2365,3 +2365,42 @@ Stack trace:
 #9 E:\www\car\laravel\vendor\laravel\framework\src\Illuminate\Foundation\Http\Kernel.php(152): Illuminate\Foundation\Application->make('App\\Http\\Middle...')
 #10 E:\www\car\laravel\public\index.php(58): Illuminate\Foundation\Http\Kernel->terminate(Object(Illuminate\Http\Request), Object(Illuminate\Http\Response))
 #11 {main}  
+[2017-06-12 12:59:57] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:162
+Stack trace:
+#0 {main}  
+[2017-06-12 13:02:26] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:162
+Stack trace:
+#0 {main}  
+[2017-06-12 13:03:37] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:04:39] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:04:40] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:05:33] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:07:15] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:07:16] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:07:16] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected 'endforeach' (T_ENDFOREACH)' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:161
+Stack trace:
+#0 {main}  
+[2017-06-12 13:07:32] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'syntax error, unexpected end of file' in E:\www\car\laravel\storage\framework\views\ce1eeacf5a95d25e64185565135ff9dbe44b9e2b.php:551
+Stack trace:
+#0 {main}  
+[2017-06-12 13:09:25] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type Illuminate\Http\UploadedFile as array' in E:\www\car\laravel\app\Http\Controllers\Admin\CarController.php:336
+Stack trace:
+#0 {main}  
+[2017-06-12 13:09:51] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type Illuminate\Http\UploadedFile as array' in E:\www\car\laravel\app\Http\Controllers\Admin\CarController.php:336
+Stack trace:
+#0 {main}  
+[2017-06-12 13:10:31] local.ERROR: exception 'Symfony\Component\Debug\Exception\FatalErrorException' with message 'Cannot use object of type Illuminate\Http\UploadedFile as array' in E:\www\car\laravel\app\Http\Controllers\Admin\CarController.php:336
+Stack trace:
+#0 {main}  
