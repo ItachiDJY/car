@@ -41,10 +41,12 @@ class LoginController extends Controller
             if(md5($pwd) == $v->user_pwd) {
                 if (Input::has('free')){
                     setcookie('logo',$v->pwd_hash,time()+60*60*24*30,'/');
+                    setcookie('user_id',$v->user_id,time()+60*60*24*30,'/');
                     setcookie('user_name',$v->user_name,time()+60*60*24*30,'/');
                     return redirect("/");
                 } else {
                     setcookie('logo',$v->pwd_hash,0,'/');
+                    setcookie('user_id',$v->user_id,0,'/');
                     setcookie('user_name',$v->user_name,0,'/');
                     return redirect("/");
                 }
@@ -89,11 +91,12 @@ class LoginController extends Controller
         }
     }
 
-    //退出登录
-    public function out_login()
+    public function loginout() 
     {
-        setcookie('logo',"",time()-3600,'/');
-        return redirect("/login");
+        setcookie('logo','',time()-1,'/');
+        setcookie('user_id','',time()-1,'/');
+        setcookie('user_name','',time()-1,'/');
+        return redirect('/');
     }
 }
 
