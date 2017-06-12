@@ -94,8 +94,6 @@
                 <li  >
                     <a href="/long" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-长租（顶）')">长租</a>
                 </li>
-            
-                
                 <li  >
                     <a href="/store" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-门店（顶）')">门店</a>
                 </li>

@@ -32,11 +32,8 @@
             <li><a href="/door">上门取送</a></li>
             <li><a href="/shop">到店取还</a></li>
             <li><a href="/long">长租</a></li>
-            <li><a href="/company">企业租车</a></li>
-            <li><a href="/free">顺风车</a></li>
             <li><a href="/store">门店</a></li>
             <li><a href="/activity">活动</a></li>
-            <li><a href="/country">国际租车</a></li>
         </ul>
         <div class="zcindex_login" >
 <!--            <div class="wdl" id="notLogin">-->
