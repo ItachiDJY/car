@@ -34,6 +34,13 @@ Route::group(['middleware'=>'web'], function (){
 	Route::get('/register/check_code','Home\RegisterController@check_code');
 	Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
+
+    //长租
+    Route::get('/select','Home\LongRentController@select');
+    Route::get('/add_show','Home\longRentController@add_show');
+    Route::get('/show','Home\longRentController@show');
+    Route::get('/need','Home\longRentController@need');
+
     //前台 个人中心
     Route::get('/person/account','Home\PersonController@account');
     Route::get('/person/check','Home\PersonController@check');
