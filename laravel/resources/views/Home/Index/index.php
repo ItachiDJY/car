@@ -73,7 +73,7 @@
             <div class="ydl"  style="display: none;" id="aa">
                 <h1 id="topLoginName">您好 , <?php echo $username?></h1>
                 <div class="zc_index_my">
-                    <a href="https://mycar.zuche.com" class="top">我的神州<i class="zc_ordown"></i></a>
+                    <a href="/" class="top">我的神州<i class="zc_ordown"></i></a>
                     <div class="contmyszlist">
                         <div class="p-re">
                             <span class="y">◆</span>
