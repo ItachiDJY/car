@@ -52,52 +52,6 @@ Route::group(['middleware'=>'web'], function (){
     Route::get('/right_choose_car','Home\ShopController@right_choose_car');
     //租车
     Route::get('/rent_car','Home\ShopController@rent_car');
-
-
-/*******后台路由区******/
-
-//首页
-Route::get('/index', 'Admin\IndexController@index');
-//车辆管理
-Route::get('/car', 'Admin\CarController@index');
-Route::get('/car_add', 'Admin\CarController@add');
-Route::post('/car_add_do', 'Admin\CarController@add_do');
-
-//车辆删除
-Route::get('/car_del', 'Admin\CarController@car_del');
-Route::get('/car_update', 'Admin\CarController@car_update');
-Route::post('/car_update_do', 'Admin\CarController@car_update_do');
-
-Route::get('/deploy', 'Admin\CarController@deployList');
-Route::get('/deploy_add', 'Admin\CarController@deploy_add');
-Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
-//配置删除
-Route::get('/deploy_del', 'Admin\CarController@deploy_del');
-//员工管理
-Route::get('/staff','Admin\StaffController@index');
-Route::get('/staff_add','Admin\StaffController@add');
-Route::post('/staff_add_do','Admin\StaffController@add_do');
-//司机管理
-Route::get('/driver','Admin\DriverController@index');
-Route::get('/driver_add','Admin\DriverController@add');
-Route::get('/reg_select','Admin\DriverController@reg_select');
-Route::post('/driver_add_do','Admin\DriverController@add_do');
-//订单管理
-Route::get('/order_index','Admin\OrderController@order_index');
-Route::get('/recycle','Admin\OrderController@recycle');
-Route::get('/dele_order','Admin\OrderController@dele_order');
-Route::get('/search_order','Admin\OrderController@search_order');
-Route::get('/recycle_add','Admin\OrderController@recycle_add');
-Route::get('/recycle_index','Admin\OrderController@recycle_index');
-Route::get('/restore','Admin\OrderController@restore');
-Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
-Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
-Route::get('/add_order','Admin\OrderController@add_order');
-Route::post('/add_order_do','Admin\OrderController@add_order_do');
-Route::get('/order_detail','Admin\OrderController@order_detail');
-
-Route::group(['middleware'=>['web','illegal_login']],function(){
-
     //长租
     Route::get('/select','Home\LongRentController@select');
     Route::get('/add_show','Home\longRentController@add_show');
@@ -120,6 +74,42 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
 
     //前台首页
     Route::get('/Index/get_city','Home\IndexController@get_city');
+
+
+/*******后台路由区******/
+
+
+// //车辆管理
+// Route::get('/car', 'Admin\CarController@index');
+// Route::get('/car_add', 'Admin\CarController@add');
+// Route::post('/car_add_do', 'Admin\CarController@add_do');
+
+// //车辆删除
+// Route::get('/car_del', 'Admin\CarController@car_del');
+// Route::get('/car_update', 'Admin\CarController@car_update');
+// Route::post('/car_update_do', 'Admin\CarController@car_update_do');
+
+// Route::get('/deploy', 'Admin\CarController@deployList');
+// Route::get('/deploy_add', 'Admin\CarController@deploy_add');
+// Route::post('/deploy_add_do', 'Admin\CarController@deploy_add_do');
+// //配置删除
+// Route::get('/deploy_del', 'Admin\CarController@deploy_del');
+
+// //订单管理
+// Route::get('/order_index','Admin\OrderController@order_index');
+// Route::get('/recycle','Admin\OrderController@recycle');
+// Route::get('/dele_order','Admin\OrderController@dele_order');
+// Route::get('/search_order','Admin\OrderController@search_order');
+// Route::get('/recycle_add','Admin\OrderController@recycle_add');
+// Route::get('/recycle_index','Admin\OrderController@recycle_index');
+// Route::get('/restore','Admin\OrderController@restore');
+// Route::get('/empty_recycle','Admin\OrderController@empty_recycle');
+// Route::get('/delete_recycle','Admin\OrderController@delete_recycle');
+// Route::get('/add_order','Admin\OrderController@add_order');
+// Route::post('/add_order_do','Admin\OrderController@add_order_do');
+// Route::get('/order_detail','Admin\OrderController@order_detail');
+
+    
 
     /*******后台路由区******/
     Route::group(['middleware'=>['web','illegal_login']],function(){
@@ -211,11 +201,4 @@ Route::group(['middleware'=>'web'],function(){
     Route::get('/login_out','Admin\LoginController@login_out');
 });
 
-
-
-
-
-
 });
-
-
