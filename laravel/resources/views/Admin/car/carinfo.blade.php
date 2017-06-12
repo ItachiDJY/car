@@ -147,7 +147,7 @@
 														<td><?= $v['car_status']?></td>
 														<td>
 														<?php foreach($v['car_img'] as $val ):?>
-														<img src="../<?= $val?>" alt="" >
+														<img src="../<?= $val?>" alt="" width="50" high="50">
 														<?php endforeach;?>
 														</td>
 														<td><?= $v['deploy_name']?></td>

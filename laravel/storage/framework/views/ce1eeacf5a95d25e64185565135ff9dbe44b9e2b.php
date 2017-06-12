@@ -5,8 +5,8 @@
 		<title>租呗</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 	</head>
 
 	<body>
-		@include('admin.layouts.header')
+		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')<!-- /.nav-list -->
+					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -128,7 +128,7 @@
 												</thead>
 
 												<tbody>
-												@foreach ($data as $v)
+												<?php foreach($data as $v): ?>
 
 													<tr ids="<?=$v->brand_id?>">
 														<td class="center">
@@ -158,7 +158,7 @@
 														</td>
 
 													</tr>
-												@endforeach
+												<?php endforeach; ?>
 												</tbody>
 											</table>
 										</div><!-- /.table-responsive -->
@@ -180,7 +180,7 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 		<!-- <![endif]-->
 		<script>
 		    //编辑
@@ -222,7 +222,7 @@
 		<!--[if !IE]> -->
 
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -234,10 +234,10 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 		</script>
-		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
@@ -245,25 +245,25 @@
 		  <script src="assets/js/excanvas.min.js"></script>
 		<![endif]-->
 
-		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 
