@@ -88,5 +88,12 @@ class LoginController extends Controller
             return 0;
         }
     }
+
+    //退出登录
+    public function out_login()
+    {
+        setcookie('logo',"",time()-3600,'/');
+        return redirect("/login");
+    }
 }
 

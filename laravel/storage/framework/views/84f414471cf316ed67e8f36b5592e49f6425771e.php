@@ -95,7 +95,7 @@
 								<i class="icon-home home-icon"></i>
 								<a href="/index.php/admin">首页</a>
 							</li>
-							<li class="active">租呗控制台</li>
+							<li class="active">管理员列表</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -109,50 +109,44 @@
 									
 									
 										<div class="table-responsive">
-											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th class="center">
-															<label>
-																<input type="checkbox" class="ace" />
-																<span class="lbl"></span>
-															</label>
-														</th>
-														<th>人员编号</th>
+											 <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+				                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>"/>
+				                                <thead>
+				                                <tr>
+				                                    	<th>选择</th>
+				                                    	<th>人员编号</th>
 														<th>姓名</th>
-														<th>头像</th>
-														
-														<!-- <th>图片</th> -->
-														
-														<th>操作</th>
-													</tr>
-												</thead>
+														<th>头像</th>				                                
+														<th>操作</th>				                                
+												</tr>
+				                                </thead>
+				                                <tbody>
+				                                <?php foreach($arr as $k => $val): ?>
+				                                    <tr>
+				                                        <td><input type="checkbox" name="check" value="<?php echo e($val -> admin_id); ?>"/></td>
+				                                        <td><?php echo e($k+1); ?></td>
+				                                        <td>
+				                                            <?php echo e($val -> admin_name); ?>
 
-												<tbody>
-												<?php foreach($arr as $v): ?>
+				                                        </td>
+				                                        <td>
+				                                            <img src="../<?php echo e($val -> admin_img); ?>" alt="" width="50" high="50">	
+				                                        </td>
+				                                        <td>
+				                                            <button class="delete" ids="<?php echo e($val -> admin_id); ?>">删除</button>
+				                                        </td>
+				                                    </tr>
+				                                <?php endforeach; ?>
+				                                </tbody>
+				                            </table>
+				                            <button id="all">全选</button>&nbsp;&nbsp;&nbsp;
+				                            <button id="no">不选</button>&nbsp;&nbsp;&nbsp;
+				                            <button id="other">反选</button>&nbsp;&nbsp;&nbsp;
+				                            <button id="del">批删</button>
+				                            <div align="center" class="links">
+                                				<?php echo $arr->links(); ?>
 
-													<tr>
-														<td class="center">
-															<label>
-																<input type="checkbox" class="ace" />
-																<span class="lbl"></span>
-															</label>
-														</td>
-
-														<td><?= $v['admin_id']?></td>
-														<td><?= $v['admin_name']?></td>
-														<td>
-															<img src="<?= $v['admin_img']?>" alt="">							
-														</td>
-														<td>
-														<button class="btn">编辑</button>
-														<button class="btn btn-danger">删除</button>
-														</td>
-
-													</tr>
-												<?php endforeach; ?>
-												</tbody>
-											</table>
+                            				</div>
 										</div><!-- /.table-responsive -->
 									</div><!-- /span -->
 								</div><!-- /row -->
@@ -228,6 +222,67 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
+		//全选
+        $("#all").click(function() {
+            $("input[name='check']").prop("checked",true);
+        });
+        //不选
+        $("#no").click(function() {
+            $("input[name='check']").prop("checked",false);
+        });
+        //反选
+        $("#other").click(function() {
+            $("input[name='check']").each(function() {
+                $(this).prop("checked",!$(this).prop("checked"));
+            });
+        });
+        //单删
+        $(".delete").click(function() {
+            var ids = $(this).attr("ids");
+            var rm = $(this);
+            $.ajax({
+                type:"get",
+                url:"/admin_delete",
+                data:
+                {
+                    ids:ids
+                },
+                dataType:'json',
+                success:function(data)
+                {
+                    if(data.status==1000)
+                    {
+                        rm.parent().parent().remove();
+                    }
+                }
+            });
+        });
+        //批删
+        $("#del").click(function() {
+            var str = "";
+            $("input[name='check']:checked").each(function() {
+                str += ","+$(this).val();
+            });
+            var newstr = str.substr(1);
+            $.ajax({
+            	type:"get",
+                url:"/admin_delete",
+                data:
+                {
+                    ids:newstr
+                },
+                dataType:'json',
+                success:function(data) {
+                    if(data.status==1000)
+                    {
+                        $("input[name='check']:checked").each(function() {
+                            $(this).parent().parent().remove();
+                        });
+                    }
+                }
+            });
+        });
+        
 			jQuery(function($) {
 				$('#id-disable-check').on('click', function() {
 					var inp = $('#form-input-readonly').get(0);

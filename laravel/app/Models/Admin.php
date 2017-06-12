@@ -53,5 +53,10 @@ class Admin extends Model
     public function login($data) {
         return $this->where('admin_name',$data['admin_name'])->get()->toArray();
     }
+
+     public function delAll($id)
+    {
+        return $this->whereIn('admin_id',$id)->delete();
+    }
 }
 

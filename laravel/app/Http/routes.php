@@ -28,12 +28,14 @@ Route::group(['middleware'=>'web'], function (){
 	Route::post('/login/login','Home\LoginController@login');
 	Route::get('/login/check_username','Home\LoginController@check_username');
 	Route::get('/login/check_pwd','Home\LoginController@check_pwd');
+    Route::get('/login/out_login','Home\LoginController@out_login');
 	//前台注册
 	Route::post('/register/register','Home\RegisterController@register');
 	Route::get('/register/check_code','Home\RegisterController@check_code');
 	Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
 
+<<<<<<< HEAD
 /*******后台路由区******/
 <<<<<<< HEAD
 //首页
@@ -77,8 +79,35 @@ Route::post('/add_order_do','Admin\OrderController@add_order_do');
 Route::get('/order_detail','Admin\OrderController@order_detail');
 =======
 Route::group(['middleware'=>['web','illegal_login']],function(){
+=======
+    //长租
+    Route::get('/select','Home\LongRentController@select');
+    Route::get('/add_show','Home\longRentController@add_show');
+    Route::get('/show','Home\longRentController@show');
+    Route::get('/need','Home\longRentController@need');
+
+    //前台 个人中心
+    Route::get('/person/account','Home\PersonController@account');
+    Route::get('/person/check','Home\PersonController@check');
+    Route::get('/person/login_pwd','Home\PersonController@login_pwd');
+    Route::get('/person/check_pwd','Home\PersonController@check_pwd');
+    Route::get('/person/change_pwd','Home\PersonController@change_pwd');
+    Route::get('/person/member_rule','Home\PersonController@member_rule');
+    Route::get('/person/member_detail','Home\PersonController@member_detail');
+
+
+    //前台门店
+    Route::get('/store/get_cat_son','Home\StoreController@get_cat_son');
+    Route::get('/store/index','Home\StoreController@index');
+
+    //前台首页
+    Route::get('/Index/get_city','Home\IndexController@get_city');
+
+    /*******后台路由区******/
+    Route::group(['middleware'=>['web','illegal_login']],function(){
+>>>>>>> db7e98f87ec926cac57fd528b6c856a598f82973
     //首页
-    Route::get('/admin', 'Admin\IndexController@index');
+    Route::get('/admin_index', 'Admin\IndexController@index');
     //车辆管理
     Route::get('/car', 'Admin\CarController@index');
     Route::get('/car_add', 'Admin\CarController@add');
@@ -93,6 +122,7 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::get('/staff','Admin\StaffController@index');
     Route::get('/staff_add','Admin\StaffController@add');
     Route::post('/staff_add_do','Admin\StaffController@add_do');
+    Route::get('/admin_delete','Admin\StaffController@admin_delete');
     //会员管理
     Route::get('member','Admin\MemberController@index');//会员列表
     Route::get('member_delete','Admin\MemberController@delete');//会员删除
@@ -126,10 +156,32 @@ Route::group(['middleware'=>['web','illegal_login']],function(){
     Route::post('/add_order_do','Admin\OrderController@add_order_do');
     Route::get('/order_detail','Admin\OrderController@order_detail');
     //门店管理
-	Route::get('/store','Admin\StoreController@index');
-	Route::get('/add_store','Admin\StoreController@add');
+	Route::get('/store_index','Admin\StoreController@index');
+    Route::get('/store_add','Admin\StoreController@add');
+	Route::post('/store_add_do','Admin\StoreController@add_do');
 	Route::get('/store_select','Admin\StoreController@store_select');
 	Route::get('/store_list','Admin\StoreController@store_list');
+    //活动管理
+    Route::get('/active_index','Admin\ActiveController@active_index');
+    Route::get('/active_add','Admin\ActiveController@active_add');
+    Route::post('/active_add_do','Admin\ActiveController@active_add_do');
+    Route::get('/active_delete','Admin\ActiveController@active_delete');
+    Route::get('/active_change_name','Admin\ActiveController@active_change_name');
+    //代金券管理
+    Route::get('/voucher_index','Admin\VoucherController@voucher_index');//代金券页面展示
+    Route::get('/voucher_add','Admin\VoucherController@voucher_add');//代金券添加展示
+    Route::post('/voucher_add_do','Admin\VoucherController@voucher_add_do');//代金券添加操作
+    Route::get('/voucher_delete','Admin\VoucherController@voucher_delete');//删除代金券
+    Route::get('voucher_change_name','Admin\VoucherController@voucher_change_name');//修改代金券名称
+    Route::get('voucher_change_value','Admin\VoucherController@voucher_change_value');//修改代金券面额
+    //长租预定管理
+    Route::get('/long_index','Admin\LongController@long_index');//长租预定页面展示
+    Route::get('/long_delete','Admin\LongController@long_delete');//删除长租预定
+    Route::get('long_status','Admin\LongController@long_status');//修改状态
+    //个人用户修改密码
+    Route::get('/password_update','Admin\PasswordController@password_update');//个人用户修改密码页面展示
+    Route::post('/password_update_to','Admin\PasswordController@password_update_to');//个人用户修改密码操作
+    Route::get('/sure_old_pwd','Admin\PasswordController@sure_old_pwd');//旧密码查证
 });
 
 //后台登陆及防非登录

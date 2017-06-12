@@ -93,7 +93,7 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="/index.php/admin">首页</a>
+								<a href="/admin_index">首页</a>
 							</li>
 							<li class="active">门店列表</li>
 							
@@ -106,9 +106,17 @@
 
 									<div class="col-xs-12">
 									<p>
+									行政区&nbsp;&nbsp;
+									<select id="check_place">
+									<option value="">请选择...</option>
 									<?php foreach ($data as $key => $val): ?>
-										<a id="check_place"><?php echo $val['store_name']?></a><input type="hidden" value="<?= $val['store_id']?>">&nbsp;&nbsp;&nbsp;&nbsp;
+										<option value="<?php echo $val['store_id']?>"><?php echo $val['store_name']?></option>
 									<?php endforeach ?>
+									</select>&nbsp;&nbsp;&nbsp;&nbsp;
+									市、区&nbsp;&nbsp;
+									<select id="check_where">
+									<option value="">请选择...</option>
+									</select>
 									</p>
 									<p id="store"></p>
 										<div class="table-responsive">
@@ -122,8 +130,6 @@
 															</label>
 														</th>
 														<th>门店编号</th>
-														<th>所属省份</th>
-														<th>所属市/区</th>
 														<th>详细地址</th>
 														<th>联系电话</th>
 								
@@ -209,8 +215,8 @@
 		<!-- inline scripts related to this page -->
 
 		<script type="text/javascript">
-		$(document).on('click','#check_where',function(){
-			var id = $(this).next().val();
+		$(document).on('change','#check_where',function(){
+			var id = $(this).val();
 			var store_info = $('#store_info');
 			$.ajax({
 				type:'get',
@@ -220,25 +226,28 @@
 				success:function(msg) {
 					var str = "";
 					$.each(msg,function(k,v){
-						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
-					 });
-					
-					store.html(str);
+						str += '<tr><td class="center"><label><input type="checkbox" class="ace" /><span class="lbl"></span></label></td>';
+						str += "<td>"+v.store_id+"</td>";
+						str += "<td>"+v.store_name+"</td>";
+						str += "<td>"+v.phone+"</td></tr>";
+					});
+				
+					store_info.html(str);
 				}
 			});
 		});
-		$(document).on('click','#check_place',function(){
-			var id = $(this).next().val();
-			var store = $('#store');
+		$(document).on('change','#check_place',function(){
+			var id = $(this).val();
+			var store = $('#check_where');
 			$.ajax({
 				type:'get',
 				url:'store_select',
 				data:{store_id:id},
 				dataType:'json',
 				success:function(msg) {
-					var str = "";
+					var str = "<option>请选择...</option>";
 					$.each(msg,function(k,v){
-						str += '<a id="check_where">'+v.store_name+'</a><input type="hidden" value='+v.store_id+'>&nbsp;&nbsp;&nbsp;&nbsp;'
+						str += '<option value='+v.store_id+'>'+v.store_name+'</option>';
 					 });
 					
 					store.html(str);

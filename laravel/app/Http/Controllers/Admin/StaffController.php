@@ -17,9 +17,8 @@ class StaffController extends Controller
    public function index()
    {
       $info = $_SESSION['admin'];
-  		$staffObj = new Admin ;
-  		$data = $staffObj ->selectAll() ;
-  		return view('admin.staff.staffinfo', ['arr' =>$data,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
+  	  $arr = $arr =DB::table('admin')->paginate(5);
+  		return view('admin.staff.staffinfo', ['arr' =>$arr,'admin_id'=>$info[0]['admin_id'],'admin_name'=>$info[0]['admin_name'],'admin_img'=>$info[0]['admin_img']]) ;
    }
 
    //员工添加列表
@@ -44,7 +43,26 @@ class StaffController extends Controller
       return redirect('/staff');
    }
    
-  
+  //管理员删除
+    public function admin_delete()
+    {
+        //接视图层传过来的值
+        $admin_id = Input::get('ids');
+        $admin_id = explode(',',$admin_id);
+        //实例化model
+        $model = new Admin();
+        //调用删除方法
+        $res = $model->delAll($admin_id);
+        //判断，成功返回1，失败返回0
+        if($res)
+        {
+            return json_encode(['status' => 1000]);
+        } 
+        else
+        {
+            return json_encode(['status' => 1001]);;
+        }
+    }
 
 
    /**
