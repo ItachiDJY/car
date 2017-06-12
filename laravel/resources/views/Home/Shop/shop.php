@@ -22,7 +22,32 @@
     <meta name="WT.huanChe_menDian_Second" content="正定机场店" />
     <meta name="WT.quChe_time_Second" content="2017-05-24 10:00" />
     <meta name="WT.huanChe_time_Second" content="2017-06-21 10:00" />
+    <script src="Scripts/jquery.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://css.zuchecdn.com/divided/som/entry/main@977f78b8d9.css" />
+    <!--城市选择控件开始-->
+    <link rel="stylesheet" href="Content/kuCity.css">
+    <script src="http://www.jq22.com/jquery/jquery-1.9.1.js"></script>
+    <script src="Scripts/kuCity.js"></script>
+    <!--城市选择控件结束-->
+    <style>
+        .areaSelectionall {
+            text-align: left;
+            margin-top: 38px;
+            position: absolute;
+            text-align: left;
+            width: 868px;
+            z-index: 10000;
+        }
+        .areaSelectionallno {
+            text-align: left;
+            margin-top: 38px;
+            position: absolute;
+            text-align: left;
+            width: 868px;
+            z-index: 10000;
+        }
+       
+    </style>
 </head>
 <body class="bodycolor">
 <input type="hidden" id="currentDateStr" name="currentDateStr" value="2017-05-24 09:38">
@@ -39,59 +64,52 @@
     <div class="zc_main">
         <a href="/" class="zc_logo" alt="神州租车"></a>
         <ul class="zc_menu">
-            <li class="homecur" >
+            <li >
                 <a href="/" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-首页（顶）')">首页</a>
             </li>
             <li  >
                 <a href="/door" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-上门取送（顶）')">上门取送</a>
             </li>
-            <li  >
+            <li class="homecur" >
                 <a href="/shop" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-到店取还（顶）')">到店取还</a>
             </li>
             <li  >
                 <a href="/long" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-长租（顶）')">长租</a>
             </li>
-            <li  >
-                <a href="/company" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-企业租车（顶）')">企业租车</a>
-            </li>
-            <li  >
-                <a href="/free" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-顺风车（顶）')">顺风车</a>
-            </li>
-            <li  >
-                <a href="/store" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-门店（顶）')">门店</a>
-            </li>
-            <li>
-                <a href="/activity" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-活动（顶）')">活动</a>
-            </li>
-            <li  >
-                <a href="/country" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-国际租车（顶）')">国际租车</a>
-            </li>
+           
         </ul>
-        <div class="zcindex_login" >
-            <div class="wdl" id="notLogin">
-                <a href="/login" class="colfabe00" id="loginBT" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-登录（顶）')">登录</a>
-                <b>/</b>
-                <a href="/register" class="colfabe00" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-注册（顶）')">注册</a>
-                <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=loginSys&flag=order" class="colc8c8ce ml20" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-我的神州（顶）')">我的神州</a>
-            </div>
-            <div class="ydl"  style="display: block;" id="alreadyLogin">
-                <h1 id="topLoginName" ></h1>
+        
+        <div class="zcindex_login">
+            <?php if(isset($_COOKIE['logo'])) { ?>
+             <div class="ydl" style="display:block">
+                <h1> 欢迎<font color="red"><?php echo $_COOKIE['user_name']?></font>莅临租呗</h1>
                 <div class="zc_index_my">
                     <a href="https://mycar.zuche.com" class="top">我的神州<i class="zc_ordown"></i></a>
                     <div class="contmyszlist">
                         <div class="p-re">
                             <span class="y">◆</span>
-                            <a href="https://mycar.zuche.com/queryOrder/queryOrder.do" class="bhpr reddot"  onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','我的神州-我的订单')">我的订单
+                            <a href="/order" class="bhpr reddot"  onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','我的神州-我的订单')">我的订单
 
                             </a>
                             <a href="https://mycar.zuche.com/myAssetsController/myAsset.do">我的资产</a>
                             <a href="https://mycar.zuche.com/member/person/personinfo.do">我的账户</a>
-                            <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=delsession" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','我的神州-退出登陆')">退出登录</a>
+                            <a href="/login/loginout" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','我的神州-退出登陆')">退出登录</a>
                         </div>
                     </div>
                 </div>
                 <div class="clear"></div>
             </div>
+             <?php } else { ?>
+           
+            <div class="wdl" style="display:block">
+                <a href="/login" class="colfabe00" id="loginBT" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-登录（顶）')">登录</a>
+                <b>/</b>
+                <a href="/register" class="colfabe00" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-注册（顶）')">注册</a>
+                
+                <a href="https://passport.zuche.com/memberManage/xtoploginMember.do?act=loginSys&flag=order" class="colc8c8ce ml20" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-我的神州（顶）')">我的神州</a>
+                
+            </div>
+            <?php } ?>
         </div>
         <div class="zc_phone_bd">
             <div class="p-re zc_p_h">
@@ -109,13 +127,106 @@
                 <div class="choose_ul">
                     <div class="ch_box">
                         <label class="c_car">取车</label>
-                        <input type="text" home-flag="true" value="石家庄" maxlength="10" default-value="选择城市" link-input="fromCityId" class="iptcity citySD paircitySelection" name="fromCity" id="fromCity">
+                        <input type="text" home-flag="true" value="石家庄" maxlength="10" default-value="选择城市" link-input="fromCityId" class="search iptcity citySD paircitySelection" name="fromCity" id="fromCity">
                         <input type="hidden" id="fromCityId" name="fromCityId" value="33"/>
-                        <input type="text" value="正定机场店" maxlength="30" default-value="请选择取车门店" class="iptSe iptst" link-input="fromStoreId" name="fromStoreName" id="fromStoreName">
+                        <input type="text" value="正定机场店" maxlength="30" default-value="请选择取车门店" class="iptSe iptst" link-input="fromStoreId" name="fromStoreName" id="pop_store">
                         <input type="hidden" value="959" name="fromStoreId" id="fromStoreId">
                         <input type="hidden" id="fromIsMergeDept" name="fromIsMergeDept" value="0"/>
                         <input type="hidden" id="originalFromCityId" name="originalFromCityId" value="0"/>
-                        <div class="areaSelection d_none"></div>
+            
+
+                        <!-- 取车门店弹出框开始 -->
+                        <div class="areaSelectionall "  style="display: none;left: 213.4px; top: 20px;">
+                            <div class="areainfo">
+                            <div class="wbox_bd">
+                            <dl class="areainfo_address">
+                           
+                            </dl>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- 取车门店弹出框结束 -->
+                        
+                        <script>
+                            // 获取所选城市的所有一级门店
+                            $('#pop_store').on('click',function(){
+                                 $('.areaSelectionall').css('display','block');
+                                 var cityId = $('#fromCity').val() ;
+                                 $.ajax({
+                                    url:'/shop_info',
+                                    type:'GET',
+                                    dataType:'json',
+                                    data:{id:cityId},
+                                    success:function(msg){
+
+                                        var html ='<dt>所有门店</dt>';
+                                        $.each(msg,function(i,v){
+                                            html +='<dd><a class="pop_two" ids="'+v.store_id+'">'+v.store_name+'</a></dd>';
+                                        }) 
+                                        html+='<div class="clear"></div>';
+                                        $(".areainfo_address").html(html);
+
+                                    }
+                                 })
+                                
+                            })
+
+                            // 获取所选城市的所有二级门店
+                            $(document).on('click','.pop_two',function(){ 
+                                 
+                                var _this = $(this);
+                                 _this.nextAll().remove();
+                                var store_id = _this.attr('ids');
+                                $.ajax({
+                                    url:'/shop_info',
+                                    type:'GET',
+                                    dataType:'json',
+                                    data:{id:store_id},
+                                    success:function(msg){
+                                        var html='<div class="areaMD " style=" left: 0px; top: 40px;"><ul class="clearfix">';
+                                        $.each(msg,function(i,v){
+                                            html+='<li class="pop_three" deptname="正定机场店" idx="0" ischain="0" ismergedept="0" code="'+v.store_id+'" name="jsdep"><a>'+v.store_name+'<span class="f12 yelow">24h</span></a></li>';
+                                        })
+                                        html+='</ul></div>';
+                                       _this.after(html);
+
+                                    }
+                                 })
+                            })
+                            // 获取所选城市的所有二级门店的地址和电话
+                            $(document).on('mouseenter','.pop_three',function(){
+                                var _this = $(this);
+                                _this.parent().nextAll().remove();
+                                var store_id = _this.attr('code');
+                                var store_name = _this.text();
+                                
+                                $.ajax({
+                                    url:'/shop_phone',
+                                    type:'GET',
+                                    dataType:'json',
+                                    data:{id:store_id},
+                                    success:function(msg){
+                                        var html='<div class="dotline"></div><div class="shopinfo"><div idx="0"<span class="wtitle">地　　址：</span><span class="w235">'+store_name+'</span><span class="clear wtitle">门店电话：</span><span class="w235">'+msg.phone+'</span></div></div>';
+                                        _this.parent().after(html);
+                                    }
+                                })
+                            }) 
+
+                            //将地址赋值在取车门店文本框
+                            $(document).on('click','.pop_three',function(){
+                                var _this = $(this);
+                                var store_name = _this.text();
+                                var store_id = _this.attr('code');
+                                $('#pop_store').val(store_name);
+                                $('#fromStoreId').val(store_id);
+                                $('.areaSelectionall').css('display','none');
+                            })
+                            
+                            
+                        </script>
+
+                        
+
                         <input type="text" value="" class="iptSe iptst" default-value="请输入送车地址" name="sentAddress" id="sentAddress" maxlength="50" style="display:none;" readonly="readonly"  defaultValue="">
                         <div class="btn index_smsc">
                             <label class="cartxt" for="showsentAddress_checkbox">送车上门
@@ -152,13 +263,106 @@
                     </div>
                     <div class="ch_box mt10 p-re w544">
                         <label class="c_car">还车</label>
-                        <input type="text" home-flag="true" value="石家庄" maxlength="10" default-value="选择城市" class="iptcity citySD citySelection" link-input="toCityId" name="toCityName" id="toCityName">
+                        <input type="text" home-flag="true" value="石家庄" maxlength="10" default-value="选择城市" class="search2 iptcity citySD citySelection" link-input="toCityId" name="toCityName" id="toCityName">
                         <input type="hidden" id="toCityId" name="toCityId" value="33"/>
-                        <input type="text" value="正定机场店" maxlength="30" default-value="请选择还车门店" class="iptSe iptst" link-input="toStoreId" name="toStoreName" id="toStoreName">
+                        <input type="text" value="正定机场店" maxlength="30" default-value="请选择还车门店" class="iptSe iptst" link-input="toStoreId" name="toStoreName" id="return_store">
                         <input type="hidden" id="toStoreId" name="toStoreId" value="959" />
                         <input type="hidden" id="toIsMergeDept" name="toIsMergeDept" value="0"/>
                         <input type="hidden" id="originalToCityId" name="originalToCityId" value="0"/>
-                        <div class="areaSelection d_none"></div>
+                        <!-- 还车门店弹出框开始 -->
+                        <div class="areaSelectionallno "  style="display: none;left: 213.4px; top: 20px;">
+                            
+                            <div class="areainfo">
+                            <div class="wbox_bd">
+                            <dl class="areainfo_address">
+                           
+                            </dl>
+                            </div>
+                            </div>
+                        </div>
+                        <!-- 还车门店弹出框结束 -->
+                        <script>
+                        //  获取城市
+                            $('.search').kuCity();
+                            $('.search2 ').kuCity();
+                        </script>
+                        <script>
+                            // 还车
+                            // 获取所选城市的所有一级门店
+                            $('#return_store').on('click',function(){
+                                 $('.areaSelectionallno').css('display','block');
+                                 var cityId = $('#toCityName').val() ;
+                                 $.ajax({
+                                    url:'/shop_info',
+                                    type:'GET',
+                                    dataType:'json',
+                                    data:{id:cityId},
+                                    success:function(msg){
+
+                                        var html ='<dt>所有门店</dt>';
+                                        $.each(msg,function(i,v){
+                                            html +='<dd><a class="return_two" ids="'+v.store_id+'">'+v.store_name+'</a></dd>';
+                                        }) 
+                                        html+='<div class="clear"></div>';
+                                        $(".areainfo_address").html(html);
+
+                                    }
+                                 })
+                                
+                            })
+
+                            // 获取所选城市的所有二级门店
+                            $(document).on('click','.return_two',function(){ 
+                                
+                                var _this = $(this);
+                                 _this.nextAll().remove();
+                                var store_id = _this.attr('ids');
+                                $.ajax({
+                                    url:'/shop_info',
+                                    type:'GET',
+                                    dataType:'json',
+                                    data:{id:store_id},
+                                    success:function(msg){
+                                        var html='<div class="areaMD " style=" left: 0px; top: 40px;"><ul class="clearfix">';
+                                        $.each(msg,function(i,v){
+                                            html+='<li class="return_three" deptname="正定机场店" idx="0" ischain="0" ismergedept="0" code="'+v.store_id+'" name="jsdep"><a>'+v.store_name+'<span class="f12 yelow">24h</span></a></li>';
+                                        })
+                                        html+='</ul></div>';
+                                       _this.after(html);
+
+                                    }
+                                 })
+                            })
+
+                            // 获取所选城市的所有二级门店的地址和电话
+                            $(document).on('mouseenter','.return_three',function(){
+                                var _this = $(this);
+                                _this.parent().nextAll().remove();
+                                var store_id = _this.attr('code');
+                                var store_name = _this.text();
+                                
+                                $.ajax({
+                                    url:'/shop_phone',
+                                    type:'GET',
+                                    dataType:'json',
+                                    data:{id:store_id},
+                                    success:function(msg){
+                                        var html='<div class="dotline"></div><div class="shopinfo"><div idx="0"<span class="wtitle">地　　址：</span><span class="w235">'+store_name+'</span><span class="clear wtitle">门店电话：</span><span class="w235">'+msg.phone+'</span></div></div>';
+                                        _this.parent().after(html);
+                                    }
+                                })
+                            }) 
+
+                            //将地址赋值在还车门店文本框
+                            $(document).on('click','.return_three',function(){
+                                var _this = $(this);
+                                var store_name = _this.text();
+                                var store_id = _this.attr('code');
+                                $('#return_store').val(store_name);
+                                $('#toStoreId').val(store_id);
+                                $('.areaSelectionallno').css('display','none');
+                            })
+                        </script>
                         <input type="text" value="" maxlength="50" default-value="请输入取车地址" class="iptSe iptst" name="pickAddress" id="pickAddress" style="display:none;" readonly="readonly"  defaultValue="">
                         <div class="btn">
                             <label class="cartxt" for="showpickAddress_span2">上门取车
@@ -232,11 +436,57 @@
                 </div>
             </div>
             <div class="choose_div">
-                <i>租期: <em class="bred toDateWeek">28天</em>，不限里程</i>
-                <a href="javascript:orderSubmitIndex('step2');" class="search_btn zc_bbtn" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-搜索车型')">立即选车</a>
+                <i>租期: <em class="bred toDateWeek" id="pre_days">28天</em>，不限里程</i>
+                <a href="javascript:;" id="select_car" class="select_car search_btn zc_bbtn">立即选车</a>
             </div>
+
             <div class="clear"></div>
         </div>
+        <script>
+            // 立即选车
+            $('#select_car').on('click',function(){
+
+                var fromStoreId = $('#fromStoreId').val();
+                var toStoreId = $('#toStoreId').val();
+                var fromDate = $('#fromDate').val();
+                var toDate = $('#toDate').val();
+                var fromHourMinute = $('#fromHourMinute').val();
+                var toHourMinute = $('#toHourMinute').val();
+                var pre_days = $('#pre_days').text();
+               
+                $.ajax({
+                    url:'/right_choose_car',
+                    type:'GET',
+                    dataType:'json',
+                    data:{fromStoreId:fromStoreId,toStoreId:toStoreId,fromDate:fromDate,toDate:toDate,fromHourMinute:fromHourMinute,toHourMinute:toHourMinute,pre_days:pre_days},
+                    success:function(msg){
+                       var html = '';
+                       $.each(msg,function(k,v){
+                           html+='<tr id="car87" class="clist_tr carLi carInfo87 " data="" price-flag="0"  style="z-index: 0; height: 79px;">';
+                           html+='<td class="pic"><img width="230" height="130" onclick="zuche.carDetailFn(87, "normal");" alt="" src="../'+v.car_img+'"></td>';
+                           html+='<td class="info"><p class="name">'+v.brand_name+'</p><p class="oth">'+v.doors_num+' | '+v.tran_type+' | 乘坐'+v.seat_num+'人</p></td>';
+                           html+='<td class="ord"><div class="order_box"><div class="od_price"><div class="car_price" style="z-index: 1;"><span class="pri_ye"><em class="rmb">¥</em><em class="num">'+v.rental_price+'</em><em class="unit">/日均</em></span><div class="sz_priceTotal" ss="" modeid="87" modelevel="3" data="normal" style="cursor: pointer;"><div class="fl clear"><span class="fl pri_all"><em class="total">总价:</em><em class="rmb">¥</em><em class="num">'+v.total_price+'</em><a class="zcargray_d" href="javascript:;"></a></span></div></div></div></div><a ids="'+v.car_id+'" class="rent_car od_btn btn_yel zc_bbtn" href="javascript:;">租 车</a></div></td>';
+                           html+='</tr>';                      
+                       })
+                       $('#tbody').html(html);
+                    }
+                })
+            })
+
+            //租车下订单
+            $(document).on('click' ,'.rent_car',function(){
+                var fromStoreId = $('#fromStoreId').val();
+                var toStoreId = $('#toStoreId').val();
+                var fromDate = $('#fromDate').val();
+                var toDate = $('#toDate').val();
+                var fromHourMinute = $('#fromHourMinute').val();
+                var toHourMinute = $('#toHourMinute').val();
+                var pre_days = $('#pre_days').text();
+                var car_id = $(this).attr('ids');
+
+                window.location.href ='/rent_car?car_id='+car_id+'&fromStoreId='+fromStoreId+'&toStoreId='+toStoreId+'&fromDate='+fromDate+'&toDate='+toDate+'&fromHourMinute='+fromHourMinute+'&toHourMinute='+toHourMinute+'&pre_days='+pre_days;
+            })
+        </script>
         <input type="hidden" id="senttype" name="senttype" value="0" />
         <input type="hidden" id="sentCarLng" name="sentCarLng" value="">
         <input type="hidden" id="sentCarLat" name="sentCarLat" value="">
@@ -313,13 +563,14 @@
                 <p class="zc_left_title">车型</p>
                 <ul class="chexing">
                     <li class="orderlevelcheck filter_level all">
-                        <a class="checked cxdefault">
+                        <a class="car_d checked cxdefault" href="javascript:void(0);">
                             <i class="zc_cx_bx"></i>
-                            <i class="cartxt">不限</i>
+                            <i class="cartxt" ids="0">不限</i>
                         </a>
                     </li>
+                    <?php foreach($deploy_data as  $v):?>
                     <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-手动紧凑型')" data="1">
+                        <a href="javascript:void(0);" class="car_d">
                             <i class="zc_cx_sdjc"></i>
 
 
@@ -328,110 +579,22 @@
 
 
 
-                            <i class="cartxt">手动紧凑型</i>
+                            <i class="cartxt" ids="<?=$v;?>"><?=$v;?></i>
                         </a>
                     </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-经济型')" data="3">
-
-                            <i class="zc_cx_jj"></i>
-
-
-
-
-
-
-                            <i class="cartxt">经济型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-商务型')" data="5">
-
-
-                            <i class="zc_cx_sw"></i>
-
-
-
-
-
-                            <i class="cartxt">商务型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-豪华型')" data="6">
-
-
-
-                            <i class="zc_cx_hh"></i>
-
-
-
-
-                            <i class="cartxt">豪华型</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-SUV')" data="7">
-
-
-
-
-                            <i class="zc_cx_suv"></i>
-
-
-
-                            <i class="cartxt">SUV</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-6至15座商务')" data="8">
-
-
-
-
-
-                            <i class="zc_cx_zsw"></i>
-
-
-                            <i class="cartxt">6至15座商务</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-个性车')" data="9">
-
-
-
-
-
-
-                            <i class="zc_cx_gx"></i>
-
-                            <i class="cartxt">个性车</i>
-                        </a>
-                    </li>
-                    <li class="orderlevelcheck filter_level brandname">
-                        <a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-车型-电动车')" data="12">
-
-
-
-
-
-
-
-                            <i class="zc_cx_dd"></i>
-                            <i class="cartxt">电动车</i>
-                        </a>
-                    </li>
+                    <?php endforeach;?>
+                   
                 </ul>
             </div>
+            
             <div class="cl-lbox bdbtm orderRent price1">
                 <p class="zc_left_title">价格 <span class="sma12">(元)</span></p>
                 <ul class="pri_range">
-                    <li class="bar1 orderlevelcheck filter_rent_money all"><a class="checked jgdefault" data="0-*"><span class="w40"></span></a></li>
-                    <li class="bar2 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-价格-0-150')"data="0-150"><span class="w40"></span></a></li>
-                    <li class="bar3 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-价格-150-300')"data="150-300"><span class="w40"></span></a></li>
-                    <li class="bar4 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-价格-300-500')"data="300-500"><span class="w40"></span></a></li>
-                    <li class="bar5 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-价格-500-*')"data="500-*"><span class="w70"></span></a></li>
+                    <li class="bar1 orderlevelcheck filter_rent_money all"><a class="car_price checked jgdefault" data="0"><span class="w40"></span></a></li>
+                    <li class="bar2 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" class="car_price" data="0-150"><span class="w40"></span></a></li>
+                    <li class="bar3 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" class="car_price" data="150-300"><span class="w40"></span></a></li>
+                    <li class="bar4 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" class="car_price" data="300-500"><span class="w40"></span></a></li>
+                    <li class="bar5 prli orderlevelcheck filter_rent_money"><a href="javascript:void(0);" class="car_price" data="500-*"><span class="w70"></span></a></li>
                 </ul>
                 <ul class="pri_num">
                     <li class="pri1 w37 checked jgdefault">不限</li>
@@ -445,48 +608,79 @@
             <div class="cl-lbox bdbtm orderBrand">
                 <p class="zc_left_title">品牌</p>
                 <ul class="car_brand">
-                    <li class="orderlevelcheck filter_brand all"><a class="checked ppdefault">不限</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="12">奥迪</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="11">宝马</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="20">奔驰</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="10">本田</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="2">标致</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="3">别克</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="16">比亚迪</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="21">长城</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="8">大众</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="7">丰田</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="9">福特</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="22">金杯</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="18">凯迪拉克</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="17">铃木</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="14">马自达</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="15">奇瑞</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="6">起亚</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="13">斯柯达</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="5">现代</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="4">雪佛兰</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="1">雪铁龙</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="23">猎豹</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="24">日产</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="25">沃尔沃</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="28">依维柯</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="29">华泰</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="30">野马</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="31">三菱</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="32">MINI</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="33">雪铁龙DS</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="34">北京汽车</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="35">菲亚特</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="36">江淮</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="37">江铃</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="38">上汽大通</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="39">华颂</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="40">风行</a></li>
-                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" onclick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click', '短租-某一个品牌')" data="41">广汽</a></li>
+                    <li class="orderlevelcheck filter_brand all"><a class="brand_select checked ppdefault" ids="">不限</a></li>
+                    <?php foreach($brand_data as $v ):?>
+                    <li class="orderlevelcheck filter_brand brandname"><a href="javascript:void(0);" class="brand_select" ids="<?=$v['brand_id']?>" ><?=$v['brand_name']?></a></li>
+                   
+                    <?php endforeach;?>
                 </ul>
             </div>
         </div>
+        <input type="hidden" id="car_d" value="0">
+        <input type="hidden" id="car_price" value="0">
+        <input type="hidden" id="brand_select" value="0">
+        <script> 
+                //车型图标切换   
+                $('.car_d').on('click',function(){
+                   // alert(123);
+                    var _this = $(this);
+                    _this.hasClass('checked cxdefault') ? _this.parent().siblings().find('a').removeClass('checked cxdefault') : _this.addClass('checked cxdefault').parent().siblings().find('a').removeClass('checked cxdefault');
+                    var car_deploy = $(this).find('.cartxt').attr('ids');
+                    $('#car_d').val(car_deploy);
+                     
+                    loadData();
+                })
+
+
+                //价格切换  
+                $('.car_price').on('click',function(){
+                   
+                    var _this = $(this);
+                    _this.hasClass('checked jgdefault') ? _this.parent().siblings().find('a').removeClass('checked jgdefault') : _this.addClass('checked jgdefault').parent().siblings().find('a').removeClass('checked jgdefault');
+                    var price = _this.attr('data') ;
+                    $('#car_price').val(price);
+                    loadData();
+                })
+
+
+                //品牌图标切换
+                $('.brand_select').on('click',function(){
+                    
+                    var _this = $(this);
+                    _this.hasClass('checked ppdefault') ? _this.parent().siblings().find('a').removeClass('checked ppdefault') : _this.addClass('checked ppdefault').parent().siblings().find('a').removeClass('checked ppdefault');
+                     var car_brand = $(this).attr('ids');
+                    $('#brand_select').val(car_brand);
+                    loadData();
+                })
+
+                function loadData(){
+                    var car_d = $('#car_d').val();
+                    var car_price = $('#car_price').val();
+                    var brand_select = $('#brand_select').val();
+                    var pre_days = $('#pre_days').text();
+                    $.ajax({
+                        url:'/shop_serach',
+                        type:'GET',
+                        dataType:'json',
+                        data:{car_d:car_d,car_price:car_price,brand_select:brand_select,pre_days:pre_days},
+                        success:function(msg){
+                            var html = '';
+                       $.each(msg,function(k,v){
+                           html+='<tr id="car87" class="clist_tr carLi carInfo87 " data="" price-flag="0"  style="z-index: 0; height: 79px;">';
+                           html+='<td class="pic"><img width="230" height="130" onclick="zuche.carDetailFn(87, "normal");" alt="" src="../'+v.car_img+'"></td>';
+                           html+='<td class="info"><p class="name">'+v.brand_name+'</p><p class="oth">'+v.doors_num+' | '+v.tran_type+' | 乘坐'+v.seat_num+'人</p></td>';
+                           html+='<td class="ord"><div class="order_box"><div class="od_price"><div class="car_price" style="z-index: 1;"><span class="pri_ye"><em class="rmb">¥</em><em class="num">'+v.rental_price+'</em><em class="unit">/日均</em></span><div class="sz_priceTotal" ss="" modeid="87" modelevel="3" data="normal" style="cursor: pointer;"><div class="fl clear"><span class="fl pri_all"><em class="total">总价:</em><em class="rmb">¥</em><em class="num">'+v.total_price+'</em><a class="zcargray_d" href="javascript:;"></a></span></div></div></div></div><a ids="'+v.car_id+'" class="rent_car od_btn btn_yel zc_bbtn" href="javascript:;">租 车</a></div></td>';
+                           html+='</tr>';                      
+                       })
+                       $('#tbody').html(html);
+                        }
+                    })
+                }
+
+                
+                
+
+            </script>
         <div class="empty_choose"></div>
         <!--地图 start-->
         <div class="zc_boxshd cl-lbox mt10 lmap_box">
@@ -569,14 +763,43 @@
                 <img src="https://image.zuchecdn.com/newversion/common/loading.gif" width="30" height="30" style="display:block;margin:0 auto">
                 载入中，请稍等...
             </p>
-            <p class="ac searchError d_none newwait">
-                很抱歉，加载车辆数据失败！<a href="javascript:window.location.reload()" id="carListSearchError">重新加载</a>
-            </p>
+            
+            <!--车辆展示开始-->
             <div class="clist_ct ">
-                <table class="clist_tb" cellpadding="0" cellspacing="0" border="0">
-                    <tbody class="carList"></tbody>
-                </table>
+            <table class="clist_tb" cellspacing="0" cellpadding="0" border="0">
+            <tbody class="carList" id="tbody">
+            <?php foreach($car_data as $k=>$v) {?>
+            <tr id="car87" class="clist_tr carLi carInfo87 " data="1-235-3-4-3000-40-0-1-5-https://image.zuchecdn.com/newversion/news/order/klz.jpg-三厢 | 1.6自动-雪佛兰科鲁兹" price-flag="0"  style="z-index: 0; height: 79px;">
+            <td class="pic">
+                <img width="230" height="130" onclick="zuche.carDetailFn(87, "normal");" alt="租雪佛兰科鲁兹/三厢/1.6自动" src="../<?=$v['car_img']?>">
+            </td>
+            <td class="info">
+                <p class="name"><?=$v['brand_name']?></p>
+                <p class="oth"><?=$v['doors_num']?> | <?=$v['tran_type']?> | 乘坐<?=$v['seat_num']?>人</p>
+            </td>
+            <td class="ord">
+                <div class="order_box">
+                <div class="od_price">
+                <div class="car_price" style="z-index: 1;">
+                    <span class="pri_ye"><em class="rmb">¥</em><em class="num"><?=$v['rental_price']?></em><em class="unit">/日均</em></span>
+                    <div class="sz_priceTotal" ss="" modeid="87" modelevel="3" data="normal" style="cursor: pointer;">
+                    <div class="fl clear">
+                    <!-- <span class="fl pri_all"><em class="total">总价:</em><em class="rmb">¥</em><em class="num"></em><a class="zcargray_d" href="javascript:;"></a></span> -->
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <a ids="<?=$v['car_id']?>" class="rent_car od_btn btn_yel zc_bbtn" href="javascript:;">租 车</a>
+                </div>
+                </td>
+            </tr>
+            <?php }?>
+            </tbody>
+            </table>
             </div>
+            
+        <!--车辆展示结束-->
+            
         </div>
     </div>
     <!-- 车辆列表结束 -->
@@ -673,7 +896,7 @@
             </div>
         </li>
         <li class="libox p-re" id="rtoolorder" >
-            <a href="https://mycar.zuche.com/queryOrder/queryOrder.do" target="_Blank" class="abox" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','侧边-订单')"><span class="zc_record_i"></span>订<br>单<span class="zc_nont_ory"></span><span class="zc_has_ory" style="display:none;"></span></a>
+            <a href="/order" target="_Blank" class="abox" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','侧边-订单')"><span class="zc_record_i"></span>订<br>单<span class="zc_nont_ory"></span><span class="zc_has_ory" style="display:none;"></span></a>
             <div class="zc_tool_order" style="display: none;">
                 <div class="p-re" id="orderQueryResult">
                     <!-- 在这里根据查询订单的结果使用模版渲染填入数据 -->
@@ -739,9 +962,10 @@
     <ul>
         <li>
             <a href="http://wpa.qq.com/msgrd?V=3&uin=507536932&site=liuyanbao.net&menu=yes">
-            <span class="zc_service_i"></span></a>
+                <span class="zc_service_i"></span></a>
             <div class="zc_foottooltipe">
                 <div class="p-re"><div class="rightsj">◆</div>在线客服</div>
+            </div>
         </li>
         <li>
             <a href="https://help.zuche.com/" target="_blank"><span class="zc_help_i"></span></a>
@@ -1671,22 +1895,22 @@
     var carwrmjsURL = 'https://js.zuchecdn.com';
     var carwrmimageURL = 'https://image.zuchecdn.com';
     var carwrmcssURL = 'https://css.zuchecdn.com';
-    var carwlomURL = "https://changzu.zuche.com";
-    var carwcmsURL='https://huodong.zuche.com';
-    var carwdmURL = "https://service.zuche.com";
-    var carwepmURL='https://carbusiness.zuche.com';
-    var carwlmURL='https://passport.zuche.com';
-    var carwmmURL = "https://mycar.zuche.com";
-    var carwsomURL='https://www.zuche.com';
-    var enURL='https://en.zuche.com';
-    var orderURL='https://order.zuche.com';
-    var leasingURL='https://leasing.zuche.com';
-    var easyrideURL='https://easyride.zuche.com';
+    // var carwlomURL = "https://changzu.zuche.com";
+    // var carwcmsURL='https://huodong.zuche.com';
+    // var carwdmURL = "https://service.zuche.com";
+    // var carwepmURL='https://carbusiness.zuche.com';
+    // var carwlmURL='https://passport.zuche.com';
+    // var carwmmURL = "https://mycar.zuche.com";
+    // var carwsomURL='https://www.zuche.com';
+    // var enURL='https://en.zuche.com';
+    // var orderURL='https://order.zuche.com';
+    // var leasingURL='https://leasing.zuche.com';
+    // var easyrideURL='https://easyride.zuche.com';
     var serviceURL='https://service.zuche.com';
-    var carbusinessURL='';
-    var driverURL='';
-    var protocol='https://';
-    var protocoldm='https://';
+    // var carbusinessURL='';
+    // var driverURL='';
+    // var protocol='https://';
+    // var protocoldm='https://';
 </script>
 <script type="text/javascript" src="https://js.zuchecdn.com/divided/som/public/lib/sea/sea@89b3a8eaa1.js"></script>
 <script type="text/javascript" src="https://js.zuchecdn.com/divided/som/public/lib/sea/plugin/seajs-preload@11b2cc155e.js"></script>
@@ -1696,24 +1920,24 @@
 <![endif]-->
 <script type="text/javascript" >
     seajs.use([
-        'divided/som/entry/lib@9418beaef0',
+        //'divided/som/entry/lib@9418beaef0',
         'divided/som/entry/common@3fee529603'
     ]);
     seajs.use(['divided/som/dcs_tag_zc.js']);
 </script>
 <script type="text/javascript">
     var pageSystemDate='2017-05-24 09:38';
-    var priceLevel='1';
-    var isHoliday = '';
-    var differCityOrStore = ""==="true";
-    var sentType = "0";
-    var pickType = "0";
+   // var priceLevel='1';
+   // var isHoliday = '';
+    //var differCityOrStore = ""==="true";
+   // var sentType = "0";
+   // var pickType = "0";
     var minDate = '2017-05-24';
     var currentDate = '2017-05-24';
-    var hasCustomerDiscount = '';
-    var orderId='';
-    var spdbActivityParas = '';
-    var modeLevel = "";
+    // var hasCustomerDiscount = '';
+    // var orderId='';
+    // var spdbActivityParas = '';
+    // var modeLevel = "";
 
     seajs.use(['divided/som/entry/lib@9418beaef0'],function(){
         seajs.use('divided/som/entry/cartlist@df03e2be9f');

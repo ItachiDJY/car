@@ -49,5 +49,34 @@ class Store extends Model
         $resume= $this->where('store_id',$id);
         return $resume->update($data);
     }
+
+	//查询一条数据
+    public function get_one($data)
+    {
+        return $this->where($data)->first()->toArray();
+    }
+
+    //查询多条数据
+    public function get_all()
+    {
+        return $this->where($data)->get()->toArray();
+    }
+
+    //根据一级城市id 查询该ID下对应的门店
+    public function get_tree($arr , $parent_id)
+    {
+        $result = [];
+        if ($arr) {
+            foreach ($arr as $key=>$val) {
+                if ($val['parent_id'] == $parent_id) {
+                    $result[$key] = $val;
+                    $result[$key]['city'] = $this->get_tree($arr , $val['store_id']);
+                }
+                
+            }
+        }
+
+        return $result;
+    }
 }
 

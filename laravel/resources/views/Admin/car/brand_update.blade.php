@@ -93,7 +93,19 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+								<a href="index">首页</a>
+=======
+								<a href="admin">首页</a>
+>>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
+=======
+								<a href="/index.php/admin">首页</a>
+>>>>>>> 23791d287c1ac75688757c328f4b49095a706ddc
+=======
 								<a href="/admin_index">首页</a>
+>>>>>>> db7e98f87ec926cac57fd528b6c856a598f82973
 							</li>
 							<li class="active">车辆管理</li>
 							<li class="active">修改车辆品牌</li>

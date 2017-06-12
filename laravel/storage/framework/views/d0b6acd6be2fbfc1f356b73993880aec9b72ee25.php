@@ -2,11 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>租呗</title>
+		<title>安居客</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<!-- basic styles -->
-		<link href="{{URL::asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/font-awesome.min.css')}}" />
+		<link href="<?php echo e(URL::asset('assets/css/bootstrap.min.css')); ?>" rel="stylesheet" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/font-awesome.min.css')); ?>" />
 
 		<!--[if IE 7]>
 		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
@@ -20,9 +20,9 @@
 
 		<!-- ace styles -->
 
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-rtl.min.css')}}" />
-		<link rel="stylesheet" href="{{URL::asset('assets/css/ace-skins.min.css')}}" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-rtl.min.css')); ?>" />
+		<link rel="stylesheet" href="<?php echo e(URL::asset('assets/css/ace-skins.min.css')); ?>" />
 
 		<!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
@@ -32,7 +32,7 @@
 
 		<!-- ace settings handler -->
 
-		<script src="{{URL::asset('assets/js/ace-extra.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-extra.min.js')); ?>"></script>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 
@@ -43,7 +43,7 @@
 	</head>
 
 	<body>
-		@include('admin.layouts.header')
+		<?php echo $__env->make('admin.layouts.header', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
 		<div class="main-container" id="main-container">
 			<script type="text/javascript">
@@ -73,7 +73,7 @@
 						</div>
 					</div><!-- #sidebar-shortcuts -->
 
-					@include('admin.layouts.main')<!-- /.nav-list -->
+					<?php echo $__env->make('admin.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?><!-- /.nav-list -->
 
 					<div class="sidebar-collapse" id="sidebar-collapse">
 						<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
@@ -93,10 +93,10 @@
 						<ul class="breadcrumb">
 							<li>
 								<i class="icon-home home-icon"></i>
-								<a href="/admin_index">首页</a>
+								<a href="index">首页</a>
 							</li>
 							<li class="active">车辆管理</li>
-							<li class="active">车辆品牌展示</li>
+							<li class="active">添加车辆品牌</li>
 							
 						</ul><!-- .breadcrumb -->
 					</div>
@@ -106,63 +106,65 @@
 							
 
 									<div class="col-xs-12">
-
 									
+									<form class="form-horizontal" role="form" method="post" action="brand_add_do" enctype="multipart/form-data">
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-1"> 品牌名称 </label>
+										<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+										<div class="col-sm-9">
+											<input type="text" name="brand_name" id="form-field-1" placeholder="品牌名称" class="col-xs-10 col-sm-5" />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 品牌logo </label>
+
+										<div class="col-sm-9">
+											<input type="file" name="brand_logo" id="form-field-2" class="col-xs-10 col-sm-5" multiple="multiple"  />
+										</div>
+									</div>
+
+									<div class="space-4"></div>
+
+									<div class="form-group">
+														<label class="col-sm-3 control-label no-padding-right" for="form-field-2"> 上级品牌</label>
+
+														<div class="col-sm-9">
+															<select name="parent_id">
+																<option value="0">顶级分类</option>
+																<?php foreach($brand_list as $key=>$v) : ?>
+																<option value="<?=$v->brand_id?>" path="<?=$v->path?>">
+																<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
+																<?=$v->brand_name?>
+																</option>
+																<?php  endforeach; ?>
+																        
+															</select>
+															<input type="hidden" name="path">
+													    </div>
+
+
+									</div>
 									
-										<div class="table-responsive">
-											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
-												<thead>
-													<tr>
-														<th class="center">
-															<label>
-																<input type="checkbox" class="ace" id="check" />
-																<span class="lbl"></span>
-															</label>
-														</th>
-														                                                    
-														<th>品牌名称</th>
-														<th>品牌logo</th>
-														<th>父级ID</th>
-														<th>操作</th>
-													</tr>
-												</thead>
+									<div class="form-group">
+										<div class="col-md-offset-3 col-md-9">
+											<button class="btn btn-info" type="submit" id="car_add">
+												<i class="icon-ok bigger-110"></i>
+												增加
+											</button>
 
-												<tbody>
-												@foreach ($data as $v)
+											&nbsp; &nbsp; &nbsp;
+											<button class="btn" type="reset">
+												<i class="icon-undo bigger-110"></i>
+												重置
+											</button>
+										</div>
+									</div>
+									<div class="hr hr-24"></div>
 
-													<tr ids="<?=$v->brand_id?>">
-														<td class="center">
-															<label>
-																<input type="checkbox" class="ace" name="box" />
-																<span class="lbl"></span>
-															</label>
-														</td>
-														<td>
-														<?=str_repeat('&nbsp;',(substr_count($v->path,'-'))*3) ?>
-														<?= $v->brand_name?>
-														</td>
-														<td>
-<<<<<<< HEAD
-														<?php if (isset($v->brand_logo)) {  ?>
-															<img src="<?=$v->brand_logo?>" alt=""> 
-=======
-														<?php if (!empty($v->brand_logo)) {  ?>
-															<img src="../<?=$v->brand_logo?>" alt="" width="100px" height="40px"> 
->>>>>>> eb3d4056bbf2e97557dfb634dfcd078205a67ae2
-														<?php	} ?>
-													     </td>
-														<td><?= $v->parent_id?></td>
-														
-														<td>
-														<button class="up btn">编辑</button>
-														<button class="del btn btn-danger">删除</button>
-														</td>
-
-													</tr>
-												@endforeach
-												</tbody>
-											</table>
-										</div><!-- /.table-responsive -->
+									</form>
 									</div><!-- /span -->
 								</div><!-- /row -->
 
@@ -181,49 +183,25 @@
 
 		<!--[if !IE]> -->
 
-			<script src="{{URL::asset('assets/js/jquery-2.0.3.min.js')}}"></script>
+			<script src="<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>"></script>
 		<!-- <![endif]-->
-		<script>
-		    //编辑
-			$('.up').on('click' ,function(){
-		    	var id = $(this).parents('tr').attr('ids');
-		    	location.href ='brand_update?id='+id;
-		    })
-			//全选/全不选
-			$('#check').on('click' , function(){
-				if (this.checked == true) {
-					$('[name=box]:checkbox').prop('checked',true); 
-				} else {
-					$('[name=box]:checkbox').prop('checked',false); 
 
-				}
-			})
-			//单删
-			$(document).on('click' ,'.del' ,function(){
-				 var _this = $(this);
-				 var ids = _this.parents('tr').attr('ids') ;
-				 $.ajax({
-				 	 url:'brand_del',
-				 	 type:'GET',
-				 	 data:{id:ids},
-				 	 success:function(msg){
-				 	 	 if (msg) {
-				 	 	 	  _this.parents('tr').remove();
-				 	 	 } else {
-				 	 	 	  alert('删除失败');
-				 	 	 }
-				 	 }
-				 })
-			})
-		</script>
 		<!--[if IE]>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <![endif]-->
 
 		<!--[if !IE]> -->
-
+		<script>
+	
+		$(":input[name=parent_id]").change(function(){
+			//alert($(this).find(":selected").attr('path'));
+			var path=$(this).find(":selected").attr('path');
+			$(":input[name=path]").val(path);
+		})
+	
+		</script>
 		<script type="text/javascript">
-			window.jQuery || document.write("<script src={{URL::asset('assets/js/jquery-2.0.3.min.js')}}>"+"<"+"script>");
+			window.jQuery || document.write("<script src=<?php echo e(URL::asset('assets/js/jquery-2.0.3.min.js')); ?>>"+"<"+"script>");
 		</script>
 
 		<!-- <![endif]-->
@@ -235,36 +213,36 @@
 <![endif]-->
 
 		<script type="text/javascript">
-			if("ontouchend" in document) document.write("<script src={{URL::asset('assets/js/jquery.mobile.custom.min.js')}}>"+"<"+"script>");
+			if("ontouchend" in document) document.write("<script src=<?php echo e(URL::asset('assets/js/jquery.mobile.custom.min.js')); ?>>"+"<"+"script>");
 		</script>
-		<script src="{{URL::asset('assets/js/bootstrap.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/typeahead-bs2.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/typeahead-bs2.min.js')); ?>"></script>
 
 		<!-- page specific plugin scripts -->
 
 		<!--[if lte IE 8]>
-		  <script src="assets/js/excanvas.min.js"></script>
+		  <script src="<?php echo e(URL::asset('assets/js/excanvas.min.js')); ?>"></script>
 		<![endif]-->
 
-		<script src="{{URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/chosen.jquery.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/fuelux/fuelux.spinner.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/moment.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/date-time/daterangepicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-colorpicker.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.knob.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.autosize.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/jquery.maskedinput.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/bootstrap-tag.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery-ui-1.10.3.custom.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.ui.touch-punch.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/chosen.jquery.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/fuelux/fuelux.spinner.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-datepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/bootstrap-timepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/moment.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/date-time/daterangepicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-colorpicker.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.knob.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.autosize.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.inputlimiter.1.3.1.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/jquery.maskedinput.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/bootstrap-tag.min.js')); ?>"></script>
 
 		<!-- ace scripts -->
 
-		<script src="{{URL::asset('assets/js/ace-elements.min.js')}}"></script>
-		<script src="{{URL::asset('assets/js/ace.min.js')}}"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace-elements.min.js')); ?>"></script>
+		<script src="<?php echo e(URL::asset('assets/js/ace.min.js')); ?>"></script>
 
 		<!-- inline scripts related to this page -->
 
