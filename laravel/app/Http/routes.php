@@ -33,7 +33,11 @@ Route::group(['middleware'=>'web'], function (){
 	Route::get('/register/check_code','Home\RegisterController@check_code');
 	Route::get('/register/check_phone','Home\RegisterController@check_phone');
 
-
+    //长租
+    Route::get('/select','Home\LongRentController@select');
+    Route::get('/add_show','Home\longRentController@add_show');
+    Route::get('/show','Home\longRentController@show');
+    Route::get('/need','Home\longRentController@need');
 /*******后台路由区******/
 Route::group(['middleware'=>['web','illegal_login']],function(){
     //首页
