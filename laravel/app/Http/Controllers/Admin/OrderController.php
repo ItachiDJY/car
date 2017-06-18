@@ -88,11 +88,15 @@ class OrderController extends Controller
         // echo $order_id;die;
         $order = new Order();
         $res = DB::select("delete from car_order where order_id in ($order_id)");
-        if ($res) {
-            echo 1;
+        $result = ['success'=>0,'msg'=>''];
+        if ($res == false) {
+            $result['success'] = 1;
         } else {
-            echo 0;
+            $result['success'] = 0;
+            $result['msg'] = '删除失败';
         }
+
+        return $result;
     }
 
     //筛选订单
@@ -177,11 +181,15 @@ class OrderController extends Controller
     {
         $order = new Order();
         $res = $order->dele(['is_delete'=>1]);    
-        if ($res) {
-            echo 1;
+        $result = ['success'=>0,'msg'=>''];
+        if ($res == false) {
+            $result['success'] = 1;
         } else {
-            echo 0;
-        }  
+            $result['success'] = 0;
+            $result['msg'] = '放入回收站失败';
+        }
+
+        return $result;
     }
 
     //封装数据
@@ -223,6 +231,7 @@ class OrderController extends Controller
     }
         
 }
+
 
 
 

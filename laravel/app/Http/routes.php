@@ -30,7 +30,12 @@ Route::post('/login/login','Home\LoginController@login');
 Route::post('/register/register','Home\RegisterController@register');
 Route::get('/register/check_code','Home\RegisterController@check_code');
 Route::get('/register/check_phone','Home\RegisterController@check_phone');
-
+//前台到店取还
+Route::get('/shop','Home\ShopController@index');
+Route::get('/shop_info','Home\ShopController@store_info');
+Route::get('/shop_phone','Home\ShopController@store_phone');
+Route::get('/right_choose_car','Home\ShopController@right_choose_car');
+Route::get('/car_show','Home\ShopController@car_show');
 
 /*******后台路由区******/
 //首页

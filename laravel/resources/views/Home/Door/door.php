@@ -39,10 +39,10 @@
     <div class="zc_main">
         <a href="/" class="zc_logo" alt="神州租车"></a>
         <ul class="zc_menu">
-            <li class="homecur" >
+            <li  >
                 <a href="/" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-首页（顶）')">首页</a>
             </li>
-            <li  >
+            <li  class="homecur">
                 <a href="/door" onClick="dcsMultiTrack('DCS.dcsuri', '/zuchepc.event','WT.mc_click','首页-上门取送（顶）')">上门取送</a>
             </li>
             <li  >
@@ -158,7 +158,11 @@
                         <input type="hidden" id="toStoreId" name="toStoreId" value="959" />
                         <input type="hidden" id="toIsMergeDept" name="toIsMergeDept" value="0"/>
                         <input type="hidden" id="originalToCityId" name="originalToCityId" value="0"/>
-                        <div class="areaSelection d_none"></div>
+
+                        <!--弹框-->
+                        <div class="areaSelection d_none">
+                            
+                        </div>
                         <input type="text" value="" maxlength="50" default-value="请输入取车地址" class="iptSe iptst" name="pickAddress" id="pickAddress" style="display:none;" readonly="readonly"  defaultValue="">
                         <div class="btn">
                             <label class="cartxt" for="showpickAddress_span2">上门取车

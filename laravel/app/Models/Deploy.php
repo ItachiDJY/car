@@ -19,9 +19,9 @@ class Deploy extends Model
 	public function selectAll(){
 		return $this->get()->toArray();
 	}
-	//查询单条
+	//查询多条
 	public function select($id){
-        return $this->where('deploy_id',$id)->get()->toArray();
+        return $this->where('deploy_id',$id)->first()->toArray();
     }
     //添加操作   返回id值
     public function insert($data)

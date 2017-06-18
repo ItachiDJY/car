@@ -130,7 +130,6 @@
 					<div class="page-content">
 							<div class="row">
 							
-
 									<div class="col-xs-12">
 
 									<form class="form-horizontal"  action="<?php echo e(URL::to('add_order_do')); ?>" method="post">
@@ -350,7 +349,9 @@
 			</a>
 		</div><!-- /.main-container -->
 
+		
 		<script type="text/javascript">
+		// 百度地图 
 		$('.map').on('click', function(){
 			var obj = $(this).attr('obj');    //获取名字
 			var asd = $(this).attr('asd');

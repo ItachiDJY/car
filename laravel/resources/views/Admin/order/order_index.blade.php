@@ -334,9 +334,11 @@
 	   	data: {order_id:order_id},
 	   	success: function(msg){
 	    //alert(msg);
-		    if(msg)
+		    if(msg['success'] == 1)
 		    {
 		    	_this.parents('tr').remove();
+		    } else{
+		    	alert(msg['msg']);
 		    }
 	   }
 	   })
@@ -365,6 +367,8 @@
 	    	{
 	    		$(this).parent().parent().parent().remove();
 	    	})
+	    } else {
+	    	alert(msg['msg']);
 	    }
 	    }
 	   })

@@ -15,14 +15,19 @@ class Brand extends Model
     //默认添加开始时间和结束时间，默认开启ture
     public $timestamps=false;
     protected $fillable = ['brand_name','brand_logo','parent_id','path'];
+    
 	//查看所有的方法
-	public function selectAll(){
+	public function selectAll()
+    {
 		return $this->get()->toArray();
 	}
+
 	//查询单条
-	public function select($id){
+	public function select($id)
+    {
         return $this->where('brand_id',$id)->get()->toArray();
     }
+
     //添加操作   返回id值
     public function insert($data)
     {
@@ -31,6 +36,7 @@ class Brand extends Model
         
         return $this->attributes['brand_id'];  
     }
+
     //添加操作 
     public function adds($data)
     {
@@ -38,25 +44,21 @@ class Brand extends Model
     	$info = $this->save();
     	return $info;
     }
+
     //删除
-    public function del($id){
+    public function del($id)
+    {
         $data=$this->find($id);
        return $data->delete();
     }
+
     //修改操作
-    public function updates($data,$id){
+    public function updates($data,$id)
+    {
        
         $resume= $this->where('brand_id',$id);
         return $resume->update($data);
     }
-
-    /*//修改操作
-    public function brandSelect(){
-       
-       return $this ->orderBy("depath")->get()->toArray();
-       
-    }*/
-
 
 }
 
